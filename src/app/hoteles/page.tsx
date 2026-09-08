@@ -34,10 +34,6 @@ export default function HotelesPage() {
           </section>
         ))}
       </div>
-
-      <div className="mt-8 rounded-2xl border border-dashed border-brand/20 bg-white p-4 text-sm text-zinc-500">
-        España · Madrid — próximamente sumaremos hoteles boutique seleccionados.
-      </div>
     </div>
   );
 }

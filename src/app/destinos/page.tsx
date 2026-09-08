@@ -1,4 +1,4 @@
-import DestinationsAccordion from "@/components/DestinationsAccordion";
+import DestinationsExplorer from "@/components/DestinationsExplorer";
 import { countries, cities } from "@/lib/data/destinations";
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function DestinosPage() {
       </p>
 
       <div className="mt-5">
-        <DestinationsAccordion countries={countries} cities={cities} />
+        <DestinationsExplorer countries={countries} cities={cities} />
       </div>
     </div>
   );

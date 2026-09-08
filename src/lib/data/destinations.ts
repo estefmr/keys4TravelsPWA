@@ -143,7 +143,13 @@ export const countries: Country[] = [
     id: "espana",
     slug: "espana",
     name: "España",
-    citySlugs: ["madrid"],
+    // España aún no está lista para publicarse: la asesora/fotógrafa de la
+    // clienta sigue documentando el destino. El contenido de Madrid ya está
+    // completo en `cities` arriba (y su página /destinos/madrid sigue
+    // existiendo) — solo lo dejamos sin enlazar desde la navegación pública.
+    // Cuando el contenido esté listo, basta con volver a poner
+    // citySlugs: ["madrid"] para reactivarlo.
+    citySlugs: [],
   },
   {
     id: "chile",
