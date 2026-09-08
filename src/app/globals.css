@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1c1a2e;
+
+  /* Brand palette sampled from the Keys4Travels logo (navy/indigo wordmark) */
+  --color-brand: #312783;
+  --color-brand-dark: #1f1a54;
+  --color-brand-light: #4a3fae;
+  --color-cream: #faf8f4;
+  --color-sand: #f1ede4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--color-brand);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-light: var(--color-brand-light);
+  --color-cream: var(--color-cream);
+  --color-sand: var(--color-sand);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    Cambria, ui-serif, serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Hide scrollbar for horizontal gallery strips while keeping it scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
