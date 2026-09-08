@@ -23,7 +23,11 @@ const HIGHLIGHTS = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HeroBanner src="/images/madrid/palacio-de-cibeles.webp" alt="Madrid, España">
+      <HeroBanner
+        src="/images/santiago/atardecer-en-santiago.jpg"
+        alt="Atardecer en Santiago de Chile"
+        priority
+      >
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
           Keys4Travels
         </p>

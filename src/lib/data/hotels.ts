@@ -8,9 +8,11 @@ import type { Hotel } from "@/lib/types";
  * that is actually a different property, just change `name` (and `slug`
  * if you want a different URL) below; nothing else needs to change.
  *
- * Image files: drop real photos into `public/images/<folder>/` using the
- * exact filenames referenced in each `images` array below and they will
- * appear automatically (a friendly placeholder shows until then).
+ * Fotos: cada array `images` apunta a archivos que YA existen en
+ * `public/images/<carpeta>/`. La primera foto del array es la que se usa
+ * como banner/portada y como miniatura en las tarjetas. Para agregar más
+ * fotos después, basta con soltar el archivo en esa carpeta y añadir su
+ * ruta al array.
  */
 export const hotels: Hotel[] = [
   {
@@ -29,13 +31,11 @@ export const hotels: Hotel[] = [
       "Cuenta con 19 habitaciones exclusivas repartidas en categorías Economy, Classic, Premium y Suites, de 15 a 37 m², estacionamiento privado, sábanas de algodón egipcio, desayuno incluido (7:30–10:30), estación de té, un wine bar íntimo y una terraza abierta las 24 horas.",
       "A pasos de La Chascona (casa de Pablo Neruda), el Patio Bellavista y el Cerro San Cristóbal.",
     ],
+    // 4 fotos reales. La primera es la portada del hotel.
     images: [
       "/images/castillo-rojo/castillo-rojo-hotel-boutique.jpg",
       "/images/castillo-rojo/patio.jpg",
-      "/images/castillo-rojo/puerta-principal.jpg",
-      "/images/castillo-rojo/habitacion-economy.jpg",
       "/images/castillo-rojo/lobby-front-desk.jpg",
-      "/images/castillo-rojo/area-lounge.jpg",
       "/images/castillo-rojo/habitacion-classic.jpg",
     ],
   },
@@ -52,15 +52,12 @@ export const hotels: Hotel[] = [
       "Tiene un patio central con zona de estar, piscina, dos cocinas disponibles las 24 horas, living y comedor de desayuno (8:00–10:30), tres habitaciones nuevas y jacuzzi bajo reserva. Ofrece bicicletas de montaña gratuitas y organiza tours a Valle de la Luna, Géiser del Tatio y las Lagunas Altiplánicas.",
       "15 habitaciones en tres categorías: Kala (15 m²), Suite Selti (17 m²) y Suite Ckari (22 m², con terraza privada). Todas con caja fuerte, baño privado, aire acondicionado, USB, parlante Bluetooth, minibar y enchufes universales.",
     ],
+    // 4 fotos reales. La primera es la portada del hotel.
     images: [
       "/images/casa-solcor/casa-solcor-bb.jpg",
-      "/images/casa-solcor/piscina-y-casa-2.webp",
+      "/images/casa-solcor/piscina-y-casa-2.jpg",
       "/images/casa-solcor/patio.jpg",
-      "/images/casa-solcor/lobby.jpg",
       "/images/casa-solcor/habitacion-kala.jpg",
-      "/images/casa-solcor/nuevas-suites-selti-1.jpg",
-      "/images/casa-solcor/area-del-jacuzzi.png",
-      "/images/casa-solcor/bicicletas.jpg",
     ],
   },
   {
@@ -77,14 +74,13 @@ export const hotels: Hotel[] = [
       "Las habitaciones están en el segundo piso de la residencia principal, con un comedor acogedor en la planta baja, y habitaciones adicionales, decoradas con esmero, en un sector posterior. Todas cuentan con escritorio, mesas de noche, baño privado, TV y una selección de vinos locales; hay servicio a la habitación para ocasiones especiales según disponibilidad.",
       "El diseño combina estética minimalista con elegancia oriental. Sin estacionamiento en el hotel. A 10 minutos del Casino de Viña del Mar, 15 del muelle Vergara y 20 de la Quinta Vergara (sede del Festival de Viña del Mar desde 1960).",
     ],
+    // 5 fotos reales. La primera es la portada del hotel.
     images: [
-      "/images/esencia/entrada.webp",
-      "/images/esencia/descanso.webp",
-      "/images/esencia/comedor.webp",
-      "/images/esencia/area-para-el-desayuno.webp",
-      "/images/esencia/habitacion-1.webp",
-      "/images/esencia/habitaciones-parte-trasera.webp",
-      "/images/esencia/patio-trasero.webp",
+      "/images/esencia/entrada.jpg",
+      "/images/esencia/descanso.jpg",
+      "/images/esencia/comedor.jpg",
+      "/images/esencia/habitacion-1.jpg",
+      "/images/esencia/patio-trasero.jpg",
     ],
   },
 ];

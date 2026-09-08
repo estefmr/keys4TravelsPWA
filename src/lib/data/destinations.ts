@@ -2,11 +2,12 @@ import type { City, Country } from "@/lib/types";
 
 /**
  * Static destinations content, adapted from https://keys4travels.com/.
- * Edit copy directly here — no CMS or database needed.
+ * Edit copy directly here — no CMS o base de datos.
  *
- * Image files: drop real photos into `public/images/<city-slug>/` using the
- * exact filenames referenced below and they will appear automatically (a
- * friendly placeholder shows until then).
+ * Fotos: cada array `images` apunta a archivos que YA existen en
+ * `public/images/<carpeta>/`. La primera foto del array es la que se usa
+ * como banner/portada. Para agregar más fotos después, basta con soltar el
+ * archivo en esa carpeta y añadir su ruta al array.
  */
 export const cities: City[] = [
   {
@@ -34,14 +35,13 @@ export const cities: City[] = [
       "Parque El Capricho",
       "Petit Palace Posada del Peine (el hotel más antiguo de Madrid, desde 1610)",
     ],
-    images: [
-      "/images/madrid/palacio-de-cibeles.webp",
-      "/images/madrid/puente-de-toledo.webp",
-      "/images/madrid/plaza-de-la-villa.webp",
-      "/images/madrid/catedral-de-almudena.jpg",
-      "/images/madrid/parque-el-capricho.webp",
-      "/images/madrid/posada-del-peine.webp",
-    ],
+    // Sin fotos aún: España sigue en documentación, así que la carpeta
+    // `public/images/madrid/` está vacía y este destino no está enlazado
+    // desde la navegación. Fotos pendientes (de keys4travels.com):
+    // palacio-de-cibeles, puente-de-toledo, plaza-de-la-villa,
+    // catedral-de-almudena, parque-el-capricho, posada-del-peine.
+    // Al soltarlas en esa carpeta, añade aquí sus rutas .jpg.
+    images: [],
     hotelIds: [],
     comingSoon: true,
   },
@@ -69,13 +69,12 @@ export const cities: City[] = [
       "Isla Negra (Casa de Neruda)",
       "Viñas cercanas: Concha y Toro, Errázuriz, Cousiño Macul",
     ],
+    // 4 fotos reales. La primera es el banner de la ciudad.
     images: [
-      "/images/santiago/atardecer-en-santiago.webp",
-      "/images/santiago/pueblito-de-los-dominicos.webp",
-      "/images/santiago/cerro-san-cristobal-por-bellavista.webp",
-      "/images/santiago/jardin-japones-y-torre-costanera.webp",
-      "/images/santiago/palacio-presidencial-casa-de-la-moneda.webp",
-      "/images/santiago/museo-de-bellas-artes-de-santiago.webp",
+      "/images/santiago/atardecer-en-santiago.jpg",
+      "/images/santiago/pueblito-de-los-dominicos.jpg",
+      "/images/santiago/cerro-san-cristobal-por-bellavista.jpg",
+      "/images/santiago/palacio-presidencial-casa-de-la-moneda.jpg",
     ],
     hotelIds: ["castillo-rojo"],
   },
@@ -106,13 +105,13 @@ export const cities: City[] = [
       "Laguna Chaxa",
       "Termas de Puritama",
     ],
+    // 5 fotos reales. La primera es el banner de la ciudad.
     images: [
       "/images/san-pedro-de-atacama/calle-caracoles.jpg",
       "/images/san-pedro-de-atacama/iglesia-san-pedro-de-a.jpg",
       "/images/san-pedro-de-atacama/valle-luna.jpg",
       "/images/san-pedro-de-atacama/laguna-cejar-y-laguna-piedra.jpg",
       "/images/san-pedro-de-atacama/piedras-rojas-y-lagunas-altiplanicas.jpg",
-      "/images/san-pedro-de-atacama/termas-de-puritama.jpg",
     ],
     hotelIds: ["casa-solcor"],
   },
@@ -127,12 +126,13 @@ export const cities: City[] = [
       "Viña del Mar, una de las ciudades costeras más famosas del mundo, con calles estrechas llenas de encanto. Cerca del Casino de Viña del Mar (10 min caminando), el muelle Vergara (15 min) y la Quinta Vergara, sede del Festival de Viña del Mar desde 1960 (20 min).",
     ],
     attractions: [],
-    // No dedicated destination photos for Viña del Mar on the source site;
-    // reusing the Esencia Hotel Boutique gallery as the city banner/gallery.
+    // La web de origen no tiene fotos propias de la ciudad: reutilizamos la
+    // galería del Esencia Hotel Boutique como banner/galería de Viña del Mar.
+    // La primera es el banner de la ciudad.
     images: [
-      "/images/esencia/entrada.webp",
-      "/images/esencia/patio-trasero.webp",
-      "/images/esencia/comedor.webp",
+      "/images/esencia/entrada.jpg",
+      "/images/esencia/patio-trasero.jpg",
+      "/images/esencia/comedor.jpg",
     ],
     hotelIds: ["esencia"],
   },

@@ -1,24 +1,26 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import Image from "next/image";
 
 /**
  * Full-bleed hero: a brand-colored gradient that always looks intentional,
- * with an optional real photo layered on top. If the photo file isn't
- * present yet (see /public/images), it silently fails to load and the
- * gradient alone carries the banner — no broken-image icon in a spot this
- * visible.
+ * with the real photo layered on top (optimized through next/image). If a
+ * photo file is ever missing, it silently fails to load and the gradient
+ * alone carries the banner — no broken-image icon in a spot this visible.
  */
 export default function HeroBanner({
   src,
   alt,
   children,
   minHeight = "20rem",
+  priority = false,
 }: {
   src?: string;
   alt: string;
   children: ReactNode;
   minHeight?: string;
+  priority?: boolean;
 }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -29,20 +31,25 @@ export default function HeroBanner({
       style={{ minHeight }}
     >
       {src && !failed && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={src}
           alt={alt}
+          fill
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, 768px"
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          className={`object-cover transition-opacity duration-700 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
+      {/* Dark scrim: keeps the white headline readable over any photo. */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/25" />
       <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/5 blur-2xl" />
-      <div className="relative z-10 w-full px-5 pb-6 pt-16 text-white">{children}</div>
+      <div className="relative z-10 w-full px-5 pb-6 pt-16 text-white drop-shadow-sm">
+        {children}
+      </div>
     </div>
   );
 }

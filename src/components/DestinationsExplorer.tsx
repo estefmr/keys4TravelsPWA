@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown, Clock3, ArrowRight } from "lucide-react";
 import type { Country, City } from "@/lib/types";
 
@@ -96,13 +97,14 @@ function CountryCard({
       <div className="absolute inset-0 bg-gradient-to-br from-brand via-brand-dark to-[#14103c]" />
 
       {coverImage && !imgFailed && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={coverImage}
           alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 768px"
           onLoad={() => setImgLoaded(true)}
           onError={() => setImgFailed(true)}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          className={`object-cover transition-opacity duration-700 ${
             imgLoaded ? "opacity-100" : "opacity-0"
           } ${!ready ? "grayscale" : ""}`}
         />
@@ -155,13 +157,14 @@ function CityRow({ city }: { city: City }) {
     >
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-brand-light to-brand">
         {cover && !imgFailed && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={cover}
             alt=""
+            fill
+            sizes="64px"
             onLoad={() => setImgLoaded(true)}
             onError={() => setImgFailed(true)}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            className={`object-cover transition-opacity duration-500 ${
               imgLoaded ? "opacity-100" : "opacity-0"
             }`}
           />
