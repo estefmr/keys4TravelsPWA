@@ -138,7 +138,16 @@ export const cities: City[] = [
   },
 ];
 
+// El orden de este array es el orden en que aparecen las tarjetas en la
+// pantalla Destinos: primero los países publicados, al final los que están
+// "Próximamente".
 export const countries: Country[] = [
+  {
+    id: "chile",
+    slug: "chile",
+    name: "Chile",
+    citySlugs: ["santiago", "san-pedro-de-atacama", "vina-del-mar"],
+  },
   {
     id: "espana",
     slug: "espana",
@@ -150,12 +159,6 @@ export const countries: Country[] = [
     // Cuando el contenido esté listo, basta con volver a poner
     // citySlugs: ["madrid"] para reactivarlo.
     citySlugs: [],
-  },
-  {
-    id: "chile",
-    slug: "chile",
-    name: "Chile",
-    citySlugs: ["santiago", "san-pedro-de-atacama", "vina-del-mar"],
   },
 ];
 
