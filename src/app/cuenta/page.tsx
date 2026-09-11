@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { LogOut, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import InstallPrompt from "@/components/InstallPrompt";
 
 export default function CuentaPage() {
   const { user, loading, signOut, configured } = useAuth();
@@ -59,6 +60,11 @@ export default function CuentaPage() {
           </div>
         </>
       )}
+
+      {/* Acceso permanente: el banner del layout se puede descartar, este no. */}
+      <div className="mt-8 w-full">
+        <InstallPrompt variant="card" />
+      </div>
     </div>
   );
 }

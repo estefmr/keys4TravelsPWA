@@ -4,6 +4,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import TopBar from "@/components/TopBar";
 import BottomNav from "@/components/BottomNav";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import InstallPrompt from "@/components/InstallPrompt";
 
 export const metadata: Metadata = {
   title: "Keys4Travels — El lujo de viajar lento y sin prisa",
@@ -35,8 +36,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-cream text-foreground">
+        {/* Chrome dispara `beforeinstallprompt` antes de que React hidrate.
+            Si nadie lo escucha en ese momento se pierde y el botón de
+            instalar no llega a aparecer, así que lo guardamos aquí. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__k4tInstallEvent=e;});",
+          }}
+        />
         <AuthProvider>
           <TopBar />
+          <InstallPrompt />
           <main className="mx-auto w-full max-w-3xl flex-1 pb-28">{children}</main>
           <BottomNav />
         </AuthProvider>
