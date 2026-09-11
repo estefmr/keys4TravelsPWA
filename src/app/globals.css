@@ -26,14 +26,21 @@
     Cambria, ui-serif, serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-}
+/* These defaults MUST live inside `@layer base`. Tailwind v4 emits its
+   utilities into `@layer utilities`, and unlayered CSS outranks *every*
+   layer — so an unlayered `body { background: ... }` silently overrides
+   the `bg-cream` utility on <body> and the whole cream/sand palette never
+   renders. Inside the base layer, utilities win as intended. */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
 
-h1, h2, h3, .font-display {
-  font-family: var(--font-serif), Georgia, serif;
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif), Georgia, serif;
+  }
 }
 
 /* Hide scrollbar for horizontal gallery strips while keeping it scrollable */

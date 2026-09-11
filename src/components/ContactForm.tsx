@@ -9,6 +9,9 @@ export default function ContactForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // React nulls out `currentTarget` once the handler returns, so capture
+    // the form element before the first await or `reset()` below throws.
+    const form = e.currentTarget;
     setSending(true);
 
     // TODO(Estefania / dev): once Supabase credentials exist, replace this
@@ -22,7 +25,7 @@ export default function ContactForm() {
 
     setSending(false);
     setSent(true);
-    e.currentTarget.reset();
+    form.reset();
   }
 
   if (sent) {
