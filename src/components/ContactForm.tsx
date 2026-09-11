@@ -1,49 +1,62 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import WhatsAppGlyph from "@/components/WhatsAppGlyph";
+import { buildWhatsAppMessageUrl } from "@/lib/contact";
 
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
+  const [sentUrl, setSentUrl] = useState<string | null>(null);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // React nulls out `currentTarget` once the handler returns, so capture
-    // the form element before the first await or `reset()` below throws.
     const form = e.currentTarget;
-    setSending(true);
+    const data = new FormData(form);
 
-    // TODO(Estefania / dev): once Supabase credentials exist, replace this
-    // with either:
-    //   1) an insert into a `contact_messages` table via the Supabase
-    //      client (see src/lib/supabase/client.ts), or
-    //   2) a call to an email-sending API route / Supabase Edge Function.
-    // For now this just simulates a submission so the form is fully usable
-    // in the UI without a backend.
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const url = buildWhatsAppMessageUrl({
+      nombre: String(data.get("nombre") ?? ""),
+      email: String(data.get("email") ?? ""),
+      mensaje: String(data.get("mensaje") ?? ""),
+    });
 
-    setSending(false);
-    setSent(true);
+    // Esto tiene que ocurrir de forma síncrona dentro del gesto de envío:
+    // si se hiciera después de un await, los navegadores móviles lo
+    // bloquearían como popup. Si aun así lo bloquean, navegamos directo.
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.href = url;
+
+    setSentUrl(url);
     form.reset();
   }
 
-  if (sent) {
+  if (sentUrl) {
     return (
       <div className="flex items-start gap-3 rounded-2xl bg-brand/5 p-4 text-sm text-brand-dark">
         <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
         <div>
-          <p className="font-semibold">¡Gracias por escribirnos!</p>
+          <p className="font-semibold">Te abrimos WhatsApp con tu mensaje listo</p>
           <p className="mt-1 text-brand-dark/80">
-            Recibimos tu mensaje. Te contactaremos pronto.
+            Solo tienes que pulsar enviar dentro de WhatsApp para que nos
+            llegue.
           </p>
-          <button
-            type="button"
-            onClick={() => setSent(false)}
-            className="mt-2 text-xs font-medium underline underline-offset-2"
-          >
-            Enviar otro mensaje
-          </button>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <a
+              href={sentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-dark"
+            >
+              <WhatsAppGlyph />
+              Abrir WhatsApp de nuevo
+            </a>
+            <button
+              type="button"
+              onClick={() => setSentUrl(null)}
+              className="text-xs font-medium underline underline-offset-2"
+            >
+              Escribir otro mensaje
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -89,12 +102,14 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        disabled={sending}
-        className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-60"
+        className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
       >
-        {sending ? "Enviando…" : "Enviar mensaje"}
-        {!sending && <Send className="h-4 w-4" />}
+        <WhatsAppGlyph />
+        Enviar por WhatsApp
       </button>
+      <p className="text-center text-xs text-zinc-400">
+        Se abrirá WhatsApp con tu mensaje ya escrito.
+      </p>
     </form>
   );
 }
