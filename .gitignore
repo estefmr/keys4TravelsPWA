@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# credenciales locales — NUNCA subir al repo (es público)
+/credenciales.md
