@@ -38,6 +38,15 @@ export const hotels: Hotel[] = [
       "/images/castillo-rojo/lobby-front-desk.jpg",
       "/images/castillo-rojo/habitacion-classic.jpg",
     ],
+    // Tanda que envió la clienta por Drive, descargada al repo por los
+    // mismos motivos que la de Casa Solcor: cache offline y no depender
+    // de que la carpeta siga compartida.
+    gallery: [
+      "/images/castillo-rojo/el-hotel.jpg",
+      "/images/castillo-rojo/entrada-al-lobby.jpg",
+      "/images/castillo-rojo/living-room-y-bar.jpg",
+      "/images/castillo-rojo/habitacion.jpg",
+    ],
   },
   {
     id: "casa-solcor",
