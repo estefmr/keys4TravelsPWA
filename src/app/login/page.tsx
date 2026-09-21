@@ -76,7 +76,7 @@ export default function LoginPage() {
             Acceso exclusivo
           </p>
           <h1 className="font-display mt-3 text-3xl leading-tight text-white">
-            Bienvenido de vuelta
+            Bienvenido
           </h1>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/60">
             Tu próximo viaje sin prisa te está esperando.
