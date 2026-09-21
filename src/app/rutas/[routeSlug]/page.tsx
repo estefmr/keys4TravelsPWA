@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, ArrowRight } from "lucide-react";
-import HeroBanner from "@/components/HeroBanner";
+import { ChevronLeft } from "lucide-react";
+import SmartImage from "@/components/SmartImage";
+import BackBar from "@/components/BackBar";
 import PhotoSlider from "@/components/PhotoSlider";
 import { routes, getRouteBySlug } from "@/lib/data/routes";
 import { getCityBySlug } from "@/lib/data/destinations";
@@ -23,6 +24,12 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * Pantalla de una ruta. A diferencia de la ficha de destino —que abre con una
+ * foto a sangre y el nombre encima— esta arranca con el título sobre fondo
+ * limpio y la foto debajo, para que se lea como un artículo y no como otra
+ * portada más.
+ */
 export default async function RouteDetailPage({
   params,
 }: {
@@ -33,29 +40,37 @@ export default async function RouteDetailPage({
   if (!route) notFound();
 
   const city = getCityBySlug(route.citySlug);
+  const destino = city?.name ?? "el destino";
   const volver = `/destinos/${route.citySlug}`;
 
   return (
     <div>
-      <HeroBanner src={route.cover} alt={route.title} minHeight="16rem" priority>
-        <Link
-          href={volver}
-          className="mb-3 inline-flex items-center gap-1 text-xs font-medium text-white/80 hover:text-white"
-        >
-          <ChevronLeft className="h-4 w-4" /> {city?.name ?? "Destino"}
-        </Link>
-        {route.kicker && (
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-            {route.kicker}
-          </p>
-        )}
-        <h1 className="font-display mt-1 text-2xl leading-snug sm:text-3xl">
-          {route.title}
-        </h1>
-      </HeroBanner>
+      <BackBar href={volver} backLabel={destino} title={route.title} />
 
-      <div className="px-5 py-6 pb-12">
-        <div className="flex flex-col gap-3">
+      <article className="px-5 pb-12 pt-6">
+        <header>
+          {route.kicker && (
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+              {route.kicker}
+            </p>
+          )}
+          <h1 className="font-display mt-1 text-2xl leading-snug text-foreground sm:text-3xl">
+            {route.title}
+          </h1>
+          <p className="mt-2 text-sm text-zinc-500">{route.teaser}</p>
+        </header>
+
+        <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-2xl bg-sand">
+          <SmartImage
+            src={route.cover}
+            alt={route.title}
+            sizes="(max-width: 768px) 100vw, 768px"
+            priority
+            className="object-cover"
+          />
+        </div>
+
+        <div className="mt-5 flex flex-col gap-3">
           {route.intro.map((parrafo, i) => (
             <p
               key={i}
@@ -71,7 +86,7 @@ export default async function RouteDetailPage({
         </div>
 
         {/* Fichas de un solo lugar (Tatio, Baltinache…): sus fotos van aquí,
-            justo después de la entrada, porque no hay paradas que las repartan. */}
+            justo tras la entrada, porque no hay paradas que las repartan. */}
         {route.photos && route.photos.length > 0 && (
           <div className="mt-6">
             <PhotoSlider photos={route.photos} altPrefix={route.title} />
@@ -118,10 +133,10 @@ export default async function RouteDetailPage({
           href={volver}
           className="mt-10 flex items-center justify-center gap-2 rounded-full border border-brand/20 px-5 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand/5"
         >
-          Volver a {city?.name ?? "el destino"}
-          <ArrowRight className="h-4 w-4" />
+          <ChevronLeft className="h-4 w-4" />
+          Volver a {destino}
         </Link>
-      </div>
+      </article>
     </div>
   );
 }

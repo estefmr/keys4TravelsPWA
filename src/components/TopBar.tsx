@@ -10,7 +10,9 @@ export default function TopBar() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-black/5 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-2.5">
+      {/* Alto fijo (no derivado del padding) para que la barra de "volver" de
+          las rutas pueda anclarse justo debajo con `--topbar-h`. */}
+      <div className="mx-auto flex h-[var(--topbar-h)] max-w-3xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/logo-primary.png"

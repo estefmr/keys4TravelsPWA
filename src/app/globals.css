@@ -10,6 +10,11 @@
   --color-brand-light: #4a3fae;
   --color-cream: #faf8f4;
   --color-sand: #f1ede4;
+
+  /* Alto de la barra superior. Lo fijamos aquí porque una segunda barra
+     pegajosa (la de "volver" de las rutas) necesita saber dónde termina la
+     primera para quedarse justo debajo y no detrás. */
+  --topbar-h: 3.25rem;
 }
 
 @theme inline {
