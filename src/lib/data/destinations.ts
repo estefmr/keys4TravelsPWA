@@ -46,6 +46,57 @@ export const cities: City[] = [
     comingSoon: true,
   },
   {
+    id: "buenos-aires",
+    slug: "buenos-aires",
+    name: "Buenos Aires",
+    countrySlug: "argentina",
+    countryName: "Argentina",
+    heroText:
+      "Buenos Aires, Argentina — la puerta de entrada al país del tango, donde el excelente vino y los cortes de carne más exquisitos son parte esencial de la vida cotidiana.",
+    body: [
+      "En el sur del continente americano se encuentra una de las ciudades más fascinantes que hemos tenido el privilegio de visitar. Pasear por la emblemática Avenida de Mayo, disfrutar del vibrante ambiente de Corrientes un viernes por la noche o deleitarse con una comida en el sofisticado Puerto Madero son solo algunas de las experiencias inolvidables que ofrece esta metrópolis cosmopolita.",
+      "Buenos Aires fue fundada en dos ocasiones: la primera en 1536, como Ciudad de la Santísima Trinidad y Puerto Santa María del Buen Ayre, y de nuevo en 1580, cuando Juan de Garay la refundó bajo el mandato de la Corona española. Fue precisamente en el área que hoy conocemos como Plaza de Mayo donde comenzó a desarrollarse la vida social y comercial de la ciudad. En 1880 se convirtió en Capital Federal y destacó entre las grandes metrópolis del mundo por la elegancia de su arquitectura, inspirada en el estilo parisino.",
+      "Es una ciudad extensa y dinámica, con dos aeropuertos internacionales. El más importante es el Aeropuerto Internacional Ministro Pistarini —el de Ezeiza—, a más de 30 km del centro. El Aeroparque Jorge Newbery, en cambio, se especializa en vuelos regionales y domésticos, y está en pleno centro: desde ahí llegas a tu hospedaje en unos 15 minutos.",
+      "Toda la ciudad tiene su encanto, pero hay dos zonas favoritas para alojarse. Palermo es el barrio de mayor crecimiento y modernización: excelente propuesta gastronómica (desde lo más pintoresco hasta estrellas Michelin, como la parrilla Don Julio), muy bien conectado con el resto de la ciudad y seguro para caminar. El Casco Histórico es simplemente hermoso, con una arquitectura de fuerte influencia europea —y en particular francesa— donde edificios como el Palacio Barolo evocan construcciones de siglos atrás.",
+      "Para el clima: si quieres verano porteño, entre diciembre y febrero, con temperaturas altas y una humedad que puede hacer el calor sofocante. Junio, julio y agosto son los meses más fríos, pero recorrer la ciudad sigue siendo buena opción. Si buscas el equilibrio perfecto, marzo y abril (otoño) u octubre y noviembre (primavera): menos turistas, hoteles más accesibles y caminar resulta mucho más agradable.",
+      "Caminar por Buenos Aires es toda una experiencia. Es muy limpia y organizada, con edificios históricos que hoy albergan bancos o sedes de gobierno, y con un obelisco que es quizá la estructura más representativa de la ciudad. La vida nocturna es peculiar: las fiestas recién entran en calor pasada la medianoche, y en muchos locales a las 2 o 3 de la madrugada se considera que la noche es joven.",
+    ],
+    attractions: [
+      "Plaza de Mayo, Casa Rosada y Museo del Cabildo",
+      "Avenida de Mayo",
+      "Palacio Barolo",
+      "Plaza del Congreso, Plaza Lorea y Plaza Mariano Moreno",
+      "Galería Güemes y Confitería Ideal",
+      "Librería El Ateneo Grand Splendid",
+      "Teatro Colón",
+      "El Obelisco y la Avenida Corrientes",
+      "Palermo y Palermo Hollywood",
+      "Monumento de los Españoles",
+      "Lagunas artificiales de Palermo (Bosques de Palermo)",
+      "Mafalda y sus amigos, en San Telmo",
+      "Puerto Madero",
+      "Barrio de Recoleta",
+      "Cafés notables: Tortoni, Las Violetas y El Gato Negro",
+      "Parrilla Don Julio (una estrella Michelin; reserva con meses de antelación)",
+    ],
+    // 8 fotos reales traídas de keys4travels.com/buenos-aires-argentina.
+    // La primera es el banner de la ciudad.
+    images: [
+      "/images/buenos-aires/avenida-de-mayo.jpg",
+      "/images/buenos-aires/casco-historico.jpg",
+      "/images/buenos-aires/teatro-colon.jpg",
+      "/images/buenos-aires/ateneo-grand-splendid.jpg",
+      "/images/buenos-aires/monumento-de-los-espanoles.jpg",
+      "/images/buenos-aires/laguna-artificial-de-palermo.jpg",
+      "/images/buenos-aires/mafalda-y-sus-amigos.jpg",
+      "/images/buenos-aires/aeroparque-jorge-newbery.jpg",
+    ],
+    // La web de origen sí tiene dos hoteles en Buenos Aires (Cassa Lepage Art
+    // Hotel y Mine Hotel Boutique). Cuando tengamos sus fotos y fichas, se
+    // añaden a `hotels.ts` y sus ids aquí.
+    hotelIds: [],
+  },
+  {
     id: "santiago",
     slug: "santiago",
     name: "Santiago",
@@ -152,11 +203,7 @@ export const countries: Country[] = [
     id: "argentina",
     slug: "argentina",
     name: "Argentina",
-    // Argentina todavía no tiene ciudades documentadas. Un país sin
-    // `citySlugs` se dibuja como tarjeta "Próximamente": no despliega ni
-    // navega. Cuando Buenos Aires esté listo, se añade su ciudad a
-    // `cities` y su slug aquí.
-    citySlugs: [],
+    citySlugs: ["buenos-aires"],
   },
   {
     id: "espana",
