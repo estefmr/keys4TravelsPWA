@@ -42,10 +42,16 @@ export const hotels: Hotel[] = [
     // mismos motivos que la de Casa Solcor: cache offline y no depender
     // de que la carpeta siga compartida.
     gallery: [
-      "/images/castillo-rojo/el-hotel.jpg",
-      "/images/castillo-rojo/entrada-al-lobby.jpg",
-      "/images/castillo-rojo/living-room-y-bar.jpg",
-      "/images/castillo-rojo/habitacion.jpg",
+      { src: "/images/castillo-rojo/el-hotel.jpg", label: "El hotel" },
+      {
+        src: "/images/castillo-rojo/entrada-al-lobby.jpg",
+        label: "Entrada al lobby",
+      },
+      {
+        src: "/images/castillo-rojo/living-room-y-bar.jpg",
+        label: "Living room y bar",
+      },
+      { src: "/images/castillo-rojo/habitacion.jpg", label: "Habitación" },
     ],
   },
   {
@@ -71,13 +77,16 @@ export const hotels: Hotel[] = [
     // Tanda que envió la clienta por Drive, ya descargada al repo para que
     // funcione sin conexión y no dependa de que el Drive siga compartido.
     gallery: [
-      "/images/casa-solcor/piscina.jpg",
-      "/images/casa-solcor/atardecer.jpg",
-      "/images/casa-solcor/area-de-descanso.jpg",
-      "/images/casa-solcor/habitacion-1.jpg",
-      "/images/casa-solcor/habitacion-2.jpg",
-      "/images/casa-solcor/cocina.jpg",
-      "/images/casa-solcor/bicicletas.jpg",
+      { src: "/images/casa-solcor/piscina.jpg", label: "Piscina" },
+      { src: "/images/casa-solcor/atardecer.jpg", label: "Atardecer" },
+      {
+        src: "/images/casa-solcor/area-de-descanso.jpg",
+        label: "Área de descanso",
+      },
+      { src: "/images/casa-solcor/habitacion-1.jpg", label: "Habitación 1" },
+      { src: "/images/casa-solcor/habitacion-2.jpg", label: "Habitación 2" },
+      { src: "/images/casa-solcor/cocina.jpg", label: "Cocina" },
+      { src: "/images/casa-solcor/bicicletas.jpg", label: "Bicicletas" },
     ],
   },
   {

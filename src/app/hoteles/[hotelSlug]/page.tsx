@@ -75,7 +75,7 @@ export default async function HotelDetailPage({
             <h2 className="font-display mb-3 text-xl text-foreground">
               Galería
             </h2>
-            <PhotoSlider images={hotel.gallery} altPrefix={hotel.name} />
+            <PhotoSlider photos={hotel.gallery} altPrefix={hotel.name} />
           </section>
         )}
 

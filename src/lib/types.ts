@@ -1,3 +1,10 @@
+/** Una foto del carrusel: su ruta y el nombre con el que se ofrece. */
+export type GalleryPhoto = {
+  src: string;
+  /** Texto del botón bajo el carrusel; también alimenta el alt de la foto. */
+  label: string;
+};
+
 export type Hotel = {
   id: string;
   slug: string;
@@ -14,7 +21,7 @@ export type Hotel = {
    * sigue siendo la portada y la tira de miniaturas de arriba; esto es una
    * segunda tanda, opcional, para enseñar la propiedad con calma.
    */
-  gallery?: string[];
+  gallery?: GalleryPhoto[];
 };
 
 export type City = {
