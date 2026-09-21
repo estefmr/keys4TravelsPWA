@@ -43,3 +43,9 @@ next-env.d.ts
 
 # credenciales locales — NUNCA subir al repo (es público)
 /credenciales.md
+
+# notas de trabajo de la clienta (documentos, capturas) — NUNCA subir:
+# el repo es público, así que commitearlas las dejaría descargables por
+# cualquiera, y dentro de /public además se servirían en la web.
+/tareas/
+/public/images/tareas/
