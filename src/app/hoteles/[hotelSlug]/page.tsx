@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronLeft, MapPin } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import Gallery from "@/components/Gallery";
+import PhotoSlider from "@/components/PhotoSlider";
 import { hotels, getHotelBySlug } from "@/lib/data/hotels";
 
 export function generateStaticParams() {
@@ -68,6 +69,15 @@ export default async function HotelDetailPage({
             </p>
           ))}
         </div>
+
+        {hotel.gallery && hotel.gallery.length > 0 && (
+          <section className="mt-8">
+            <h2 className="font-display mb-3 text-xl text-foreground">
+              Galería
+            </h2>
+            <PhotoSlider images={hotel.gallery} altPrefix={hotel.name} />
+          </section>
+        )}
 
         <div className="mt-8 rounded-2xl bg-brand/5 p-4 text-sm text-brand-dark">
           ¿Interesado en hospedarte en {hotel.name}?{" "}

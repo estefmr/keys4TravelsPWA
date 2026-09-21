@@ -59,6 +59,17 @@ export const hotels: Hotel[] = [
       "/images/casa-solcor/patio.jpg",
       "/images/casa-solcor/habitacion-kala.jpg",
     ],
+    // Tanda que envió la clienta por Drive, ya descargada al repo para que
+    // funcione sin conexión y no dependa de que el Drive siga compartido.
+    gallery: [
+      "/images/casa-solcor/piscina.jpg",
+      "/images/casa-solcor/atardecer.jpg",
+      "/images/casa-solcor/area-de-descanso.jpg",
+      "/images/casa-solcor/habitacion-1.jpg",
+      "/images/casa-solcor/habitacion-2.jpg",
+      "/images/casa-solcor/cocina.jpg",
+      "/images/casa-solcor/bicicletas.jpg",
+    ],
   },
   {
     id: "esencia",

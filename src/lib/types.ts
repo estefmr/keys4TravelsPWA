@@ -9,6 +9,12 @@ export type Hotel = {
   summary: string;
   description: string[];
   images: string[];
+  /**
+   * Fotos extra para el carrusel del final de la ficha. La lista "images"
+   * sigue siendo la portada y la tira de miniaturas de arriba; esto es una
+   * segunda tanda, opcional, para enseñar la propiedad con calma.
+   */
+  gallery?: string[];
 };
 
 export type City = {
