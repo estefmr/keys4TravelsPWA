@@ -91,10 +91,7 @@ export const cities: City[] = [
       "/images/buenos-aires/mafalda-y-sus-amigos.jpg",
       "/images/buenos-aires/aeroparque-jorge-newbery.jpg",
     ],
-    // La web de origen sí tiene dos hoteles en Buenos Aires (Cassa Lepage Art
-    // Hotel y Mine Hotel Boutique). Cuando tengamos sus fotos y fichas, se
-    // añaden a `hotels.ts` y sus ids aquí.
-    hotelIds: [],
+    hotelIds: ["cassa-lepage", "mine-hotel"],
   },
   {
     id: "santiago",
