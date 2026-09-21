@@ -30,7 +30,13 @@ export default function ContactoPage() {
     <div className="px-5 py-6">
       <h1 className="font-display text-2xl text-foreground">Contacto</h1>
 
+      {/* El cuestionario trae su propio encabezado ("Antes de tu llamada
+          con Kenny"), así que aquí no hace falta otro título. */}
       <div className="mt-5 rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
+        <ContactForm />
+      </div>
+
+      <div className="mt-8 rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 font-display text-lg text-brand">
             KA
@@ -85,12 +91,6 @@ export default function ContactoPage() {
             </a>
           )}
         </div>
-      </div>
-
-      {/* El cuestionario trae su propio encabezado ("Antes de tu llamada
-          con Kenny"), así que aquí no hace falta otro título. */}
-      <div className="mt-8 rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
-        <ContactForm />
       </div>
     </div>
   );
