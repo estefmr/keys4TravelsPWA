@@ -36,14 +36,27 @@ export default function Home() {
         </h1>
       </HeroBanner>
 
-      <section className="px-5 py-8">
-        <p className="text-[15px] leading-relaxed text-zinc-600">
-          En Keys4Travels diseñamos viajes de{" "}
-          <span className="font-medium text-brand">turismo lento</span>,
-          hechos a la medida del viajero: te conectamos con los destinos y
-          hoteles boutique correctos, te acompañamos si algo se complica en
-          el camino, y ponemos el foco en experiencias memorables, no en
-          recorrer lugares a la carrera. Menos es más.
+      <section className="flex flex-col gap-4 px-5 py-8 text-[15px] leading-relaxed text-zinc-600">
+        <p>
+          El viajar es una de las experiencias más reconfortantes y
+          enriquecedoras que existe para el ser humano, es por ello por lo que
+          esta experiencia no debe limitarse a la opinión de otros. Dos
+          personas pueden tener experiencias totalmente diferentes visitando la
+          misma ciudad, los mismos días y recorriendo los dos mismos lugares.
+        </p>
+        <p>
+          En Keys4Travels nos especializamos en el{" "}
+          <span className="font-medium text-brand">Turismo Lento</span> y los
+          viajes, por lo que te proponemos conocer el destino a tu ritmo, sin
+          prisas, sin correr de un monumento a otro y, sobre todo, dejando
+          tiempo para que sientas lo que es ser un local en una ciudad nueva.
+        </p>
+        <p>
+          Hoteles seleccionados bajos criterios muy específicos y un agente a
+          tu disposición que te ayuda a organizar tu viaje según tus deseos y
+          necesidades basado exclusivamente en lo que tú quieras conocer. Esto
+          hace de Keys4Travels un puente entre ese destino soñado y tus deseos
+          de conocerlo sin estrés ni ansiedades propias del viaje.
         </p>
       </section>
 
