@@ -112,8 +112,17 @@ export default function PhotoSlider({
     if (!fila) return;
     const boton = fila.children[actual] as HTMLElement | undefined;
     if (!boton) return;
-    // `block: "nearest"` evita que el navegador desplace también la página.
-    boton.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    // Movemos la fila a mano en vez de usar `scrollIntoView`: aunque se le
+    // pida `block: "nearest"`, este desplaza TAMBIÉN la página en vertical,
+    // y en una pantalla con varios carruseles el último se llevaba la vista
+    // al final nada más abrir. Tocando solo `scrollLeft` eso no puede pasar.
+    const centrado =
+      boton.offsetLeft - (fila.clientWidth - boton.clientWidth) / 2;
+    const maximo = fila.scrollWidth - fila.clientWidth;
+    fila.scrollTo({
+      left: Math.max(0, Math.min(maximo, centrado)),
+      behavior: "smooth",
+    });
   }, [actual]);
 
   // El temporizador de reanudar sobrevive al desmontaje si no se limpia.

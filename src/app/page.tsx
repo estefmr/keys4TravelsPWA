@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { Sparkles, Building2, Compass, ArrowRight } from "lucide-react";
-import HeroBanner from "@/components/HeroBanner";
+import HeroSlider, { type HeroPhoto } from "@/components/HeroSlider";
+
+/** Las fotos que se van relevando en la portada del Home. */
+const PORTADA: HeroPhoto[] = [
+  { src: "/images/home/amsterdam.jpg", place: "Ámsterdam" },
+  { src: "/images/home/cinque-terre.jpg", place: "Cinque Terre" },
+  { src: "/images/home/florencia.jpg", place: "Florencia" },
+  { src: "/images/home/baltinache.jpg", place: "Lagunas de Baltinache" },
+  { src: "/images/home/machu-picchu.jpg", place: "Machu Picchu" },
+];
 
 const HIGHLIGHTS = [
   {
@@ -23,18 +32,14 @@ const HIGHLIGHTS = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HeroBanner
-        src="/images/santiago/atardecer-en-santiago.jpg"
-        alt="Atardecer en Santiago de Chile"
-        priority
-      >
+      <HeroSlider photos={PORTADA}>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
           Keys4Travels
         </p>
         <h1 className="font-display mt-2 max-w-sm text-3xl leading-tight sm:text-4xl">
           El lujo de viajar lento y sin prisa
         </h1>
-      </HeroBanner>
+      </HeroSlider>
 
       <section className="flex flex-col gap-4 px-5 py-8 text-[15px] leading-relaxed text-zinc-600">
         <p>
