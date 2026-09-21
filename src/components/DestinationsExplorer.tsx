@@ -21,10 +21,8 @@ export default function DestinationsExplorer({
   countries: Country[];
   cities: City[];
 }) {
-  const firstReady = countries.find((c) => c.citySlugs.length > 0);
-  const [openCountry, setOpenCountry] = useState<string | null>(
-    firstReady?.slug ?? null
-  );
+  // Todos cerrados al entrar: la pantalla arranca mostrando solo los países.
+  const [openCountry, setOpenCountry] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col gap-4">
