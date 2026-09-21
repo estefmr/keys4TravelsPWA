@@ -4,8 +4,10 @@ import { ChevronLeft } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import Gallery from "@/components/Gallery";
 import StickyCityHotels from "@/components/StickyCityHotels";
+import RoutesSection from "@/components/RoutesSection";
 import { cities, getCityBySlug } from "@/lib/data/destinations";
 import { getHotelsByCitySlug } from "@/lib/data/hotels";
+import { getRoutesByCitySlug } from "@/lib/data/routes";
 
 export function generateStaticParams() {
   return cities.map((city) => ({ citySlug: city.slug }));
@@ -33,6 +35,7 @@ export default async function CityDetailPage({
   if (!city) notFound();
 
   const hotels = getHotelsByCitySlug(city.slug);
+  const routes = getRoutesByCitySlug(city.slug);
 
   return (
     <div>
@@ -86,6 +89,8 @@ export default async function CityDetailPage({
             </ul>
           </div>
         )}
+
+        <RoutesSection routes={routes} />
       </div>
 
       <StickyCityHotels
