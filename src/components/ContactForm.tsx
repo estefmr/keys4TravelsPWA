@@ -72,8 +72,11 @@ const CAJA =
   "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors";
 const CAJA_ON = "border-brand bg-brand/5 text-foreground";
 const CAJA_OFF = "border-black/10 bg-white text-zinc-700 hover:border-brand/30";
-const CAMPO =
-  "w-full rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand";
+// El aspecto de los campos, sin ancho: el del WhatsApp comparte fila con el
+// desplegable de prefijo y ahí cada uno necesita el suyo.
+const CAMPO_BASE =
+  "rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand";
+const CAMPO = `w-full ${CAMPO_BASE}`;
 
 function Pregunta({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -508,9 +511,11 @@ export default function ContactForm() {
                       aria-label="Prefijo del país"
                       value={r.prefijo}
                       onChange={(e) => set("prefijo", e.target.value)}
-                      // Ancho fijo y contenido: el desplegable solo tiene que
-                      // dejar ver el prefijo, y el número necesita el resto.
-                      className={`${CAMPO} w-[7.5rem] shrink-0`}
+                      // Ancho propio, sin el w-full de CAMPO: con él se comía
+                      // la fila entera y el número se quedaba sin sitio. Si el
+                      // nombre del país no cabe se corta por el final, que es
+                      // lo prescindible; el prefijo va delante y siempre se ve.
+                      className={`${CAMPO_BASE} w-[7rem] shrink-0`}
                     >
                       {PREFIJOS.map(({ codigo, pais }) => (
                         <option key={codigo} value={codigo}>
@@ -529,7 +534,9 @@ export default function ContactForm() {
                         set("whatsapp", e.target.value.replace(/[^\d\s-]/g, ""))
                       }
                       placeholder="9 1234 5678"
-                      className={`${CAMPO} flex-1`}
+                      // min-w-0 deja que encoja de verdad: sin él, un flex-1
+                      // nunca baja del ancho de su contenido.
+                      className={`${CAMPO_BASE} min-w-0 flex-1`}
                     />
                   </div>
                 </Pregunta>
