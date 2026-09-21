@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { CalendarClock } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import KennyCard from "@/components/KennyCard";
 import { useAuth } from "@/contexts/AuthContext";
 
 type Seccion = "reservar" | "mis-reservas";
@@ -81,6 +82,13 @@ export default function ReservaPage() {
       ) : (
         <MisReservas onReservar={() => setSeccion("reservar")} />
       )}
+
+      {/* Bajo las dos secciones, no dentro de una: la pestaña Contacto
+          desaparece del menú al iniciar sesión, así que esta es la única
+          vía que le queda a quien ya entró para escribirle a Kenny. */}
+      <div className="mt-8">
+        <KennyCard compact />
+      </div>
     </div>
   );
 }
