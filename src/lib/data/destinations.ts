@@ -160,6 +160,16 @@ export const countries: Country[] = [
     // citySlugs: ["madrid"] para reactivarlo.
     citySlugs: [],
   },
+  {
+    id: "argentina",
+    slug: "argentina",
+    name: "Argentina",
+    // Argentina todavía no tiene ciudades documentadas. Igual que España,
+    // un país sin `citySlugs` se dibuja como tarjeta "Próximamente": no
+    // despliega ni navega. Cuando Buenos Aires esté listo, se añade su
+    // ciudad a `cities` y su slug aquí.
+    citySlugs: [],
+  },
 ];
 
 export function getCityBySlug(slug: string): City | undefined {

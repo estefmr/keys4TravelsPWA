@@ -3,7 +3,7 @@ import { countries, cities } from "@/lib/data/destinations";
 
 export const metadata = {
   title: "Destinos — Keys4Travels",
-  description: "Explora nuestros destinos en España y Chile.",
+  description: "Explora nuestros destinos en Chile, España y Argentina.",
 };
 
 export default function DestinosPage() {
