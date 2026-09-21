@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
 import Gallery from "@/components/Gallery";
 import StickyCityHotels from "@/components/StickyCityHotels";
 import RoutesSection from "@/components/RoutesSection";
+import BackBar from "@/components/BackBar";
 import { cities, getCityBySlug } from "@/lib/data/destinations";
 import { getHotelsByCitySlug } from "@/lib/data/hotels";
 import { getRoutesByCitySlug } from "@/lib/data/routes";
@@ -39,13 +38,9 @@ export default async function CityDetailPage({
 
   return (
     <div>
+      <BackBar href="/destinos" backLabel="Destinos" title={city.name} />
+
       <HeroBanner src={city.images[0]} alt={city.name} minHeight="16rem">
-        <Link
-          href="/destinos"
-          className="mb-3 inline-flex items-center gap-1 text-xs font-medium text-white/80 hover:text-white"
-        >
-          <ChevronLeft className="h-4 w-4" /> Destinos
-        </Link>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
           {city.countryName}
         </p>

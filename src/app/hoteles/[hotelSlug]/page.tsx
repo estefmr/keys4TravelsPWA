@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import HeroBanner from "@/components/HeroBanner";
+import BackBar from "@/components/BackBar";
 import Gallery from "@/components/Gallery";
 import PhotoSlider from "@/components/PhotoSlider";
 import { hotels, getHotelBySlug } from "@/lib/data/hotels";
@@ -33,13 +34,9 @@ export default async function HotelDetailPage({
 
   return (
     <div>
+      <BackBar href="/hoteles" backLabel="Hoteles" title={hotel.name} />
+
       <HeroBanner src={hotel.images[0]} alt={hotel.name} minHeight="16rem">
-        <Link
-          href="/hoteles"
-          className="mb-3 inline-flex items-center gap-1 text-xs font-medium text-white/80 hover:text-white"
-        >
-          <ChevronLeft className="h-4 w-4" /> Hoteles
-        </Link>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
           {hotel.cityName}, {hotel.countryName}
         </p>

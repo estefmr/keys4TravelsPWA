@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import BackBar from "@/components/BackBar";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function RegistroPage() {
@@ -36,7 +37,10 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="flex flex-col items-center px-5 py-10">
+    <div>
+      <BackBar href="/cuenta" backLabel="Mi cuenta" title="Crear cuenta" />
+
+      <div className="flex flex-col items-center px-5 py-10">
       <Image
         src="/logo-primary.png"
         alt="Keys4Travels"
@@ -112,6 +116,7 @@ export default function RegistroPage() {
           Inicia sesión
         </Link>
       </p>
+      </div>
     </div>
   );
 }
