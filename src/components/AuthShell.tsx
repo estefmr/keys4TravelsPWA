@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import BackBar from "@/components/BackBar";
 
 /**
- * Carcasa compartida de las pantallas de acceso y registro.
+ * Carcasa compartida de las pantallas de cuenta: acceso, registro y Mi cuenta.
  *
- * A diferencia del resto de la app —clara, de lectura— estas dos se van a
+ * A diferencia del resto de la app —clara, de lectura— estas se van a
  * oscuro: una foto de viaje al fondo bajo un velo azul profundo, el logo en
  * blanco y el formulario sobre un cristal esmerilado. La idea es que entrar
  * se sienta como cruzar una puerta, no como rellenar un trámite.
@@ -14,11 +14,12 @@ import BackBar from "@/components/BackBar";
  * inventar dorados: el lujo lo dan el aire entre elementos y la tipografía
  * con serifa, no la purpurina.
  *
- * Vive aquí y no en cada página porque las dos pantallas son gemelas: si el
- * estilo se duplicara, la siguiente retoque solo llegaría a una de ellas.
+ * Vive aquí y no en cada página porque las tres son hermanas: si el estilo se
+ * duplicara, el siguiente retoque solo llegaría a una de ellas.
  */
 export default function AuthShell({
   backTitle,
+  back = true,
   photo,
   kicker,
   title,
@@ -27,6 +28,8 @@ export default function AuthShell({
 }: {
   /** Nombre de la pantalla en la barra de volver. */
   backTitle: string;
+  /** Las pantallas raíz (Mi cuenta) no cuelgan de nada: van sin flecha. */
+  back?: boolean;
   /** Foto del fondo; cada pantalla lleva la suya para no ser calcadas. */
   photo: string;
   kicker: string;
@@ -39,12 +42,19 @@ export default function AuthShell({
     // aquí el panel oscuro llega hasta abajo del todo y ese hueco dejaría
     // una franja crema asomando bajo el azul.
     <div className="-mb-28">
-      <BackBar href="/cuenta" backLabel="Mi cuenta" title={backTitle} />
+      {back && (
+        <BackBar href="/cuenta" backLabel="Mi cuenta" title={backTitle} />
+      )}
 
-      {/* La altura descuenta las dos barras de arriba (3.25rem + 3.55rem) para
-          llenar la pantalla justa. `dvh` evita el salto cuando el navegador
+      {/* La altura descuenta lo que ocupan las barras de arriba, para llenar
+          la pantalla justa: la superior siempre (3.25rem) y la de volver solo
+          cuando la hay (3.55rem). `dvh` evita el salto cuando el navegador
           móvil esconde su propia barra al hacer scroll. */}
-      <div className="relative isolate flex min-h-[calc(100dvh-6.8rem)] flex-col justify-center overflow-hidden px-5 pb-28 pt-12">
+      <div
+        className={`relative isolate flex flex-col justify-center overflow-hidden px-5 pb-28 pt-12 ${
+          back ? "min-h-[calc(100dvh-6.8rem)]" : "min-h-[calc(100dvh-3.25rem)]"
+        }`}
+      >
         <Image
           src={photo}
           alt=""
@@ -137,16 +147,29 @@ export function AuthField({
   );
 }
 
+/**
+ * Forma común de los botones. Se exportan como clases —y no solo como
+ * componentes— porque aquí unas acciones son <button> y otras <Link>, y
+ * deben verse idénticas.
+ */
+export const authPrimario =
+  "rounded-full bg-sand px-5 py-3.5 text-center text-sm font-semibold tracking-wide text-brand-dark transition-colors hover:bg-white disabled:opacity-60";
+
+export const authSecundario =
+  "flex items-center justify-center gap-2 rounded-full border border-white/25 px-5 py-3.5 text-center text-sm font-semibold tracking-wide text-white transition-colors hover:bg-white/10";
+
 /** Botón principal: lo más claro de la pantalla, para que la mirada aterrice ahí. */
 export function AuthButton({ children, ...props }: React.ComponentProps<"button">) {
   return (
-    <button
-      {...props}
-      className="mt-2 rounded-full bg-sand px-5 py-3.5 text-sm font-semibold tracking-wide text-brand-dark transition-colors hover:bg-white disabled:opacity-60"
-    >
+    <button {...props} className={`mt-2 ${authPrimario}`}>
       {children}
     </button>
   );
+}
+
+/** Columna de acciones, para las pantallas que ofrecen botones en vez de formulario. */
+export function AuthActions({ children }: { children: ReactNode }) {
+  return <div className="mt-8 flex flex-col gap-3">{children}</div>;
 }
 
 /** El "¿ya tienes cuenta?" del pie, con su enlace a la pantalla hermana. */

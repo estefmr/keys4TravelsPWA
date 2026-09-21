@@ -120,8 +120,10 @@ function getServerSnapshot() {
 export default function InstallPrompt({
   variant = "banner",
 }: {
-  variant?: "banner" | "card";
+  /** "card-dark" es la misma tarjeta sobre el panel oscuro de Mi cuenta. */
+  variant?: "banner" | "card" | "card-dark";
 }) {
+  const oscuro = variant === "card-dark";
   const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [dismissedNow, setDismissedNow] = useState(false);
 
@@ -163,28 +165,43 @@ export default function InstallPrompt({
         className="mt-0.5 shrink-0 rounded-xl shadow-sm"
       />
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-foreground">
+        <p
+          className={`text-sm font-semibold ${
+            oscuro ? "text-white" : "text-foreground"
+          }`}
+        >
           Instala Keys4Travels
         </p>
         {ios && !prompt ? (
-          <p className="mt-1 text-xs leading-relaxed text-zinc-500">
-            Pulsa <span className="font-semibold text-brand">Compartir</span> en
-            la barra de Safari y elige{" "}
-            <span className="inline-flex items-center gap-0.5 font-semibold text-brand">
+          <p className={`mt-1 text-xs leading-relaxed ${oscuro ? "text-white/60" : "text-zinc-500"}`}>
+            Pulsa{" "}
+            <span className={`font-semibold ${oscuro ? "text-sand" : "text-brand"}`}>
+              Compartir
+            </span>{" "}
+            en la barra de Safari y elige{" "}
+            <span
+              className={`inline-flex items-center gap-0.5 font-semibold ${
+                oscuro ? "text-sand" : "text-brand"
+              }`}
+            >
               Añadir a pantalla de inicio <Plus className="h-3 w-3" />
             </span>
             .
           </p>
         ) : (
           <>
-            <p className="mt-1 text-xs leading-relaxed text-zinc-500">
+            <p className={`mt-1 text-xs leading-relaxed ${oscuro ? "text-white/60" : "text-zinc-500"}`}>
               Ábrela desde tu pantalla de inicio, a pantalla completa y sin
               barra del navegador.
             </p>
             <button
               type="button"
               onClick={handleInstall}
-              className="mt-2.5 flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-dark"
+              className={`mt-2.5 flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+                oscuro
+                  ? "bg-sand text-brand-dark hover:bg-white"
+                  : "bg-brand text-white hover:bg-brand-dark"
+              }`}
             >
               <Download className="h-3.5 w-3.5" strokeWidth={2.25} />
               Instalar app
@@ -205,9 +222,15 @@ export default function InstallPrompt({
     </div>
   );
 
-  if (variant === "card") {
+  if (variant === "card" || oscuro) {
     return (
-      <div className="w-full rounded-2xl border border-black/5 bg-white p-4 text-left shadow-sm">
+      <div
+        className={`w-full rounded-2xl border p-4 text-left ${
+          oscuro
+            ? "border-white/10 bg-white/[0.06] backdrop-blur-md"
+            : "border-black/5 bg-white shadow-sm"
+        }`}
+      >
         {content}
       </div>
     );

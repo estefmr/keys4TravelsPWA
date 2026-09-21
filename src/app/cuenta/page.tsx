@@ -1,70 +1,74 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut, User } from "lucide-react";
+import { LogOut } from "lucide-react";
+import AuthShell, {
+  AuthActions,
+  AuthNotice,
+  authPrimario,
+  authSecundario,
+} from "@/components/AuthShell";
 import { useAuth } from "@/contexts/AuthContext";
 import InstallPrompt from "@/components/InstallPrompt";
 
 export default function CuentaPage() {
   const { user, loading, signOut, configured } = useAuth();
 
-  if (loading) {
-    return <div className="px-5 py-10 text-sm text-zinc-500">Cargando…</div>;
-  }
+  // Mientras se resuelve la sesión mantenemos el mismo panel: con un
+  // "Cargando…" sobre fondo claro, la pantalla daba un fogonazo blanco
+  // antes de ponerse oscura.
+  const entrado = Boolean(user);
 
   return (
-    <div className="flex flex-col items-center px-5 py-10 text-center">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand/10 text-brand">
-        <User className="h-7 w-7" strokeWidth={1.75} />
-      </div>
-
-      {user ? (
-        <>
-          <h1 className="font-display mt-4 text-xl text-foreground">Mi cuenta</h1>
-          <p className="mt-1 text-sm text-zinc-500">{user.email}</p>
-          <button
-            onClick={() => signOut()}
-            className="mt-6 flex items-center gap-2 rounded-full border border-black/10 px-5 py-2.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
-          >
+    <AuthShell
+      // Pantalla raíz: se llega desde la barra de arriba, no cuelga de
+      // ninguna otra, así que va sin flecha de volver.
+      back={false}
+      backTitle="Mi cuenta"
+      photo="/images/home/machu-picchu.jpg"
+      // Mientras carga no afirmamos nada: decir "aún no has iniciado sesión"
+      // a quien sí la tiene sería un parpadeo desconcertante.
+      kicker={loading || !entrado ? "Tu cuenta" : "Sesión iniciada"}
+      title={loading || entrado ? "Mi cuenta" : "Aún no has iniciado sesión"}
+      subtitle={
+        loading
+          ? ""
+          : entrado
+            ? (user?.email ?? "")
+            : "Crea una cuenta para guardar tus hoteles y destinos favoritos."
+      }
+    >
+      {loading ? (
+        <p className="mt-8 text-center text-sm text-white/50">Cargando…</p>
+      ) : entrado ? (
+        <AuthActions>
+          <button onClick={() => signOut()} className={authSecundario}>
             <LogOut className="h-4 w-4" /> Cerrar sesión
           </button>
-        </>
+        </AuthActions>
       ) : (
         <>
-          <h1 className="font-display mt-4 text-xl text-foreground">
-            Aún no has iniciado sesión
-          </h1>
-          <p className="mt-1 max-w-xs text-sm text-zinc-500">
-            Crea una cuenta para guardar tus hoteles y destinos favoritos.
-          </p>
-
           {!configured && (
-            <div className="mt-4 w-full rounded-xl bg-amber-50 p-3 text-sm text-amber-800">
+            <AuthNotice tone="warn">
               Configura Supabase para activar el acceso.
-            </div>
+            </AuthNotice>
           )}
 
-          <div className="mt-6 flex w-full flex-col gap-3">
-            <Link
-              href="/login"
-              className="rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-            >
+          <AuthActions>
+            <Link href="/login" className={authPrimario}>
               Iniciar sesión
             </Link>
-            <Link
-              href="/registro"
-              className="rounded-full border border-brand/20 px-5 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand/5"
-            >
+            <Link href="/registro" className={authSecundario}>
               Crear cuenta
             </Link>
-          </div>
+          </AuthActions>
         </>
       )}
 
       {/* Acceso permanente: el banner del layout se puede descartar, este no. */}
-      <div className="mt-8 w-full">
-        <InstallPrompt variant="card" />
+      <div className="mt-8">
+        <InstallPrompt variant="card-dark" />
       </div>
-    </div>
+    </AuthShell>
   );
 }
