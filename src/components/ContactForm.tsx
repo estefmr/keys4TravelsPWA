@@ -3,7 +3,12 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { CheckCircle2, ArrowLeft, Info } from "lucide-react";
 import WhatsAppGlyph from "@/components/WhatsAppGlyph";
-import { buildCuestionarioWhatsAppUrl, type Cuestionario } from "@/lib/contact";
+import {
+  buildCuestionarioWhatsAppUrl,
+  PREFIJOS,
+  PREFIJO_POR_DEFECTO,
+  type Cuestionario,
+} from "@/lib/contact";
 
 /**
  * Cuestionario previo a la llamada con Kenny, en tres etapas con barra de
@@ -59,6 +64,7 @@ const VACIO: Cuestionario = {
   objetivo: "",
   nombre: "",
   email: "",
+  prefijo: PREFIJO_POR_DEFECTO,
   whatsapp: "",
 };
 
@@ -188,6 +194,10 @@ export default function ContactForm() {
       if (!r.nombre.trim()) return "Falta tu nombre.";
       if (!r.email.trim()) return "Falta tu email.";
       if (!r.whatsapp.trim()) return "Falta tu WhatsApp.";
+      // Sin el prefijo, un número corto de más suele ser un dedazo: seis
+      // dígitos es menos que cualquier móvil de los países de la lista.
+      if (r.whatsapp.replace(/\D/g, "").length < 6)
+        return "El número de WhatsApp parece incompleto.";
     }
     return null;
   }
@@ -452,13 +462,35 @@ export default function ContactForm() {
               </div>
               <div className="flex-1">
                 <Pregunta label="WhatsApp">
-                  <input
-                    type="tel"
-                    value={r.whatsapp}
-                    onChange={(e) => set("whatsapp", e.target.value)}
-                    placeholder="+34 600 000 000"
-                    className={CAMPO}
-                  />
+                  <div className="flex gap-2">
+                    <select
+                      aria-label="Prefijo del país"
+                      value={r.prefijo}
+                      onChange={(e) => set("prefijo", e.target.value)}
+                      // Ancho fijo y contenido: el desplegable solo tiene que
+                      // dejar ver el prefijo, y el número necesita el resto.
+                      className={`${CAMPO} w-[7.5rem] shrink-0`}
+                    >
+                      {PREFIJOS.map(({ codigo, pais }) => (
+                        <option key={codigo} value={codigo}>
+                          {codigo} {pais}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      inputMode="tel"
+                      value={r.whatsapp}
+                      // Solo dígitos y separadores: así lo que se envía a
+                      // Kenny se lee siempre igual, escriba como escriba cada
+                      // persona.
+                      onChange={(e) =>
+                        set("whatsapp", e.target.value.replace(/[^\d\s-]/g, ""))
+                      }
+                      placeholder="9 1234 5678"
+                      className={`${CAMPO} flex-1`}
+                    />
+                  </div>
                 </Pregunta>
               </div>
             </div>
