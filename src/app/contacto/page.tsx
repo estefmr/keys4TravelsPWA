@@ -87,14 +87,10 @@ export default function ContactoPage() {
         </div>
       </div>
 
-      <div className="mt-6">
-        <h2 className="font-display text-lg text-foreground">Escríbenos</h2>
-        <p className="mt-1 text-sm text-zinc-500">
-          Cuéntanos qué estás buscando y te respondemos a la brevedad.
-        </p>
-        <div className="mt-3">
-          <ContactForm />
-        </div>
+      {/* El cuestionario trae su propio encabezado ("Antes de tu llamada
+          con Kenny"), así que aquí no hace falta otro título. */}
+      <div className="mt-8 rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
+        <ContactForm />
       </div>
     </div>
   );

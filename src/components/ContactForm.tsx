@@ -1,32 +1,222 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { useState, type FormEvent, type ReactNode } from "react";
+import { CheckCircle2, ArrowLeft, Info } from "lucide-react";
 import WhatsAppGlyph from "@/components/WhatsAppGlyph";
-import { buildWhatsAppMessageUrl } from "@/lib/contact";
+import { buildCuestionarioWhatsAppUrl, type Cuestionario } from "@/lib/contact";
+
+/**
+ * Cuestionario previo a la llamada con Kenny, en tres etapas con barra de
+ * progreso. Las preguntas y las opciones vienen del documento
+ * `Cuestionario.docx` que entregó la clienta.
+ *
+ * No hay backend: al terminar se abre WhatsApp con todas las respuestas ya
+ * redactadas, igual que hacía el formulario corto anterior.
+ */
+
+const PASOS = ["Tu viaje", "Tu estilo de viaje", "Tus datos de contacto"];
+
+// Las cuatro ciudades operativas hoy, según el documento.
+const DESTINOS = [
+  "Santiago (Chile)",
+  "Buenos Aires (Argentina)",
+  "Viña del Mar (Chile)",
+  "Madrid (España)",
+];
+
+const COMPANIA = [
+  "Viajo solo/a",
+  "En pareja",
+  "En familia (con niños)",
+  "Grupo de amigos",
+];
+
+const ESTILO = [
+  "Viajar despacio. Prefiero visitar menos lugares, pero conocer más",
+  "Quiero experiencias reales y propias del destino",
+  "Tengo tiempo para salir de la ciudad sin problema",
+  "Quiero conocer a profundidad la ciudad y sus rincones",
+];
+
+const ALOJAMIENTO = [
+  "Historia y Diseño",
+  "Privacidad y Estilo",
+  "Ubicación y Tranquilidad",
+  "Precio más bajo posible",
+];
+
+const ASESOR = ["Sí", "No", "No, pero me interesa"];
+
+const VACIO: Cuestionario = {
+  destinos: [],
+  fechaDesde: "",
+  fechaHasta: "",
+  compania: "",
+  personas: "1",
+  estilo: [],
+  alojamiento: [],
+  asesor: "",
+  objetivo: "",
+  nombre: "",
+  email: "",
+  whatsapp: "",
+};
+
+const CAJA =
+  "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors";
+const CAJA_ON = "border-brand bg-brand/5 text-foreground";
+const CAJA_OFF = "border-black/10 bg-white text-zinc-700 hover:border-brand/30";
+const CAMPO =
+  "w-full rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand";
+
+function Pregunta({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div>
+      <p className="mb-2 text-sm font-semibold text-foreground">{label}</p>
+      {children}
+    </div>
+  );
+}
+
+/** Una sola respuesta posible. */
+function Opcion({
+  activa,
+  onClick,
+  children,
+}: {
+  activa: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      role="radio"
+      aria-checked={activa}
+      onClick={onClick}
+      className={`${CAJA} ${activa ? CAJA_ON : CAJA_OFF}`}
+    >
+      <span
+        className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${
+          activa ? "border-brand" : "border-zinc-300"
+        }`}
+      >
+        {activa && <span className="h-2 w-2 rounded-full bg-brand" />}
+      </span>
+      {children}
+    </button>
+  );
+}
+
+/** Varias respuestas — el documento dice "el cliente puede elegir las que desee". */
+function OpcionMulti({
+  activa,
+  onClick,
+  children,
+}: {
+  activa: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      role="checkbox"
+      aria-checked={activa}
+      onClick={onClick}
+      className={`${CAJA} ${activa ? CAJA_ON : CAJA_OFF}`}
+    >
+      <span
+        className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border-2 ${
+          activa ? "border-brand bg-brand" : "border-zinc-300"
+        }`}
+      >
+        {activa && (
+          <svg viewBox="0 0 12 12" className="h-3 w-3" aria-hidden="true">
+            <path
+              d="M2.5 6.2l2.3 2.3 4.7-5"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+      </span>
+      {children}
+    </button>
+  );
+}
 
 export default function ContactForm() {
+  const [paso, setPaso] = useState(0);
+  const [r, setR] = useState<Cuestionario>(VACIO);
+  const [error, setError] = useState<string | null>(null);
   const [sentUrl, setSentUrl] = useState<string | null>(null);
+
+  function set<K extends keyof Cuestionario>(k: K, v: Cuestionario[K]) {
+    setR((prev) => ({ ...prev, [k]: v }));
+    setError(null);
+  }
+
+  function alternar(k: "destinos" | "estilo" | "alojamiento", valor: string) {
+    const lista = r[k];
+    set(
+      k,
+      lista.includes(valor) ? lista.filter((x) => x !== valor) : [...lista, valor]
+    );
+  }
+
+  /** Primer requisito que falta en el paso indicado, o null si está completo. */
+  function faltaEn(n: number): string | null {
+    if (n === 0) {
+      if (!r.destinos.length) return "Elige al menos un destino.";
+      if (!r.fechaDesde) return "Indica la fecha aproximada de ida.";
+      if (!r.compania) return "Cuéntanos quiénes viajan.";
+    }
+    if (n === 1) {
+      if (!r.estilo.length)
+        return "Elige al menos una opción sobre cómo te gustaría viajar.";
+      if (!r.alojamiento.length)
+        return "Elige al menos una opción sobre el alojamiento.";
+      if (!r.asesor) return "Indica si has viajado antes con un asesor.";
+      if (!r.objetivo.trim())
+        return "Cuéntanos brevemente qué esperas de la llamada.";
+    }
+    if (n === 2) {
+      if (!r.nombre.trim()) return "Falta tu nombre.";
+      if (!r.email.trim()) return "Falta tu email.";
+      if (!r.whatsapp.trim()) return "Falta tu WhatsApp.";
+    }
+    return null;
+  }
+
+  function siguiente() {
+    const falta = faltaEn(paso);
+    if (falta) {
+      setError(falta);
+      return;
+    }
+    setPaso((p) => p + 1);
+    setError(null);
+  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const falta = faltaEn(2);
+    if (falta) {
+      setError(falta);
+      return;
+    }
+    const url = buildCuestionarioWhatsAppUrl(r);
 
-    const url = buildWhatsAppMessageUrl({
-      nombre: String(data.get("nombre") ?? ""),
-      email: String(data.get("email") ?? ""),
-      mensaje: String(data.get("mensaje") ?? ""),
-    });
-
-    // Esto tiene que ocurrir de forma síncrona dentro del gesto de envío:
-    // si se hiciera después de un await, los navegadores móviles lo
-    // bloquearían como popup. Si aun así lo bloquean, navegamos directo.
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) window.location.href = url;
+    // Síncrono dentro del gesto de envío: tras un await los navegadores
+    // móviles lo bloquearían como popup. Si aun así lo bloquean, navegamos.
+    const abierto = window.open(url, "_blank", "noopener,noreferrer");
+    if (!abierto) window.location.href = url;
 
     setSentUrl(url);
-    form.reset();
   }
 
   if (sentUrl) {
@@ -34,10 +224,10 @@ export default function ContactForm() {
       <div className="flex items-start gap-3 rounded-2xl bg-brand/5 p-4 text-sm text-brand-dark">
         <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
         <div>
-          <p className="font-semibold">Te abrimos WhatsApp con tu mensaje listo</p>
+          <p className="font-semibold">Te abrimos WhatsApp con tus respuestas</p>
           <p className="mt-1 text-brand-dark/80">
             Solo tienes que pulsar enviar dentro de WhatsApp para que nos
-            llegue.
+            lleguen.
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <a
@@ -51,10 +241,14 @@ export default function ContactForm() {
             </a>
             <button
               type="button"
-              onClick={() => setSentUrl(null)}
+              onClick={() => {
+                setSentUrl(null);
+                setR(VACIO);
+                setPaso(0);
+              }}
               className="text-xs font-medium underline underline-offset-2"
             >
-              Escribir otro mensaje
+              Empezar de nuevo
             </button>
           </div>
         </div>
@@ -63,53 +257,267 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <div>
-        <label htmlFor="nombre" className="mb-1 block text-xs font-medium text-zinc-500">
-          Nombre
-        </label>
-        <input
-          id="nombre"
-          name="nombre"
-          type="text"
-          required
-          className="w-full rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand"
-        />
-      </div>
-      <div>
-        <label htmlFor="email" className="mb-1 block text-xs font-medium text-zinc-500">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          className="w-full rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand"
-        />
-      </div>
-      <div>
-        <label htmlFor="mensaje" className="mb-1 block text-xs font-medium text-zinc-500">
-          Mensaje
-        </label>
-        <textarea
-          id="mensaje"
-          name="mensaje"
-          required
-          rows={4}
-          className="w-full resize-none rounded-xl border border-black/10 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand"
-        />
-      </div>
-      <button
-        type="submit"
-        className="mt-1 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-      >
-        <WhatsAppGlyph />
-        Enviar por WhatsApp
-      </button>
-      <p className="text-center text-xs text-zinc-400">
-        Se abrirá WhatsApp con tu mensaje ya escrito.
+    <form onSubmit={handleSubmit} className="flex flex-col">
+      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand">
+        Antes de tu llamada con Kenny
       </p>
+      <h2 className="font-display mt-1 text-2xl text-foreground">
+        Cuéntanos sobre tu viaje
+      </h2>
+      <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+        Unas preguntas rápidas para preparar la llamada y asegurarnos de que la
+        curaduría encaje con lo que buscas — no es un formulario de reserva.
+      </p>
+
+      {/* Barra de progreso: un segmento por etapa. */}
+      <div className="mt-5 flex gap-1.5" aria-hidden="true">
+        {PASOS.map((p, i) => (
+          <span
+            key={p}
+            className={`h-1 flex-1 rounded-full transition-colors ${
+              i <= paso ? "bg-brand" : "bg-zinc-200"
+            }`}
+          />
+        ))}
+      </div>
+      <p className="sr-only" aria-live="polite">
+        Paso {paso + 1} de {PASOS.length}: {PASOS[paso]}
+      </p>
+
+      <h3 className="font-display mt-6 text-xl text-foreground">{PASOS[paso]}</h3>
+
+      <div className="mt-5 flex flex-col gap-6">
+        {paso === 0 && (
+          <>
+            <Pregunta label="¿Qué destino(s) estás considerando?">
+              <div className="flex flex-col gap-2">
+                {DESTINOS.map((d) => (
+                  <OpcionMulti
+                    key={d}
+                    activa={r.destinos.includes(d)}
+                    onClick={() => alternar("destinos", d)}
+                  >
+                    {d}
+                  </OpcionMulti>
+                ))}
+              </div>
+            </Pregunta>
+
+            <Pregunta label="Fechas aproximadas de viaje">
+              <div className="flex gap-3">
+                <label className="flex-1">
+                  <span className="mb-1 block text-xs font-medium text-zinc-500">
+                    Ida
+                  </span>
+                  <input
+                    type="date"
+                    value={r.fechaDesde}
+                    onChange={(e) => set("fechaDesde", e.target.value)}
+                    className={CAMPO}
+                  />
+                </label>
+                <label className="flex-1">
+                  <span className="mb-1 block text-xs font-medium text-zinc-500">
+                    Vuelta
+                  </span>
+                  <input
+                    type="date"
+                    value={r.fechaHasta}
+                    min={r.fechaDesde || undefined}
+                    onChange={(e) => set("fechaHasta", e.target.value)}
+                    className={CAMPO}
+                  />
+                </label>
+              </div>
+            </Pregunta>
+
+            <Pregunta label="¿Cuántas personas viajan y quiénes?">
+              <div className="flex flex-col gap-2">
+                {COMPANIA.map((c) => (
+                  <Opcion
+                    key={c}
+                    activa={r.compania === c}
+                    onClick={() => set("compania", c)}
+                  >
+                    {c}
+                  </Opcion>
+                ))}
+              </div>
+              <label className="mt-3 flex flex-wrap items-center gap-3">
+                <span className="text-xs font-medium text-zinc-500">
+                  Número de viajeros
+                </span>
+                <select
+                  value={r.personas}
+                  onChange={(e) => set("personas", e.target.value)}
+                  className="rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:border-brand"
+                >
+                  {["1", "2", "3", "4"].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+                <span className="text-xs text-zinc-400">Máximo 4</span>
+              </label>
+            </Pregunta>
+          </>
+        )}
+
+        {paso === 1 && (
+          <>
+            <Pregunta label="¿Cómo te gustaría viajar?">
+              <p className="-mt-1 mb-2 text-xs text-zinc-400">
+                Puedes elegir las que quieras.
+              </p>
+              <div className="flex flex-col gap-2">
+                {ESTILO.map((o) => (
+                  <OpcionMulti
+                    key={o}
+                    activa={r.estilo.includes(o)}
+                    onClick={() => alternar("estilo", o)}
+                  >
+                    {o}
+                  </OpcionMulti>
+                ))}
+              </div>
+            </Pregunta>
+
+            <Pregunta label="¿Qué es lo más importante para ti al elegir alojamiento?">
+              <p className="-mt-1 mb-2 text-xs text-zinc-400">
+                Puedes elegir las que quieras.
+              </p>
+              <div className="flex flex-col gap-2">
+                {ALOJAMIENTO.map((o) => (
+                  <OpcionMulti
+                    key={o}
+                    activa={r.alojamiento.includes(o)}
+                    onClick={() => alternar("alojamiento", o)}
+                  >
+                    {o}
+                  </OpcionMulti>
+                ))}
+              </div>
+            </Pregunta>
+
+            <Pregunta label="¿Has viajado antes con un asesor de viajes, seleccionador de hoteles y con experiencia real en el destino?">
+              <div className="flex flex-col gap-2">
+                {ASESOR.map((o) => (
+                  <Opcion
+                    key={o}
+                    activa={r.asesor === o}
+                    onClick={() => set("asesor", o)}
+                  >
+                    {o}
+                  </Opcion>
+                ))}
+              </div>
+            </Pregunta>
+
+            <Pregunta label="¿Cuáles son las dudas que más atraen tu atención y cómo esperas que te ayudemos?">
+              <textarea
+                rows={4}
+                value={r.objetivo}
+                onChange={(e) => set("objetivo", e.target.value)}
+                placeholder="Ej: quiero armar 10 días en Buenos Aires y Santiago para mi aniversario en junio"
+                className={`${CAMPO} resize-none`}
+              />
+            </Pregunta>
+          </>
+        )}
+
+        {paso === 2 && (
+          <>
+            <Pregunta label="Nombre">
+              <input
+                type="text"
+                value={r.nombre}
+                onChange={(e) => set("nombre", e.target.value)}
+                placeholder="Tu nombre"
+                className={CAMPO}
+              />
+            </Pregunta>
+
+            <div className="flex flex-col gap-6 sm:flex-row sm:gap-3">
+              <div className="flex-1">
+                <Pregunta label="Email">
+                  <input
+                    type="email"
+                    value={r.email}
+                    onChange={(e) => set("email", e.target.value)}
+                    placeholder="tu@email.com"
+                    className={CAMPO}
+                  />
+                </Pregunta>
+              </div>
+              <div className="flex-1">
+                <Pregunta label="WhatsApp">
+                  <input
+                    type="tel"
+                    value={r.whatsapp}
+                    onChange={(e) => set("whatsapp", e.target.value)}
+                    placeholder="+34 600 000 000"
+                    className={CAMPO}
+                  />
+                </Pregunta>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2.5 rounded-xl bg-sand/60 p-3.5 text-xs leading-relaxed text-zinc-600">
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+              <p>
+                Nos enfocamos en Turismo Lento, por lo que recomendamos un
+                mínimo de 4 días por cada ciudad para sentir y conectar de
+                verdad con el destino.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+
+      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+
+      <div className="mt-6 flex items-center justify-between gap-3">
+        {paso > 0 ? (
+          <button
+            type="button"
+            onClick={() => {
+              setPaso((p) => p - 1);
+              setError(null);
+            }}
+            className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-zinc-500 transition-colors hover:text-brand"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Atrás
+          </button>
+        ) : (
+          <span />
+        )}
+
+        {paso < PASOS.length - 1 ? (
+          <button
+            type="button"
+            onClick={siguiente}
+            className="rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+          >
+            Continuar
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+          >
+            <WhatsAppGlyph />
+            Enviar por WhatsApp
+          </button>
+        )}
+      </div>
+
+      {paso === PASOS.length - 1 && (
+        <p className="mt-3 text-center text-xs text-zinc-400">
+          Se abrirá WhatsApp con tus respuestas ya escritas.
+        </p>
+      )}
     </form>
   );
 }

@@ -49,3 +49,63 @@ export function buildWhatsAppMessageUrl({
 
   return `${CONTACT_WHATSAPP_URL}?text=${encodeURIComponent(texto)}`;
 }
+
+export type Cuestionario = {
+  destinos: string[];
+  fechaDesde: string;
+  fechaHasta: string;
+  compania: string;
+  personas: string;
+  estilo: string[];
+  alojamiento: string[];
+  asesor: string;
+  objetivo: string;
+  nombre: string;
+  email: string;
+  whatsapp: string;
+};
+
+/** DD/MM/AAAA, el formato que pide el documento del cuestionario. */
+function formatearFecha(iso: string): string {
+  if (!iso) return "";
+  const [a, m, d] = iso.split("-");
+  return d && m && a ? `${d}/${m}/${a}` : iso;
+}
+
+/**
+ * Redacta el cuestionario completo como un mensaje de WhatsApp legible.
+ *
+ * Mismo principio que `buildWhatsAppMessageUrl`: el mensaje sale del
+ * WhatsApp del propio viajero, así que Kenny lo recibe como un chat normal
+ * y puede responder ahí mismo. Los asteriscos son negrita de WhatsApp.
+ */
+export function buildCuestionarioWhatsAppUrl(r: Cuestionario): string {
+  const fechas = [formatearFecha(r.fechaDesde), formatearFecha(r.fechaHasta)]
+    .filter(Boolean)
+    .join(" — ");
+
+  const lineas = [
+    "Hola Keys4Travels 👋",
+    "Te comparto mis respuestas antes de la llamada:",
+    "",
+    "*TU VIAJE*",
+    `*Destinos:* ${r.destinos.join(", ")}`,
+    `*Fechas:* ${fechas}`,
+    `*Viajan:* ${r.compania} (${r.personas})`,
+    "",
+    "*TU ESTILO DE VIAJE*",
+    `*Cómo me gustaría viajar:* ${r.estilo.join("; ")}`,
+    `*Al elegir alojamiento valoro:* ${r.alojamiento.join("; ")}`,
+    `*He viajado antes con un asesor:* ${r.asesor}`,
+    "",
+    "*Mis dudas y lo que espero:*",
+    r.objetivo,
+    "",
+    "*MIS DATOS*",
+    `*Nombre:* ${r.nombre}`,
+    `*Email:* ${r.email}`,
+    `*WhatsApp:* ${r.whatsapp}`,
+  ];
+
+  return `${CONTACT_WHATSAPP_URL}?text=${encodeURIComponent(lineas.join("\n"))}`;
+}
