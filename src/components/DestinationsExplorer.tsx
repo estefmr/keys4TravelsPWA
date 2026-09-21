@@ -128,17 +128,23 @@ function CountryCard({
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
             {ready
               ? `${cityCount} ${cityCount === 1 ? "destino" : "destinos"}`
-              : "En documentación por nuestro asesor"}
+              : "¡Muy pronto disponible!"}
           </p>
           <h2 className="font-display mt-0.5 text-2xl text-white">{name}</h2>
         </div>
 
         {ready && (
-          <ChevronDown
-            className={`h-5 w-5 shrink-0 text-white transition-transform ${
-              isOpen ? "rotate-180" : ""
-            }`}
-          />
+          <span
+            aria-hidden="true"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm"
+          >
+            <ChevronDown
+              className={`h-7 w-7 text-white transition-transform duration-200 ${
+                isOpen ? "rotate-180" : ""
+              }`}
+              strokeWidth={2.5}
+            />
+          </span>
         )}
       </div>
     </button>
