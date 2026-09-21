@@ -52,7 +52,7 @@ export default function Home() {
           tiempo para que sientas lo que es ser un local en una ciudad nueva.
         </p>
         <p>
-          Hoteles seleccionados bajos criterios muy específicos y un agente a
+          Hoteles seleccionados bajo criterios muy específicos y un agente a
           tu disposición que te ayuda a organizar tu viaje según tus deseos y
           necesidades basado exclusivamente en lo que tú quieras conocer. Esto
           hace de Keys4Travels un puente entre ese destino soñado y tus deseos
