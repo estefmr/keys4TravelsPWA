@@ -23,9 +23,8 @@ export default function HotelsExplorer({
   orden: string[];
 }) {
   const paises = agrupar(hotels, orden);
-  const [abierto, setAbierto] = useState<string | null>(
-    paises[0]?.nombre ?? null
-  );
+  // Todos cerrados al entrar: la pantalla arranca mostrando solo los países.
+  const [abierto, setAbierto] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col gap-4">
