@@ -2,17 +2,30 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Compass, BedDouble, Mail } from "lucide-react";
+import { Home, Compass, BedDouble, Mail, User } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
-const TABS = [
+const FIJAS = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/destinos", label: "Destinos", icon: Compass },
   { href: "/hoteles", label: "Hoteles", icon: BedDouble },
-  { href: "/contacto", label: "Contacto", icon: Mail },
 ] as const;
+
+/**
+ * La última pestaña cambia según haya sesión o no: quien no ha entrado
+ * necesita una forma de escribirnos; quien ya entró necesita llegar a su
+ * reserva y su itinerario, que es lo que viene a hacer.
+ */
+const CONTACTO = { href: "/contacto", label: "Contacto", icon: Mail } as const;
+const RESERVA = { href: "/reserva", label: "Reserva", icon: User } as const;
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const { user } = useAuth();
+
+  // Mientras se resuelve la sesión se muestra Contacto: es lo que vale para
+  // cualquiera, y así la pestaña no aparece y desaparece al cargar.
+  const tabs = [...FIJAS, user ? RESERVA : CONTACTO];
 
   return (
     <nav
@@ -21,7 +34,7 @@ export default function BottomNav() {
       aria-label="Navegación principal"
     >
       <ul className="mx-auto flex max-w-3xl items-stretch justify-between">
-        {TABS.map(({ href, label, icon: Icon }) => {
+        {tabs.map(({ href, label, icon: Icon }) => {
           const active =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
           return (
