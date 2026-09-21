@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { CheckCircle2, ArrowLeft, Info } from "lucide-react";
 import WhatsAppGlyph from "@/components/WhatsAppGlyph";
 import {
@@ -155,7 +155,16 @@ function OpcionMulti({
   );
 }
 
+/**
+ * Hueco que dejamos sobre el formulario al saltar de etapa: el alto de la
+ * barra superior pegajosa (--topbar-h, 3.25rem) más un respiro, para que el
+ * título de la etapa no quede escondido detrás de ella.
+ */
+const MARGEN_SUPERIOR = 64;
+
 export default function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const primerDibujado = useRef(true);
   const [paso, setPaso] = useState(0);
   const [r, setR] = useState<Cuestionario>(VACIO);
   const [error, setError] = useState<string | null>(null);
@@ -202,8 +211,40 @@ export default function ContactForm() {
     return null;
   }
 
+  /**
+   * Al cambiar de etapa, sube al principio del formulario.
+   *
+   * Cada etapa es tan larga como la pantalla, así que al pasar a la
+   * siguiente la vista se quedaba a la altura del botón —o sea, al final de
+   * las preguntas nuevas— y había que subir a mano para empezar a
+   * responderlas.
+   *
+   * Va en un efecto y no en cada botón porque así cubre también el "empezar
+   * de nuevo", donde el formulario todavía no existe en el momento del clic
+   * y una llamada directa no encontraría a dónde subir.
+   */
+  useEffect(() => {
+    // En el primer dibujado nadie ha cambiado de etapa: mover la página aquí
+    // daría un salto al abrir Contacto.
+    if (primerDibujado.current) {
+      primerDibujado.current = false;
+      return;
+    }
+    const form = formRef.current;
+    if (!form) return;
+    const destino =
+      form.getBoundingClientRect().top + window.scrollY - MARGEN_SUPERIOR;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: Math.max(0, destino),
+      behavior: reduce ? "auto" : "smooth",
+    });
+  }, [paso]);
+
   function siguiente() {
     const falta = faltaEn(paso);
+    // Con algo pendiente no subimos: el aviso sale junto al botón, y llevar
+    // la vista arriba lo dejaría fuera de pantalla sin que nadie lo lea.
     if (falta) {
       setError(falta);
       return;
@@ -267,7 +308,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col">
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col">
       <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand">
         Antes de tu llamada con Kenny
       </p>
