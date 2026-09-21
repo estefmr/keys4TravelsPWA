@@ -21,7 +21,10 @@ type AuthContextValue = {
     email: string,
     password: string
   ) => Promise<{ error: string | null }>;
-  signUp: (email: string, password: string) => Promise<{ error: string | null }>;
+  signUp: (
+    email: string,
+    password: string
+  ) => Promise<{ error: string | null; needsConfirmation: boolean }>;
   signOut: () => Promise<void>;
 };
 
@@ -71,10 +74,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async signUp(email, password) {
         const supabase = getSupabaseBrowserClient();
         if (!supabase) {
-          return { error: "Configura Supabase para activar el acceso." };
+          return {
+            error: "Configura Supabase para activar el acceso.",
+            needsConfirmation: false,
+          };
         }
-        const { error } = await supabase.auth.signUp({ email, password });
-        return { error: error?.message ?? null };
+        const { data, error } = await supabase.auth.signUp({ email, password });
+        // Con "Confirm email" desactivado en Supabase, signUp ya devuelve
+        // sesión y el usuario queda dentro. Si está activado, no hay sesión
+        // y hay que esperar al correo. Lo deducimos de la respuesta en vez
+        // de dar por hecho una de las dos: así el código sigue siendo
+        // correcto si algún día se vuelve a activar la confirmación.
+        return {
+          error: error?.message ?? null,
+          needsConfirmation: !error && !data.session,
+        };
       },
       async signOut() {
         const supabase = getSupabaseBrowserClient();

@@ -2,11 +2,13 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function RegistroPage() {
   const { signUp, configured } = useAuth();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -17,10 +19,17 @@ export default function RegistroPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await signUp(email, password);
+    const { error, needsConfirmation } = await signUp(email, password);
     setLoading(false);
     if (error) {
       setError(error);
+      return;
+    }
+    // Sin confirmación por email el registro ya deja la sesión abierta, así
+    // que llevamos al usuario directo a su cuenta en lugar de pedirle que
+    // revise un correo que nunca va a llegar.
+    if (!needsConfirmation) {
+      router.push("/cuenta");
       return;
     }
     setDone(true);
