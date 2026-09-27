@@ -24,6 +24,17 @@ export type Hotel = {
   gallery?: GalleryPhoto[];
 };
 
+/**
+ * Un bloque de texto con subtítulo dentro de la ficha de un destino
+ * ("Cómo llegar", "Cómo moverse", "Historia"…). Sirve para que los destinos
+ * con mucha información se lean por partes en vez de como un muro de
+ * párrafos seguidos.
+ */
+export type CitySection = {
+  title: string;
+  paragraphs: string[];
+};
+
 export type City = {
   id: string;
   slug: string;
@@ -32,6 +43,8 @@ export type City = {
   countryName: string;
   heroText: string;
   body: string[];
+  /** Bloques con subtítulo que van después de la galería. Opcional. */
+  sections?: CitySection[];
   attractions: string[];
   images: string[];
   hotelIds: string[];

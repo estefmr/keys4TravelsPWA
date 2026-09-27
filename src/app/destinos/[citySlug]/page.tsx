@@ -68,6 +68,21 @@ export default async function CityDetailPage({
           </div>
         )}
 
+        {city.sections?.map((section) => (
+          <section key={section.title} className="mt-7">
+            <h2 className="font-display text-lg text-foreground">
+              {section.title}
+            </h2>
+            <div className="mt-2 flex flex-col gap-3">
+              {section.paragraphs.map((paragraph, i) => (
+                <p key={i} className="text-sm leading-relaxed text-zinc-600">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </section>
+        ))}
+
         {city.attractions.length > 0 && (
           <div className="mt-6">
             <h2 className="font-display text-lg text-foreground">Qué ver</h2>

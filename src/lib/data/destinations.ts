@@ -102,7 +102,53 @@ export const cities: City[] = [
     heroText:
       "Santiago de Chile — una ciudad con mucho que mostrar y la puerta de entrada a uno de los países más maravillosos para el turismo que existe.",
     body: [
-      "Santiago es una metrópolis con transporte público de calidad (uno de los metros más limpios de Sudamérica), amplia oferta hotelera, parques al aire libre y buena vida nocturna.",
+      "Santiago es la capital de Chile, un país rico en bellezas naturales y ganador del premio a Mejor Destino de Turismo de Aventura de los World Travel Awards en varias oportunidades. Y es en Santiago donde está el mejor punto para entrar al país si vienes desde el extranjero.",
+      "Es una metrópolis con muchas cosas a su favor: transporte público de calidad, amplia oferta hotelera, parques al aire libre y buena vida nocturna.",
+    ],
+    sections: [
+      {
+        title: "Cómo llegar",
+        paragraphs: [
+          "Casi todos los viajeros llegan en avión, al Aeropuerto Internacional Arturo Merino Benítez (SCL), en la zona de Pudahuel. Desde ahí tienes varias formas de llegar al hotel.",
+          "Lo más cómodo es el taxi: busca siempre los oficiales, en la salida de las terminales nacional o internacional. La otra opción cómoda es pedirle a tu alojamiento el servicio de pick up, aunque sale bastante más caro —entre 30 y 100 USD de media, según cuántos vayan y dónde esté el hotel.",
+          "Lo más económico es el transporte público. Si llegas en vuelo internacional, tras recoger las maletas ve a la salida de la derecha: la puerta 5 es buena opción, porque al cruzarla verás en diagonal los paraderos de los autobuses que van al centro. Si tu vuelo es nacional llegas a la terminal T1 y tienes que bajar al primer nivel para tomarlos. El pasaje cuesta unos 3 USD y el trayecto dura unos 25 minutos hasta la estación de metro Pajaritos, donde conviene bajarse para combinar con el metro y llegar más rápido al hotel.",
+        ],
+      },
+      {
+        title: "Dónde alojarse",
+        paragraphs: [
+          "Las mejores zonas son las del sector Oriente: Providencia, Las Condes y Vitacura. En algunas zonas del centro también hay excelentes alternativas, y de hecho varios de los mejores hoteles boutique de la ciudad están ahí. Son las más buscadas por su conectividad y por lo bien situadas que quedan para moverse.",
+        ],
+      },
+      {
+        title: "Cómo moverse por la ciudad",
+        paragraphs: [
+          "Santiago puede darse el lujo de tener una de las redes de metro más limpias de Sudamérica, y sin duda es la manera más rápida de moverse.",
+          "Para usarlo hay que comprar una tarjeta recargable, que venden en todas las estaciones. Lo bueno del sistema es que con una sola tarjeta pueden viajar varias personas: basta validar el viaje en el torniquete cada vez que alguien la use.",
+          "La red sigue creciendo, pero para llegar a ciertos lugares tendrás que combinar con los buses, que también funcionan bien; hoy hay algunas líneas que operan 24 horas.",
+        ],
+      },
+      {
+        title: "Qué visitar",
+        paragraphs: [
+          "Pueblito Los Dominicos: hacia 1980 se permitió a un puñado de artesanos vender sus creaciones alrededor de la capilla San Vicente Ferrer, y más tarde se les cedió un espacio junto a las caballerizas. Así nació este pueblito, hoy un recinto privado y abierto a todo el mundo, ideal para comprar recuerdos.",
+          "Plaza y Boulevard Ñuñoa: una de las plazas con más afluencia de la ciudad, con muy buena comida y un ambiente fiestero. Siempre ha tenido más locales que turistas. El Boulevard Ñuñoa es un pasaje que reúne más de diez restaurantes con propuestas distintas y una gran variedad de tragos y cocteles.",
+          "Cerro San Cristóbal: probablemente el cerro más turístico de Santiago y uno de los parques urbanos más grandes del mundo. Tiene zoológico, teleférico, jardín japonés y un mirador en lo más alto. Es de los sitios preferidos por los santiaguinos para hacer deporte al aire libre. Se entra por el barrio Bellavista o por la avenida Pedro de Valdivia.",
+          "Paseo Orrego Luco y Barrio Lastarria: buena comida y un ambiente muy animado si vas un fin de semana por la noche.",
+          "Parque Bicentenario y Parque Araucano: dos de los grandes parques de la ciudad, perfectos para un pícnic, caminar o simplemente descansar al aire libre.",
+        ],
+      },
+      {
+        title: "Escapadas de un día",
+        paragraphs: [
+          "Un día en Santiago no alcanza para un viajero de verdad, pero si andas con el tiempo justo hay panoramas para todos los gustos, del turismo urbano y lento al de aventura.",
+          "El Cajón del Maipo: imagina un camino de tierra con una colosal formación montañosa a un lado y una inmensa reserva artificial de agua al otro. Eso es el Embalse El Yeso, a unas dos horas de la ciudad. Los mejores meses para ir son entre noviembre y febrero, y conviene ir bien abrigado: las ráfagas de viento enfrían bastante.",
+          "El centro histórico: el casco central puede sorprenderte muy positivamente. El Palacio de La Moneda y su centro cultural, el Centro Gabriela Mistral, el Museo Nacional de Bellas Artes, la Biblioteca Nacional y La Chascona cuentan buena parte de la historia del país. Caminar sus calles llenas de comercio, mezclándote con los locales, es una experiencia que no conviene saltarse; como en cualquier ciudad que visitas por primera vez, vale la pena hacerlo con un guía.",
+          "Isla Negra: llamada así por Pablo Neruda. Un lugar tranquilo y bonito, no solo por el museo, sino por la serenidad de la costa. Está a 90 minutos de Santiago y tiene un clima frío, con unos 16° de media.",
+          "Yerba Loca: el santuario natural más grande de la región metropolitana, camino a Farallones. Se pueden hacer caminatas, deportes de montaña y avistamiento de aves. Puedes ir por el día o quedarte en alguna de sus zonas de camping si quieres conocerlo a fondo.",
+          "Visitar una viña: Chile es conocido en el mundo por sus vinos, y muy cerca de Santiago puedes visitar Errázuriz, Cousiño Macul, Matetic, Antiyal, Concha y Toro, Villard y Santa Rita. En cualquiera de ellas aprenderás cómo se obtienen los mejores vinos del país, sus cepas y la historia que hay detrás de cada una: temas políticos, religiosos y hasta de terror envuelven el nacimiento de algunas de las viñas más famosas.",
+        ],
+      },
     ],
     attractions: [
       "Cerro San Cristóbal",
@@ -139,8 +185,50 @@ export const cities: City[] = [
     heroText:
       "Uno de los lugares más remotos del planeta, con una energía que parece estar más allá de nuestro entendimiento.",
     body: [
-      "San Pedro de Atacama es una joya en el corazón del desierto chileno, fundada en 1450, de calles de tierra y casas de adobe, reconocida como uno de los mejores destinos de aventura de Sudamérica, con atardeceres espectaculares y cielos estrellados todo el año.",
-      'Se recomienda al menos 6 días para un "turismo lento" en la zona.',
+      "San Pedro de Atacama es una joya encantadora en el corazón del desierto chileno. Fundado en 1450, es uno de los pueblos más antiguos del país y destaca por su autenticidad: calles de tierra, casitas de adobe y hoteles acogedores perfectamente integrados con el entorno. No es casualidad que haya sido reconocido en repetidas ocasiones como el principal destino de aventura de Sudamérica.",
+      "Es también la puerta de entrada para los miles de viajeros que cada año se aventuran a explorar las tierras desérticas que lo rodean. Y ofrece un espectáculo celestial incomparable: sus atardeceres y sus noches, bajo cielos despejados y estrellados, son un deleite inolvidable en cualquier estación del año.",
+    ],
+    sections: [
+      {
+        title: "Cómo llegar",
+        paragraphs: [
+          "San Pedro ha sobrevivido en el tiempo gracias a lo alejado que está de las grandes ciudades, lo que no le ha impedido recibir viajeros de todo el mundo. Para llegar hay que tomar un vuelo hasta Calama, a unos 100 km, y aterrizar en su Aeropuerto El Loa (CJC). Está a unos 1.500 km de Santiago, menos de dos horas de vuelo comercial en la ruta SCL–CJC.",
+          "El aeropuerto es pequeño y la mayoría de los vuelos, de ida y de vuelta, salen entre las primeras horas del día y el mediodía. Encontrar la salida no tiene misterio: al bajar del avión caes directamente en las puertas de embarque y las salas de espera, y solo tienes que bajar las escaleras mecánicas que quedan a tu izquierda, retirar el equipaje y salir por la única puerta.",
+          "Al salir verás muchas compañías de alquiler de autos y empresas de traslado que te llevan hasta la puerta de tu alojamiento. Varios hoteles ofrecen también ese servicio, privado o incluido en sus paquetes. Un dato útil: las empresas de traslado dan descuento si pagas la ida y el retorno en un solo pago.",
+          "Vayas en auto alquilado o en transfer, son unos 80 minutos de carretera por la Ruta 23. Si conduces tú, ve muy atento: es una vía muy transitada por camiones de gran tamaño y se han reportado accidentes por conductores que se distraen.",
+        ],
+      },
+      {
+        title: "Cómo moverse por el pueblo",
+        paragraphs: [
+          "La mejor opción, sin duda, es la bicicleta: sigue siendo lo más rápido, fácil y económico, y en estas calles de tierra resulta sumamente práctico. Hay muchas para alquilar en el pueblo.",
+          "Conviene tener algo de experiencia pedaleando, porque el terreno árido y la altura de San Pedro —2.400 m s. n. m.— pueden ser un desafío inesperado. El consejo es pedalear suave y constante: te cansarás menos y disfrutarás más del paseo.",
+          "Las compañías de arriendo ponen a tu disposición todo el equipo necesario para moverte con seguridad, tanto por el pueblo como hacia las afueras. Y queda la opción número uno, la que siempre recomendamos al llegar a un destino nuevo: ¡caminar!",
+        ],
+      },
+      {
+        title: "Cuánto tiempo quedarse",
+        paragraphs: [
+          "Con 1.600 km de longitud, ya te puedes imaginar la cantidad de zonas que hay para explorar en este desierto único en el mundo. Lo que vas a necesitar aquí es tiempo.",
+          'Nuestra recomendación es quedarte al menos 6 días completos, para poder practicar el "turismo lento" y conocer los parajes más impresionantes con calma y detenimiento.',
+        ],
+      },
+      {
+        title: "Un poco de historia",
+        paragraphs: [
+          "Declarado Zona Típica el 28 de marzo de 1980, la historia de este pueblo se remonta miles de años atrás. Hacia el 10.000 a. C. empiezan a registrarse los primeros indicios del paso de civilizaciones nómadas por la región: comunidades que habitaban en cuevas y se dedicaban a la caza de animales característicos de la zona, como llamas y alpacas.",
+          "Con los años la región fue acogiendo civilizaciones cada vez más sedentarias, gracias a una flora y fauna abundantes que les daban alimento y refugio. Hacia el segundo milenio ya eran comunidades completamente sedentarias, con la ganadería de llamas y el cultivo del maíz como principales actividades económicas. Más adelante la textilería y la cerámica ganaron relevancia, y la minería del cobre se consolidó como un recurso valioso que enriqueció a los habitantes de la zona.",
+          "En 1450 el imperio inca toma posesión de la región de Atacama, lo que trajo consigo el perfeccionamiento de la metalurgia y la arquitectura, además de la adoración a las altas cumbres y al Sol. Todos esos cambios elevaron mucho el grado de desarrollo de la zona.",
+          "En 1540 Atacama es conquistada por el imperio español, que trae el cristianismo a estas tierras. En 1557 se construye el templo de San Pedro, en el mismo lugar donde lo vemos hoy, aunque con las reconstrucciones y ampliaciones que fueron necesarias por los sismos e incendios de los siglos siguientes.",
+        ],
+      },
+      {
+        title: "La iglesia de San Pedro",
+        paragraphs: [
+          "Es una edificación que se conserva bastante bien, justo al lado de la Plaza de San Pedro de Atacama y casi frente a la municipalidad. De un blanco muy llamativo, con dos capillas laterales y una única nave de 41 metros de largo, es uno de los lugares que tienes que conocer en el pueblo.",
+          "Fue declarada Monumento Histórico en 1951 y su campanario se construyó en 1965. En su interior todavía se puede ver, a través de un cristal, el suelo original de la iglesia.",
+        ],
+      },
     ],
     attractions: [
       "Géiser del Tatio",
