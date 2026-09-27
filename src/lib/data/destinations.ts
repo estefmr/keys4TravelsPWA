@@ -125,6 +125,10 @@ export const cities: City[] = [
       "/images/santiago/palacio-presidencial-casa-de-la-moneda.jpg",
     ],
     hotelIds: ["castillo-rojo"],
+    // Santiago no muestra la sección "Atractivos y lugares": sus tres rutas
+    // siguen en routes.ts (y sus páginas /rutas/… siguen existiendo), pero no
+    // se enlazan desde aquí. Quita esta línea para volver a mostrarlas.
+    hideRoutes: true,
   },
   {
     id: "san-pedro-de-atacama",

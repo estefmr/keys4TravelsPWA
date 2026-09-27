@@ -36,6 +36,12 @@ export type City = {
   images: string[];
   hotelIds: string[];
   comingSoon?: boolean;
+  /**
+   * Oculta la sección "Atractivos y lugares" (las tarjetas de rutas) en la
+   * ficha del destino, aunque la ciudad tenga rutas cargadas en
+   * `src/lib/data/routes.ts`. Los datos y las páginas /rutas/… se conservan.
+   */
+  hideRoutes?: boolean;
 };
 
 export type Country = {

@@ -34,7 +34,7 @@ export default async function CityDetailPage({
   if (!city) notFound();
 
   const hotels = getHotelsByCitySlug(city.slug);
-  const routes = getRoutesByCitySlug(city.slug);
+  const routes = city.hideRoutes ? [] : getRoutesByCitySlug(city.slug);
 
   return (
     <div>
