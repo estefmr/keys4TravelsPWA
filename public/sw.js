@@ -1,7 +1,7 @@
 // Minimal service worker for Keys4Travels — caches the app shell so the PWA
 // still opens (with a lightweight offline view) without a network connection.
 // Bump CACHE_VERSION whenever the shell files below change materially.
-const CACHE_VERSION = "k4t-shell-v4";
+const CACHE_VERSION = "k4t-shell-v5";
 const APP_SHELL = [
   "/",
   "/manifest.json",
@@ -52,18 +52,36 @@ function isServerComponentRequest(request, url) {
 }
 
 /**
- * Only content-addressed or genuinely static files are safe to serve
- * cache-first. Everything else (HTML, route handlers, RSC) goes to the
- * network so published content changes actually reach the user.
+ * Next.js build files carry a content hash in their name: a new version
+ * is a new URL, so a cached copy can never go stale. Safe cache-first.
  */
-function isStaticAsset(url) {
+function isHashedBuildFile(url) {
+  return url.pathname.startsWith("/_next/static/");
+}
+
+/**
+ * Photos and icons keep the same URL when their file is replaced, so they
+ * are served stale-while-revalidate: the cached copy shows instantly and a
+ * fresh one is fetched in the background for the next view. Everything
+ * else (HTML, route handlers, RSC) goes to the network.
+ */
+function isReplaceableMedia(url) {
   return (
-    url.pathname.startsWith("/_next/static/") ||
     url.pathname.startsWith("/_next/image") ||
     url.pathname.startsWith("/images/") ||
     url.pathname.startsWith("/icons/") ||
-    /\.(png|jpe?g|webp|avif|svg|ico|woff2?)$/.test(url.pathname)
+    /.(png|jpe?g|webp|avif|svg|ico|woff2?)$/.test(url.pathname)
   );
+}
+
+function fetchAndStore(request) {
+  return fetch(request).then((response) => {
+    if (response.ok) {
+      const copy = response.clone();
+      caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+    }
+    return response;
+  });
 }
 
 self.addEventListener("fetch", (event) => {
@@ -86,22 +104,21 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Anything that isn't a static asset is left to the browser/network.
-  if (!isStaticAsset(url)) return;
+  if (isHashedBuildFile(url)) {
+    event.respondWith(
+      caches.match(request).then((cached) => cached || fetchAndStore(request))
+    );
+    return;
+  }
 
-  event.respondWith(
-    caches.match(request).then(
-      (cached) =>
-        cached ||
-        fetch(request).then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches
-              .open(CACHE_VERSION)
-              .then((cache) => cache.put(request, copy));
-          }
-          return response;
-        })
-    )
-  );
+  if (isReplaceableMedia(url)) {
+    const fresh = fetchAndStore(request);
+    // Keep the worker alive until the background refresh is stored.
+    event.waitUntil(fresh.then(() => {}, () => {}));
+    event.respondWith(
+      caches.match(request).then((cached) => cached || fresh)
+    );
+  }
+
+  // Anything else is left to the browser/network.
 });

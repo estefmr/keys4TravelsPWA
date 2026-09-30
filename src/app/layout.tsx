@@ -5,6 +5,7 @@ import TopBar from "@/components/TopBar";
 import BottomNav from "@/components/BottomNav";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import InstallPrompt from "@/components/InstallPrompt";
+import VersionUpdater from "@/components/VersionUpdater";
 
 export const metadata: Metadata = {
   title: "Keys4Travels — El lujo de viajar lento y sin prisa",
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <BottomNav />
         </AuthProvider>
         <ServiceWorkerRegister />
+        <VersionUpdater />
       </body>
     </html>
   );
