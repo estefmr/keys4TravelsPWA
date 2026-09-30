@@ -53,7 +53,9 @@ export default async function HotelDetailPage({
           </p>
         )}
 
-        {hotel.images.length > 0 && (
+        {/* Con solo la portada no hay tira que enseñar: esa foto ya es el
+            banner de arriba. */}
+        {hotel.images.length > 1 && (
           <div className="mt-4">
             <Gallery images={hotel.images} altPrefix={hotel.name} />
           </div>

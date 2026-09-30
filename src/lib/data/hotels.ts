@@ -31,27 +31,24 @@ export const hotels: Hotel[] = [
       "Cuenta con 19 habitaciones exclusivas repartidas en categorías Economy, Classic, Premium y Suites, de 15 a 37 m², estacionamiento privado, sábanas de algodón egipcio, desayuno incluido (7:30–10:30), estación de té, un wine bar íntimo y una terraza abierta las 24 horas.",
       "A pasos de La Chascona (casa de Pablo Neruda), el Patio Bellavista y el Cerro San Cristóbal.",
     ],
-    // 4 fotos reales. La primera es la portada del hotel.
-    images: [
-      "/images/castillo-rojo/castillo-rojo-hotel-boutique.jpg",
-      "/images/castillo-rojo/patio.jpg",
-      "/images/castillo-rojo/lobby-front-desk.jpg",
-      "/images/castillo-rojo/habitacion-classic.jpg",
-    ],
+    // Solo la portada: las fotos con la marca de agua vieja ("K4T") se
+    // retiraron y las cuatro con la marca nueva ya van en la galería, así
+    // que la tira de miniaturas se oculta para no repetirlas.
+    images: ["/images/castillo-rojo/el-hotel.webp"],
     // Tanda que envió la clienta por Drive, descargada al repo por los
     // mismos motivos que la de Casa Solcor: cache offline y no depender
     // de que la carpeta siga compartida.
     gallery: [
-      { src: "/images/castillo-rojo/el-hotel.jpg", label: "El hotel" },
+      { src: "/images/castillo-rojo/el-hotel.webp", label: "El hotel" },
       {
-        src: "/images/castillo-rojo/entrada-al-lobby.jpg",
-        label: "Entrada al lobby",
+        src: "/images/castillo-rojo/acceso-lobby.webp",
+        label: "Acceso al lobby",
       },
       {
-        src: "/images/castillo-rojo/living-room-y-bar.jpg",
+        src: "/images/castillo-rojo/living-room-y-bar.webp",
         label: "Living room y bar",
       },
-      { src: "/images/castillo-rojo/habitacion.jpg", label: "Habitación" },
+      { src: "/images/castillo-rojo/habitacion.webp", label: "Habitación" },
     ],
   },
   {
