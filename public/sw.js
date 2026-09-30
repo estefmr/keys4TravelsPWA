@@ -1,7 +1,7 @@
 // Minimal service worker for Keys4Travels — caches the app shell so the PWA
 // still opens (with a lightweight offline view) without a network connection.
 // Bump CACHE_VERSION whenever the shell files below change materially.
-const CACHE_VERSION = "k4t-shell-v2";
+const CACHE_VERSION = "k4t-shell-v3";
 const APP_SHELL = [
   "/",
   "/manifest.json",
