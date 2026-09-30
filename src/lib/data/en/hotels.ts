@@ -22,7 +22,7 @@ export const hotelsEn: Record<string, HotelTranslation> = {
     summary: "“Your home in the desert”: a boutique B&B in the heart of the Atacama Desert.",
     description: [
       "A boutique B&B in the heart of the Atacama Desert, described by its owners as “your home in the desert”. The property spans more than 3,300 m² across two houses (Algarrobo and Chañar), with a distinctly family feel.",
-      "It has a central courtyard with a lounge area, a swimming pool, two kitchens available 24 hours, a living room and breakfast room (8:00–10:30), three new rooms and a jacuzzi by reservation. Mountain bikes are free of charge, and the team arranges tours to Valle de la Luna, El Tatio Geysers and the Altiplanic Lagoons.",
+      "It has a central courtyard with a lounge area, a swimming pool, two kitchens available 24 hours, a living room and breakfast room (8:00–10:30), three new rooms and a jacuzzi by reservation. Mountain bikes are free of charge, and the team arranges tours to Valle de la Luna, the Géiser del Tatio and the Lagunas Altiplánicas.",
       "15 rooms in three categories: Kala (15 m²), Suite Selti (17 m²) and Suite Ckari (22 m², with a private terrace). All with a safe, private bathroom, air conditioning, USB ports, Bluetooth speaker, minibar and universal sockets.",
     ],
     galleryLabels: [
@@ -42,16 +42,16 @@ export const hotelsEn: Record<string, HotelTranslation> = {
     description: [
       "A simple yet elegant retreat, tucked away in the narrow streets of one of the most famous coastal cities in the world. It is a personal project of its Chilean-Canadian owners, Adri and Cristian, who oversaw every detail of its development.",
       "The rooms are on the second floor of the main residence, with a cozy dining room on the ground floor, plus additional, carefully decorated rooms in a rear wing. All have a desk, bedside tables, private bathroom, TV and a selection of local wines; room service is available for special occasions, subject to availability.",
-      "The design blends minimalist aesthetics with Eastern elegance. No on-site parking. 10 minutes from the Viña del Mar Casino, 15 from the Vergara Pier and 20 from the Quinta Vergara (home of the Viña del Mar Festival since 1960).",
+      "The design blends minimalist aesthetics with Eastern elegance. No on-site parking. 10 minutes from the Casino de Viña del Mar, 15 from the Muelle Vergara and 20 from the Quinta Vergara (home of the Festival de Viña del Mar since 1960).",
     ],
   },
 
   "cassa-lepage": {
-    address: "Pasaje Belgrano, Monserrat (Historic Quarter), Buenos Aires",
+    address: "Pasaje Belgrano, Monserrat (Casco Histórico), Buenos Aires",
     summary:
-      "A hotel with its own museum below ground: 300 archaeological pieces found beneath the building, in the heart of the Historic Quarter.",
+      "A hotel with its own museum below ground: 300 archaeological pieces found beneath the building, in the heart of the Casco Histórico.",
     description: [
-      "The history of the site goes back to 1580, when Juan de Garay distributed land after the second founding of Buenos Aires. The property was the Garden of the Bishop’s House in 1756, passed through several owners — among them the merchant Martín de Álzaga — and in 1881 was home to the First Press Circle. In 1891 a new building was erected on Pasaje Belgrano to launch the national film industry: that building is today the Cassa Lepage Art Hotel, and it was here that Carlos Gardel began his life in the world of culture. In 1932 it was fully renovated and given its Art Deco look.",
+      "The history of the site goes back to 1580, when Juan de Garay distributed land after the second founding of Buenos Aires. The property was the Jardín de la Casa del Obispo in 1756, passed through several owners — among them the merchant Martín de Álzaga — and in 1881 was home to the Primer Círculo de la Prensa. In 1891 a new building was erected on Pasaje Belgrano to launch the national film industry: that building is today the Cassa Lepage Art Hotel, and it was here that Carlos Gardel began his life in the world of culture. In 1932 it was fully renovated and given its Art Deco look.",
       "The entrance is Pasaje Belgrano itself, once a shopping arcade. The lobby displays pieces from the original building, and reinforced glass floors reveal the old ground and the spots where many of the museum’s pieces were found.",
       "Every room has a TV, minibar, private bathroom, amenities, air conditioning, a desk, minimalist décor and excellent soundproofing. Each washbasin is different: they were designed individually, by hand, somewhat reminiscent of Portuguese tiles. Extra beds do not fit in every room, so it is best to say how many people are traveling.",
       "Upstairs is the terrace — with a mural dedicated to Carlos Gardel covering an entire wall — where the breakfast buffet is served until 10:30, and at the very top a native garden with plants endemic to Latin America, a small green lung in the middle of the city.",

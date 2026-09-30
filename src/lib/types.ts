@@ -116,10 +116,12 @@ export type HotelTranslation = {
 /**
  * Traducción de una ruta o lugar. Los nombres de las fotos y las paradas
  * siguen el mismo orden que en el original.
+ *
+ * No lleva `title` a propósito: el nombre de un lugar no se traduce nunca
+ * (decisión de la clienta), así que siempre sale del original en español.
  */
 export type RouteTranslation = {
   kicker?: string;
-  title: string;
   teaser: string;
   intro: string[];
   photoLabels?: string[];

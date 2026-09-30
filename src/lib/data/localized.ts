@@ -10,8 +10,9 @@ import { routesEn } from "@/lib/data/en/routes";
 /**
  * El contenido en el idioma de la página. El español es la fuente: fotos,
  * slugs, hoteles y orden salen siempre de ahí, y el inglés solo pone los
- * textos encima. Si a algo le falta traducción, se muestra en español en
- * vez de romperse.
+ * textos encima. Los nombres de hoteles y de lugares no se traducen nunca:
+ * en inglés se escriben igual que en español. Si a algo le falta
+ * traducción, se muestra en español en vez de romperse.
  */
 
 function countryName(name: string, locale: Locale): string {
@@ -55,7 +56,7 @@ function localizeRoute(route: Route, locale: Locale): Route {
   return {
     ...route,
     kicker: t.kicker ?? route.kicker,
-    title: t.title,
+    // El título (nombre del lugar) no se toca: se respeta el original.
     teaser: t.teaser,
     intro: t.intro,
     photos: relabel(route.photos, t.photoLabels),

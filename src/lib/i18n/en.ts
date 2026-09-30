@@ -35,10 +35,10 @@ export const en: Dictionary = {
 
   home: {
     heroPlaces: {
-      amsterdam: "Amsterdam",
+      amsterdam: "Ámsterdam",
       cinqueTerre: "Cinque Terre",
-      florencia: "Florence",
-      baltinache: "Baltinache Lagoons",
+      florencia: "Florencia",
+      baltinache: "Lagunas de Baltinache",
       machuPicchu: "Machu Picchu",
     },
     heroTitle: "The luxury of slow, unhurried travel",
