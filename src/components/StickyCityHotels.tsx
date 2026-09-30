@@ -15,8 +15,8 @@ export default function StickyCityHotels({
       className="fixed inset-x-0 z-30 border-t border-black/5 bg-white/97 shadow-[0_-6px_20px_rgba(0,0,0,0.06)] backdrop-blur"
       style={{ bottom: "calc(56px + env(safe-area-inset-bottom))" }}
     >
-      <div className="mx-auto max-w-3xl px-4 py-2.5">
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-zinc-400">
+      <div className="mx-auto max-w-3xl px-4 py-2">
+        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
           Hoteles en {cityName}
         </p>
 

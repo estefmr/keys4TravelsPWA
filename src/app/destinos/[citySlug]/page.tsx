@@ -49,7 +49,7 @@ export default async function CityDetailPage({
         </h1>
       </HeroBanner>
 
-      <div className="px-5 py-6 pb-40">
+      <div className="px-5 py-6 pb-28">
         <p className="text-[15px] font-medium leading-relaxed text-foreground">
           {city.heroText}
         </p>

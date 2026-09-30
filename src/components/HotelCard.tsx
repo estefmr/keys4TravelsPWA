@@ -2,16 +2,26 @@ import Link from "next/link";
 import SmartImage from "@/components/SmartImage";
 import type { Hotel } from "@/lib/types";
 
+/**
+ * Tarjeta de la barra fija de hoteles en la ficha de un destino. Va en
+ * horizontal —miniatura a la izquierda, nombre a la derecha— para que la
+ * barra ocupe poco alto y deje leer la pantalla en el móvil.
+ */
 export function HotelCardCompact({ hotel }: { hotel: Hotel }) {
   return (
     <Link
       href={`/hoteles/${hotel.slug}`}
-      className="flex w-44 shrink-0 flex-col overflow-hidden rounded-xl border border-black/5 bg-white shadow-sm transition-transform active:scale-[0.98]"
+      className="flex w-56 shrink-0 items-center gap-2.5 rounded-xl border border-black/5 bg-white p-1.5 pr-3 shadow-sm transition-transform active:scale-[0.98]"
     >
-      <div className="relative h-20 w-full">
-        <SmartImage src={hotel.images[0] ?? ""} alt={hotel.name} className="object-cover" />
+      <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-sand">
+        <SmartImage
+          src={hotel.images[0] ?? ""}
+          alt={hotel.name}
+          sizes="44px"
+          className="object-cover"
+        />
       </div>
-      <div className="p-2">
+      <div className="min-w-0">
         <p className="truncate text-xs font-semibold text-foreground">{hotel.name}</p>
         <p className="truncate text-[11px] text-zinc-500">{hotel.cityName}</p>
       </div>
