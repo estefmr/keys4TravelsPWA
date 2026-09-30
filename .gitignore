@@ -49,3 +49,7 @@ next-env.d.ts
 # cualquiera, y dentro de /public además se servirían en la web.
 /tareas/
 /public/images/tareas/
+
+# lista de pendientes: menciona tareas de seguridad sin hacer (clave sin
+# rotar), así que no debe publicarse mientras el repo sea público
+/faltaporhacer.md
