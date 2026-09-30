@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import SmartImage from "@/components/SmartImage";
+import ZoomableImage from "@/components/ZoomableImage";
 import BackBar from "@/components/BackBar";
 import PhotoSlider from "@/components/PhotoSlider";
 import { routes, getRouteBySlug } from "@/lib/data/routes";
@@ -61,12 +61,11 @@ export default async function RouteDetailPage({
         </header>
 
         <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-2xl bg-sand">
-          <SmartImage
+          <ZoomableImage
             src={route.cover}
             alt={route.title}
             sizes="(max-width: 768px) 100vw, 768px"
             priority
-            className="object-cover"
           />
         </div>
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import SmartImage from "@/components/SmartImage";
+import Lightbox from "@/components/Lightbox";
 import type { GalleryPhoto } from "@/lib/types";
 
 /**
@@ -41,6 +42,8 @@ export default function PhotoSlider({
   const [actual, setActual] = useState(0);
   const [pausado, setPausado] = useState(false);
   const [visible, setVisible] = useState(false);
+  /** Foto abierta en el visor a pantalla completa, o null. */
+  const [abierta, setAbierta] = useState<number | null>(null);
 
   /** Deduce la foto visible a partir del scroll, que es la fuente de verdad. */
   const alDesplazar = useCallback(() => {
@@ -85,7 +88,7 @@ export default function PhotoSlider({
 
   // El paso automático.
   useEffect(() => {
-    if (photos.length < 2 || pausado || !visible) return;
+    if (photos.length < 2 || pausado || !visible || abierta !== null) return;
     // Quien pide menos animación en su sistema no quiere carruseles solos.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -103,7 +106,7 @@ export default function PhotoSlider({
     }, INTERVALO_MS);
 
     return () => clearInterval(id);
-  }, [photos.length, pausado, visible]);
+  }, [photos.length, pausado, visible, abierta]);
 
   // La fila de nombres no cabe entera en móvil: arrastramos el botón
   // activo a la vista para que nunca quede escondido fuera del borde.
@@ -147,10 +150,13 @@ export default function PhotoSlider({
           onScroll={alDesplazar}
           className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-2xl"
         >
-          {photos.map((foto) => (
-            <div
+          {photos.map((foto, i) => (
+            <button
               key={foto.src}
-              className="relative aspect-[4/3] w-full shrink-0 snap-center bg-sand"
+              type="button"
+              onClick={() => setAbierta(i)}
+              aria-label={`Ver en grande: ${foto.label}`}
+              className="relative aspect-[4/3] w-full shrink-0 cursor-zoom-in snap-center bg-sand"
             >
               <SmartImage
                 src={foto.src}
@@ -158,9 +164,14 @@ export default function PhotoSlider({
                 sizes="(max-width: 768px) 100vw, 768px"
                 className="object-cover"
               />
-            </div>
+            </button>
           ))}
         </div>
+
+        {/* Pista de que la foto se puede ampliar al tocarla. */}
+        <span className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/35 p-1.5 text-white backdrop-blur-sm">
+          <Expand className="h-3.5 w-3.5" strokeWidth={2.25} />
+        </span>
 
         {photos.length > 1 && (
           <>
@@ -213,6 +224,15 @@ export default function PhotoSlider({
             </button>
           ))}
         </div>
+      )}
+
+      {abierta !== null && (
+        <Lightbox
+          photos={photos}
+          index={abierta}
+          altPrefix={altPrefix}
+          onClose={() => setAbierta(null)}
+        />
       )}
     </div>
   );
