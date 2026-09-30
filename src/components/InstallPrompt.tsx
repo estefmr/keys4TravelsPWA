@@ -2,6 +2,7 @@
 
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Download, X, Plus, ExternalLink, EllipsisVertical } from "lucide-react";
 
 /**
@@ -35,6 +36,9 @@ declare global {
 }
 
 const DISMISS_KEY = "k4t-install-dismissed";
+
+/** Pantallas con su propia tarjeta `card-dark` para instalar. */
+const PANTALLAS_CON_TARJETA = ["/login", "/cuenta"];
 
 type Snapshot = {
   prompt: BeforeInstallPromptEvent | null;
@@ -149,6 +153,7 @@ export default function InstallPrompt({
   variant?: "banner" | "card" | "card-dark";
 }) {
   const oscuro = variant === "card-dark";
+  const pathname = usePathname();
   const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [dismissedNow, setDismissedNow] = useState(false);
 
@@ -181,6 +186,11 @@ export default function InstallPrompt({
   }
 
   if (standalone || installed || dismissed) return null;
+  // Estas pantallas llevan su propia tarjeta de instalar: el banner de
+  // arriba la repetiría.
+  if (variant === "banner" && PANTALLAS_CON_TARJETA.includes(pathname)) {
+    return null;
+  }
   // Nada que ofrecer: ni botón, ni iPhone ni Android con instrucciones
   // (en la práctica, un navegador de escritorio sin evento).
   if (!prompt && !ios && !android) return null;

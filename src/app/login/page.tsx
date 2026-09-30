@@ -10,6 +10,7 @@ import AuthShell, {
   AuthFooter,
   AuthNotice,
 } from "@/components/AuthShell";
+import InstallPrompt from "@/components/InstallPrompt";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginPage() {
@@ -85,6 +86,12 @@ export default function LoginPage() {
           Crea la tuya
         </Link>
       </AuthFooter>
+
+      {/* Como en Mi cuenta: acceso permanente para instalar la app, aunque
+          se haya cerrado el banner de arriba. Dentro de la app no sale. */}
+      <div className="mt-8">
+        <InstallPrompt variant="card-dark" />
+      </div>
     </AuthShell>
   );
 }
