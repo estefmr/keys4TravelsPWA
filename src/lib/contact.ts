@@ -59,33 +59,33 @@ export function buildWhatsAppMessageUrl({
  * Canadá comparten el +1 y van en la misma entrada.
  */
 export const PREFIJOS = [
-  { codigo: "+56", pais: "Chile" },
-  { codigo: "+54", pais: "Argentina" },
-  { codigo: "+34", pais: "España" },
-  { codigo: "+49", pais: "Alemania" },
-  { codigo: "+591", pais: "Bolivia" },
-  { codigo: "+55", pais: "Brasil" },
-  { codigo: "+57", pais: "Colombia" },
-  { codigo: "+506", pais: "Costa Rica" },
-  { codigo: "+53", pais: "Cuba" },
-  { codigo: "+593", pais: "Ecuador" },
-  { codigo: "+503", pais: "El Salvador" },
-  { codigo: "+1", pais: "EE. UU. / Canadá" },
-  { codigo: "+33", pais: "Francia" },
-  { codigo: "+502", pais: "Guatemala" },
-  { codigo: "+504", pais: "Honduras" },
-  { codigo: "+39", pais: "Italia" },
-  { codigo: "+52", pais: "México" },
-  { codigo: "+505", pais: "Nicaragua" },
-  { codigo: "+31", pais: "Países Bajos" },
-  { codigo: "+507", pais: "Panamá" },
-  { codigo: "+595", pais: "Paraguay" },
-  { codigo: "+51", pais: "Perú" },
-  { codigo: "+351", pais: "Portugal" },
-  { codigo: "+44", pais: "Reino Unido" },
-  { codigo: "+41", pais: "Suiza" },
-  { codigo: "+598", pais: "Uruguay" },
-  { codigo: "+58", pais: "Venezuela" },
+  { codigo: "+56", pais: "Chile", paisEn: "Chile" },
+  { codigo: "+54", pais: "Argentina", paisEn: "Argentina" },
+  { codigo: "+34", pais: "España", paisEn: "Spain" },
+  { codigo: "+49", pais: "Alemania", paisEn: "Germany" },
+  { codigo: "+591", pais: "Bolivia", paisEn: "Bolivia" },
+  { codigo: "+55", pais: "Brasil", paisEn: "Brazil" },
+  { codigo: "+57", pais: "Colombia", paisEn: "Colombia" },
+  { codigo: "+506", pais: "Costa Rica", paisEn: "Costa Rica" },
+  { codigo: "+53", pais: "Cuba", paisEn: "Cuba" },
+  { codigo: "+593", pais: "Ecuador", paisEn: "Ecuador" },
+  { codigo: "+503", pais: "El Salvador", paisEn: "El Salvador" },
+  { codigo: "+1", pais: "EE. UU. / Canadá", paisEn: "USA / Canada" },
+  { codigo: "+33", pais: "Francia", paisEn: "France" },
+  { codigo: "+502", pais: "Guatemala", paisEn: "Guatemala" },
+  { codigo: "+504", pais: "Honduras", paisEn: "Honduras" },
+  { codigo: "+39", pais: "Italia", paisEn: "Italy" },
+  { codigo: "+52", pais: "México", paisEn: "Mexico" },
+  { codigo: "+505", pais: "Nicaragua", paisEn: "Nicaragua" },
+  { codigo: "+31", pais: "Países Bajos", paisEn: "Netherlands" },
+  { codigo: "+507", pais: "Panamá", paisEn: "Panama" },
+  { codigo: "+595", pais: "Paraguay", paisEn: "Paraguay" },
+  { codigo: "+51", pais: "Perú", paisEn: "Peru" },
+  { codigo: "+351", pais: "Portugal", paisEn: "Portugal" },
+  { codigo: "+44", pais: "Reino Unido", paisEn: "United Kingdom" },
+  { codigo: "+41", pais: "Suiza", paisEn: "Switzerland" },
+  { codigo: "+598", pais: "Uruguay", paisEn: "Uruguay" },
+  { codigo: "+58", pais: "Venezuela", paisEn: "Venezuela" },
 ] as const;
 
 /** Prefijo con el que arranca el formulario. */
@@ -108,6 +108,25 @@ export type Cuestionario = {
   whatsapp: string;
 };
 
+/** Rótulos del mensaje de WhatsApp, del diccionario del idioma. */
+export type MensajeRotulos = {
+  saludo: string;
+  presentacion: string;
+  tuViaje: string;
+  destinos: string;
+  fechas: string;
+  viajan: string;
+  tuEstilo: string;
+  comoViajar: string;
+  alojamiento: string;
+  asesor: string;
+  dudas: string;
+  misDatos: string;
+  nombre: string;
+  email: string;
+  whatsapp: string;
+};
+
 /** DD/MM/AAAA, el formato que pide el documento del cuestionario. */
 function formatearFecha(iso: string): string {
   if (!iso) return "";
@@ -121,33 +140,39 @@ function formatearFecha(iso: string): string {
  * Mismo principio que `buildWhatsAppMessageUrl`: el mensaje sale del
  * WhatsApp del propio viajero, así que Kenny lo recibe como un chat normal
  * y puede responder ahí mismo. Los asteriscos son negrita de WhatsApp.
+ *
+ * Los rótulos llegan en el idioma en que se rellenó el cuestionario: quien
+ * lo hizo en inglés escribe a Kenny en inglés, igual que en el resto del chat.
  */
-export function buildCuestionarioWhatsAppUrl(r: Cuestionario): string {
+export function buildCuestionarioWhatsAppUrl(
+  r: Cuestionario,
+  m: MensajeRotulos
+): string {
   const fechas = [formatearFecha(r.fechaDesde), formatearFecha(r.fechaHasta)]
     .filter(Boolean)
     .join(" — ");
 
   const lineas = [
-    "Hola Keys4Travels 👋",
-    "Te comparto mis respuestas antes de la llamada:",
+    m.saludo,
+    m.presentacion,
     "",
-    "*TU VIAJE*",
-    `*Destinos:* ${r.destinos.join(", ")}`,
-    `*Fechas:* ${fechas}`,
-    `*Viajan:* ${r.compania} (${r.personas})`,
+    `*${m.tuViaje}*`,
+    `*${m.destinos}:* ${r.destinos.join(", ")}`,
+    `*${m.fechas}:* ${fechas}`,
+    `*${m.viajan}:* ${r.compania} (${r.personas})`,
     "",
-    "*TU ESTILO DE VIAJE*",
-    `*Cómo me gustaría viajar:* ${r.estilo.join("; ")}`,
-    `*Al elegir alojamiento valoro:* ${r.alojamiento.join("; ")}`,
-    `*He viajado antes con un asesor:* ${r.asesor}`,
+    `*${m.tuEstilo}*`,
+    `*${m.comoViajar}:* ${r.estilo.join("; ")}`,
+    `*${m.alojamiento}:* ${r.alojamiento.join("; ")}`,
+    `*${m.asesor}:* ${r.asesor}`,
     "",
-    "*Mis dudas y lo que espero:*",
+    `*${m.dudas}:*`,
     r.objetivo,
     "",
-    "*MIS DATOS*",
-    `*Nombre:* ${r.nombre}`,
-    `*Email:* ${r.email}`,
-    `*WhatsApp:* ${r.prefijo} ${r.whatsapp}`.trim(),
+    `*${m.misDatos}*`,
+    `*${m.nombre}:* ${r.nombre}`,
+    `*${m.email}:* ${r.email}`,
+    `*${m.whatsapp}:* ${r.prefijo} ${r.whatsapp}`.trim(),
   ];
 
   return `${CONTACT_WHATSAPP_URL}?text=${encodeURIComponent(lineas.join("\n"))}`;

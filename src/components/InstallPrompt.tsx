@@ -4,6 +4,8 @@ import { useState, useSyncExternalStore, type ReactNode } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Download, X, Plus, ExternalLink, EllipsisVertical } from "lucide-react";
+import { stripLocale } from "@/lib/i18n/config";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 
 /**
  * Chrome ya no muestra un banner de instalación por su cuenta: desde
@@ -153,7 +155,9 @@ export default function InstallPrompt({
   variant?: "banner" | "card" | "card-dark";
 }) {
   const oscuro = variant === "card-dark";
-  const pathname = usePathname();
+  // Sin prefijo de idioma, para reconocer también /en/login.
+  const pathname = stripLocale(usePathname());
+  const t = useDict().instalar;
   const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [dismissedNow, setDismissedNow] = useState(false);
 
@@ -208,12 +212,11 @@ export default function InstallPrompt({
     cuerpo = (
       <>
         <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
-          Ábrela desde tu pantalla de inicio, a pantalla completa y sin
-          barra del navegador.
+          {t.pantallaInicio}
         </p>
         <button type="button" onClick={handleInstall} className={botonClase}>
           <Download className="h-3.5 w-3.5" strokeWidth={2.25} />
-          Instalar app
+          {t.instalarApp}
         </button>
       </>
     );
@@ -221,23 +224,24 @@ export default function InstallPrompt({
     cuerpo = (
       <>
         <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
-          Para instalarla, ábrela en{" "}
-          <span className={`font-semibold ${resalte}`}>Chrome</span>: desde
-          este navegador el teléfono la bloquea por seguridad.
+          {t.samsungAntes}
+          <span className={`font-semibold ${resalte}`}>Chrome</span>
+          {t.samsungDespues}
         </p>
         <a href={chromeIntentUrl()} className={botonClase}>
           <ExternalLink className="h-3.5 w-3.5" strokeWidth={2.25} />
-          Abrir en Chrome
+          {t.abrirEnChrome}
         </a>
       </>
     );
   } else if (ios) {
     cuerpo = (
       <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
-        Pulsa <span className={`font-semibold ${resalte}`}>Compartir</span> en
-        la barra de Safari y elige{" "}
+        {t.iosPulsa}
+        <span className={`font-semibold ${resalte}`}>{t.iosCompartir}</span>
+        {t.iosEnLaBarra}
         <span className={`inline-flex items-center gap-0.5 font-semibold ${resalte}`}>
-          Añadir a pantalla de inicio <Plus className="h-3 w-3" />
+          {t.iosAnadir} <Plus className="h-3 w-3" />
         </span>
         .
       </p>
@@ -246,15 +250,14 @@ export default function InstallPrompt({
     // Android sin evento: otro navegador, o Chrome antes de avisar.
     cuerpo = (
       <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
-        Abre el menú{" "}
+        {t.androidAbre}
         <span className={`inline-flex items-center font-semibold ${resalte}`}>
           <EllipsisVertical className="h-3.5 w-3.5" />
-        </span>{" "}
-        del navegador y toca{" "}
-        <span className={`font-semibold ${resalte}`}>Instalar app</span> o{" "}
-        <span className={`font-semibold ${resalte}`}>
-          Añadir a pantalla de inicio
         </span>
+        {t.androidDelNavegador}
+        <span className={`font-semibold ${resalte}`}>{t.androidInstalar}</span>
+        {t.androidO}
+        <span className={`font-semibold ${resalte}`}>{t.androidAnadir}</span>
         .
       </p>
     );
@@ -275,7 +278,7 @@ export default function InstallPrompt({
             oscuro ? "text-white" : "text-foreground"
           }`}
         >
-          Instala Keys4Travels
+          {t.titulo}
         </p>
         {cuerpo}
       </div>
@@ -283,7 +286,7 @@ export default function InstallPrompt({
         <button
           type="button"
           onClick={handleDismiss}
-          aria-label="Cerrar"
+          aria-label={t.cerrar}
           className="-mr-1 -mt-1 shrink-0 rounded-full p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600"
         >
           <X className="h-4 w-4" />

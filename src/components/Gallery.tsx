@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SmartImage from "@/components/SmartImage";
 import Lightbox from "@/components/Lightbox";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 
 export default function Gallery({
   images,
@@ -12,6 +13,7 @@ export default function Gallery({
   altPrefix: string;
 }) {
   const [abierta, setAbierta] = useState<number | null>(null);
+  const t = useDict().fotos;
 
   if (images.length === 0) return null;
 
@@ -23,10 +25,10 @@ export default function Gallery({
             key={src + i}
             type="button"
             onClick={() => setAbierta(i)}
-            aria-label={`Ver en grande: ${altPrefix} — foto ${i + 1}`}
+            aria-label={t.verEnGrande(`${altPrefix} — ${t.foto(i + 1)}`)}
             className="relative h-48 w-64 shrink-0 cursor-zoom-in snap-start overflow-hidden rounded-xl bg-sand"
           >
-            <SmartImage src={src} alt={`${altPrefix} — foto ${i + 1}`} className="object-cover" />
+            <SmartImage src={src} alt={`${altPrefix} — ${t.foto(i + 1)}`} className="object-cover" />
           </button>
         ))}
       </div>

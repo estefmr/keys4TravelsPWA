@@ -1,4 +1,7 @@
+"use client";
+
 import { Phone, Mail } from "lucide-react";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 import WhatsAppGlyph from "@/components/WhatsAppGlyph";
 import {
   CONTACT_EMAIL,
@@ -17,6 +20,7 @@ import {
  * busca es el botón de WhatsApp—.
  */
 export default function KennyCard({ compact = false }: { compact?: boolean }) {
+  const t = useDict().kenny;
   return (
     <div className="rounded-2xl border border-black/5 bg-white p-5 shadow-sm">
       <div className="flex items-center gap-3">
@@ -27,23 +31,17 @@ export default function KennyCard({ compact = false }: { compact?: boolean }) {
           <h2 className="font-display text-lg leading-tight text-foreground">
             Kenny Acosta
           </h2>
-          <p className="text-xs text-zinc-500">
-            Fundador — &ldquo;el hotelero que viaja&rdquo;
-          </p>
+          <p className="text-xs text-zinc-500">{t.rol}</p>
         </div>
       </div>
 
       {compact ? (
         <p className="mt-4 text-sm leading-relaxed text-zinc-600">
-          ¿Dudas antes de reservar? Escríbele directamente.
+          {t.compacto}
         </p>
       ) : (
         <p className="mt-4 text-sm leading-relaxed text-zinc-600">
-          Venezolano del sur de Venezuela, con toda una vida de pasión por la
-          hotelería y los viajes. Con estudios en turismo y hotelería desde
-          inicios de los 2000 y experiencia en cadenas hoteleras importantes,
-          Kenny impulsa el &ldquo;Turismo Lento&rdquo; y diseña cada viaje
-          entendiendo tanto la perspectiva del viajero como la del hotelero.
+          {t.bio}
         </p>
       )}
 

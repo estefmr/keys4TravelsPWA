@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 
 export type FotoAmpliable = { src: string; label?: string };
 
@@ -32,6 +33,7 @@ export default function Lightbox({
   const dialogoRef = useRef<HTMLDialogElement>(null);
   const pistaRef = useRef<HTMLDivElement>(null);
   const [actual, setActual] = useState(index);
+  const t = useDict().fotos;
   // true mientras nuestra entrada del historial siga puesta.
   const enHistorial = useRef(false);
   // Guardado en ref para que abrir no dependa de que el padre memorice
@@ -109,7 +111,7 @@ export default function Lightbox({
   return (
     <dialog
       ref={dialogoRef}
-      aria-label={`Fotos de ${altPrefix}`}
+      aria-label={t.fotosDe(altPrefix)}
       // Escape: se cierra por nuestro camino para retirar la entrada
       // del historial.
       onCancel={(e) => {
@@ -152,7 +154,7 @@ export default function Lightbox({
         <button
           type="button"
           onClick={cerrar}
-          aria-label="Cerrar"
+          aria-label={t.cerrar}
           autoFocus
           className="pointer-events-auto rounded-full bg-white/10 p-2 text-white backdrop-blur transition-colors hover:bg-white/20"
         >
@@ -168,9 +170,15 @@ export default function Lightbox({
 
       {varias && (
         <>
-          <Flecha lado="izquierda" oculta={actual === 0} onClick={() => irA(actual - 1)} />
+          <Flecha
+            lado="izquierda"
+            label={t.anterior}
+            oculta={actual === 0}
+            onClick={() => irA(actual - 1)}
+          />
           <Flecha
             lado="derecha"
+            label={t.siguiente}
             oculta={actual === photos.length - 1}
             onClick={() => irA(actual + 1)}
           />
@@ -182,10 +190,12 @@ export default function Lightbox({
 
 function Flecha({
   lado,
+  label,
   oculta,
   onClick,
 }: {
   lado: "izquierda" | "derecha";
+  label: string;
   oculta: boolean;
   onClick: () => void;
 }) {
@@ -194,7 +204,7 @@ function Flecha({
     <button
       type="button"
       onClick={onClick}
-      aria-label={lado === "izquierda" ? "Foto anterior" : "Foto siguiente"}
+      aria-label={label}
       // En móvil manda el gesto de deslizar; las flechas, desde sm.
       className={`absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20 ${
         oculta ? "" : "sm:flex"

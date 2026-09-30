@@ -1,12 +1,15 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import HeroBanner from "@/components/HeroBanner";
 import Gallery from "@/components/Gallery";
 import StickyCityHotels from "@/components/StickyCityHotels";
 import RoutesSection from "@/components/RoutesSection";
 import BackBar from "@/components/BackBar";
-import { cities, getCityBySlug } from "@/lib/data/destinations";
-import { getHotelsByCitySlug } from "@/lib/data/hotels";
-import { getRoutesByCitySlug } from "@/lib/data/routes";
+import { cities } from "@/lib/data/destinations";
+import { getCity, getCityHotels, getCityRoutes } from "@/lib/data/localized";
+import { hasLocale, localizePath } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { alternates } from "@/lib/i18n/metadata";
 
 export function generateStaticParams() {
   return cities.map((city) => ({ citySlug: city.slug }));
@@ -14,31 +17,39 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ citySlug: string }>;
-}) {
-  const { citySlug } = await params;
-  const city = getCityBySlug(citySlug);
+}: PageProps<"/[lang]/destinos/[citySlug]">): Promise<Metadata> {
+  const { lang, citySlug } = await params;
+  if (!hasLocale(lang)) return {};
+  const city = getCity(citySlug, lang);
   return {
-    title: city ? `${city.name} — Keys4Travels` : "Destino — Keys4Travels",
+    title: city
+      ? `${city.name} — Keys4Travels`
+      : getDictionary(lang).meta.destinoFallback,
+    description: city?.heroText,
+    alternates: alternates(lang, `/destinos/${citySlug}`),
   };
 }
 
 export default async function CityDetailPage({
   params,
-}: {
-  params: Promise<{ citySlug: string }>;
-}) {
-  const { citySlug } = await params;
-  const city = getCityBySlug(citySlug);
+}: PageProps<"/[lang]/destinos/[citySlug]">) {
+  const { lang, citySlug } = await params;
+  if (!hasLocale(lang)) notFound();
+  const city = getCity(citySlug, lang);
   if (!city) notFound();
 
-  const hotels = getHotelsByCitySlug(city.slug);
-  const routes = city.hideRoutes ? [] : getRoutesByCitySlug(city.slug);
+  const t = getDictionary(lang);
+  const hotels = getCityHotels(city.slug, lang);
+  const routes = city.hideRoutes ? [] : getCityRoutes(city.slug, lang);
 
   return (
     <div>
-      <BackBar href="/destinos" backLabel="Destinos" title={city.name} />
+      <BackBar
+        href={localizePath(lang, "/destinos")}
+        backLabel={t.nav.destinos}
+        title={city.name}
+        lang={lang}
+      />
 
       <HeroBanner src={city.images[0]} alt={city.name} minHeight="16rem">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
@@ -85,7 +96,7 @@ export default async function CityDetailPage({
 
         {city.attractions.length > 0 && (
           <div className="mt-6">
-            <h2 className="font-display text-lg text-foreground">Qué ver</h2>
+            <h2 className="font-display text-lg text-foreground">{t.destino.queVer}</h2>
             <ul className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
               {city.attractions.map((attraction) => (
                 <li
@@ -100,13 +111,14 @@ export default async function CityDetailPage({
           </div>
         )}
 
-        <RoutesSection routes={routes} />
+        <RoutesSection routes={routes} lang={lang} />
       </div>
 
       <StickyCityHotels
         cityName={city.name}
         hotels={hotels}
         comingSoon={city.comingSoon}
+        lang={lang}
       />
     </div>
   );

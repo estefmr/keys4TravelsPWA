@@ -1,16 +1,17 @@
 import Link from "next/link";
 import SmartImage from "@/components/SmartImage";
 import type { Hotel } from "@/lib/types";
+import { localizePath, type Locale } from "@/lib/i18n/config";
 
 /**
  * Tarjeta de la barra fija de hoteles en la ficha de un destino. Va en
  * horizontal —miniatura a la izquierda, nombre a la derecha— para que la
  * barra ocupe poco alto y deje leer la pantalla en el móvil.
  */
-export function HotelCardCompact({ hotel }: { hotel: Hotel }) {
+export function HotelCardCompact({ hotel, lang }: { hotel: Hotel; lang: Locale }) {
   return (
     <Link
-      href={`/hoteles/${hotel.slug}`}
+      href={localizePath(lang, `/hoteles/${hotel.slug}`)}
       className="flex w-56 shrink-0 items-center gap-2.5 rounded-xl border border-black/5 bg-white p-1.5 pr-3 shadow-sm transition-transform active:scale-[0.98]"
     >
       <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-sand">
@@ -29,10 +30,10 @@ export function HotelCardCompact({ hotel }: { hotel: Hotel }) {
   );
 }
 
-export function HotelCardFull({ hotel }: { hotel: Hotel }) {
+export function HotelCardFull({ hotel, lang }: { hotel: Hotel; lang: Locale }) {
   return (
     <Link
-      href={`/hoteles/${hotel.slug}`}
+      href={localizePath(lang, `/hoteles/${hotel.slug}`)}
       className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="relative h-40 w-full">

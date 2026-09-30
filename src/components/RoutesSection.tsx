@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SmartImage from "@/components/SmartImage";
 import type { Route } from "@/lib/types";
+import { localizePath, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 /**
  * "Atractivos y lugares" dentro de la ficha de un destino: una tarjeta por
@@ -10,21 +12,28 @@ import type { Route } from "@/lib/types";
  * En móvil las tarjetas se apilan a ancho completo —la foto es el gancho, así
  * que se deja grande— y a partir de `sm` pasan a dos columnas.
  */
-export default function RoutesSection({ routes }: { routes: Route[] }) {
+export default function RoutesSection({
+  routes,
+  lang,
+}: {
+  routes: Route[];
+  lang: Locale;
+}) {
   if (routes.length === 0) return null;
+  const t = getDictionary(lang).destino;
 
   return (
     <section className="mt-8">
-      <h2 className="font-display text-lg text-foreground">Atractivos y lugares</h2>
+      <h2 className="font-display text-lg text-foreground">{t.rutasTitle}</h2>
       <p className="mt-1 text-sm text-zinc-500">
-        Recorridos pensados para hacerlos con calma.
+        {t.rutasSubtitle}
       </p>
 
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {routes.map((route) => (
           <Link
             key={route.slug}
-            href={`/rutas/${route.slug}`}
+            href={localizePath(lang, `/rutas/${route.slug}`)}
             className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-shadow hover:shadow-md active:scale-[0.99]"
           >
             <div className="relative aspect-[16/10] w-full bg-sand">
@@ -53,7 +62,7 @@ export default function RoutesSection({ routes }: { routes: Route[] }) {
               <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold text-brand">
                 {/* Solo las rutas numeradas llevan rótulo; el resto son
                     fichas de un lugar, donde "ver la ruta" no encaja. */}
-                {route.kicker ? "Ver la ruta" : "Descubrir"}
+                {route.kicker ? t.verRuta : t.descubrir}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </div>

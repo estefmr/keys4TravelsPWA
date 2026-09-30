@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { HotelCardFull } from "@/components/HotelCard";
 import type { Hotel } from "@/lib/types";
+import { useDict, useLocale } from "@/lib/i18n/LocaleProvider";
 
 /**
  * Los hoteles agrupados por país en desplegables, como los países de la
@@ -25,6 +26,7 @@ export default function HotelsExplorer({
   const paises = agrupar(hotels, orden);
   // Todos cerrados al entrar: la pantalla arranca mostrando solo los países.
   const [abierto, setAbierto] = useState<string | null>(null);
+  const lang = useLocale();
 
   return (
     <div className="flex flex-col gap-4">
@@ -50,7 +52,7 @@ export default function HotelsExplorer({
                     </h3>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       {ciudad.hotels.map((hotel) => (
-                        <HotelCardFull key={hotel.id} hotel={hotel} />
+                        <HotelCardFull key={hotel.id} hotel={hotel} lang={lang} />
                       ))}
                     </div>
                   </section>
@@ -79,6 +81,7 @@ function CabeceraPais({
 }) {
   const [cargada, setCargada] = useState(false);
   const [fallo, setFallo] = useState(false);
+  const t = useDict().hoteles;
 
   return (
     <button
@@ -110,7 +113,7 @@ function CabeceraPais({
       <div className="relative z-10 flex w-full items-end justify-between px-5 pb-3.5">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
-            {total} {total === 1 ? "hotel" : "hoteles"}
+            {t.numHoteles(total)}
           </p>
           <h2 className="font-display mt-0.5 text-2xl text-white">{nombre}</h2>
         </div>

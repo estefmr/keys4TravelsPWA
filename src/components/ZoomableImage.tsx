@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SmartImage from "@/components/SmartImage";
 import Lightbox from "@/components/Lightbox";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 
 /**
  * Una sola foto (la portada de una ruta, por ejemplo) que se abre en el
@@ -21,13 +22,14 @@ export default function ZoomableImage({
   priority?: boolean;
 }) {
   const [abierta, setAbierta] = useState(false);
+  const t = useDict().fotos;
 
   return (
     <>
       <button
         type="button"
         onClick={() => setAbierta(true)}
-        aria-label={`Ver en grande: ${alt}`}
+        aria-label={t.verEnGrande(alt)}
         className="absolute inset-0 cursor-zoom-in"
       >
         <SmartImage src={src} alt={alt} sizes={sizes} priority={priority} className="object-cover" />

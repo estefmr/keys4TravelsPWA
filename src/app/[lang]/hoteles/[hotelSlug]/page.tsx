@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
@@ -5,7 +6,11 @@ import HeroBanner from "@/components/HeroBanner";
 import BackBar from "@/components/BackBar";
 import Gallery from "@/components/Gallery";
 import PhotoSlider from "@/components/PhotoSlider";
-import { hotels, getHotelBySlug } from "@/lib/data/hotels";
+import { hotels } from "@/lib/data/hotels";
+import { getHotel } from "@/lib/data/localized";
+import { hasLocale, localizePath } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { alternates } from "@/lib/i18n/metadata";
 
 export function generateStaticParams() {
   return hotels.map((hotel) => ({ hotelSlug: hotel.slug }));
@@ -13,28 +18,36 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ hotelSlug: string }>;
-}) {
-  const { hotelSlug } = await params;
-  const hotel = getHotelBySlug(hotelSlug);
+}: PageProps<"/[lang]/hoteles/[hotelSlug]">): Promise<Metadata> {
+  const { lang, hotelSlug } = await params;
+  if (!hasLocale(lang)) return {};
+  const hotel = getHotel(hotelSlug, lang);
   return {
-    title: hotel ? `${hotel.name} — Keys4Travels` : "Hotel — Keys4Travels",
+    title: hotel
+      ? `${hotel.name} — Keys4Travels`
+      : getDictionary(lang).meta.hotelFallback,
+    description: hotel?.summary,
+    alternates: alternates(lang, `/hoteles/${hotelSlug}`),
   };
 }
 
 export default async function HotelDetailPage({
   params,
-}: {
-  params: Promise<{ hotelSlug: string }>;
-}) {
-  const { hotelSlug } = await params;
-  const hotel = getHotelBySlug(hotelSlug);
+}: PageProps<"/[lang]/hoteles/[hotelSlug]">) {
+  const { lang, hotelSlug } = await params;
+  if (!hasLocale(lang)) notFound();
+  const hotel = getHotel(hotelSlug, lang);
   if (!hotel) notFound();
+  const t = getDictionary(lang);
 
   return (
     <div>
-      <BackBar href="/hoteles" backLabel="Hoteles" title={hotel.name} />
+      <BackBar
+        href={localizePath(lang, "/hoteles")}
+        backLabel={t.nav.hoteles}
+        title={hotel.name}
+        lang={lang}
+      />
 
       <HeroBanner src={hotel.images[0]} alt={hotel.name} minHeight="16rem">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
@@ -72,18 +85,21 @@ export default async function HotelDetailPage({
         {hotel.gallery && hotel.gallery.length > 0 && (
           <section className="mt-8">
             <h2 className="font-display mb-3 text-xl text-foreground">
-              Galería
+              {t.hotel.galeria}
             </h2>
             <PhotoSlider photos={hotel.gallery} altPrefix={hotel.name} />
           </section>
         )}
 
         <div className="mt-8 rounded-2xl bg-brand/5 p-4 text-sm text-brand-dark">
-          ¿Interesado en hospedarte en {hotel.name}?{" "}
-          <Link href="/contacto" className="font-semibold underline underline-offset-2">
-            Escríbenos por Contacto
-          </Link>{" "}
-          y te ayudamos a coordinar tu estadía.
+          {t.hotel.interesadoAntes(hotel.name)}
+          <Link
+            href={localizePath(lang, "/contacto")}
+            className="font-semibold underline underline-offset-2"
+          >
+            {t.hotel.interesadoEnlace}
+          </Link>
+          {t.hotel.interesadoDespues}
         </div>
       </div>
     </div>

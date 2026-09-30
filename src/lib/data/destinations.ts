@@ -269,11 +269,3 @@ export const countries: Country[] = [
     citySlugs: [],
   },
 ];
-
-export function getCityBySlug(slug: string): City | undefined {
-  return cities.find((c) => c.slug === slug);
-}
-
-export function getCitiesByCountry(countrySlug: string): City[] {
-  return cities.filter((c) => c.countrySlug === countrySlug);
-}

@@ -12,6 +12,7 @@ import AuthShell, {
 } from "@/components/AuthShell";
 import InstallPrompt from "@/components/InstallPrompt";
 import { useAuth } from "@/contexts/AuthContext";
+import { useDict, useLocalizePath } from "@/lib/i18n/LocaleProvider";
 
 export default function LoginPage() {
   const { signInWithPassword, configured } = useAuth();
@@ -20,6 +21,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const t = useDict().auth;
+  const loc = useLocalizePath();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -31,27 +34,25 @@ export default function LoginPage() {
       setError(error);
       return;
     }
-    router.push("/cuenta");
+    router.push(loc("/cuenta"));
   }
 
   return (
     <AuthShell
-      backTitle="Iniciar sesión"
+      backTitle={t.iniciarSesion}
       photo="/images/home/florencia.jpg"
-      kicker="Acceso exclusivo"
-      title="Bienvenido"
-      subtitle="Tu próximo viaje sin prisa te está esperando."
+      kicker={t.loginKicker}
+      title={t.loginTitulo}
+      subtitle={t.loginSubtitulo}
     >
       {!configured && (
-        <AuthNotice tone="warn">
-          Configura Supabase para activar el acceso.
-        </AuthNotice>
+        <AuthNotice tone="warn">{t.configurarSupabase}</AuthNotice>
       )}
 
       <AuthCard onSubmit={handleSubmit}>
         <AuthField
           id="email"
-          label="Email"
+          label={t.email}
           type="email"
           value={email}
           onChange={setEmail}
@@ -59,7 +60,7 @@ export default function LoginPage() {
         />
         <AuthField
           id="password"
-          label="Contraseña"
+          label={t.contrasena}
           type="password"
           value={password}
           onChange={setPassword}
@@ -73,17 +74,17 @@ export default function LoginPage() {
         )}
 
         <AuthButton type="submit" disabled={loading}>
-          {loading ? "Entrando…" : "Entrar"}
+          {loading ? t.entrando : t.entrar}
         </AuthButton>
       </AuthCard>
 
       <AuthFooter>
-        ¿Aún no tienes cuenta?{" "}
+        {t.sinCuenta}{" "}
         <Link
-          href="/registro"
+          href={loc("/registro")}
           className="font-medium text-sand underline decoration-sand/40 underline-offset-4 transition-colors hover:text-white"
         >
-          Crea la tuya
+          {t.creaLaTuya}
         </Link>
       </AuthFooter>
 

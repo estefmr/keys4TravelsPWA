@@ -11,6 +11,7 @@ import AuthShell, {
   AuthNotice,
 } from "@/components/AuthShell";
 import { useAuth } from "@/contexts/AuthContext";
+import { useDict, useLocalizePath } from "@/lib/i18n/LocaleProvider";
 
 export default function RegistroPage() {
   const { signUp, configured } = useAuth();
@@ -20,6 +21,8 @@ export default function RegistroPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const t = useDict().auth;
+  const loc = useLocalizePath();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -35,7 +38,7 @@ export default function RegistroPage() {
     // que llevamos al usuario directo a su cuenta en lugar de pedirle que
     // revise un correo que nunca va a llegar.
     if (!needsConfirmation) {
-      router.push("/cuenta");
+      router.push(loc("/cuenta"));
       return;
     }
     setDone(true);
@@ -43,34 +46,32 @@ export default function RegistroPage() {
 
   return (
     <AuthShell
-      backTitle="Crear cuenta"
+      backTitle={t.crearCuenta}
       photo="/images/home/cinque-terre.jpg"
-      kicker="Únete a Keys4Travels"
-      title="Empieza el viaje"
-      subtitle="Guarda tus hoteles y destinos favoritos, y retoma la búsqueda donde la dejaste."
+      kicker={t.registroKicker}
+      title={t.registroTitulo}
+      subtitle={t.registroSubtitulo}
     >
       {!configured && (
-        <AuthNotice tone="warn">
-          Configura Supabase para activar el acceso.
-        </AuthNotice>
+        <AuthNotice tone="warn">{t.configurarSupabase}</AuthNotice>
       )}
 
       {done ? (
         <AuthNotice>
-          ¡Listo! Revisa tu email para confirmar tu cuenta y luego{" "}
+          {t.registroListoAntes}
           <Link
-            href="/login"
+            href={loc("/login")}
             className="font-semibold underline decoration-sand/40 underline-offset-4 transition-colors hover:text-white"
           >
-            inicia sesión
+            {t.registroListoEnlace}
           </Link>
-          .
+          {t.registroListoDespues}
         </AuthNotice>
       ) : (
         <AuthCard onSubmit={handleSubmit}>
           <AuthField
             id="email"
-            label="Email"
+            label={t.email}
             type="email"
             value={email}
             onChange={setEmail}
@@ -78,7 +79,7 @@ export default function RegistroPage() {
           />
           <AuthField
             id="password"
-            label="Contraseña"
+            label={t.contrasena}
             type="password"
             value={password}
             onChange={setPassword}
@@ -93,18 +94,18 @@ export default function RegistroPage() {
           )}
 
           <AuthButton type="submit" disabled={loading}>
-            {loading ? "Creando cuenta…" : "Crear cuenta"}
+            {loading ? t.creandoCuenta : t.crearCuenta}
           </AuthButton>
         </AuthCard>
       )}
 
       <AuthFooter>
-        ¿Ya tienes cuenta?{" "}
+        {t.yaTienesCuenta}{" "}
         <Link
-          href="/login"
+          href={loc("/login")}
           className="font-medium text-sand underline decoration-sand/40 underline-offset-4 transition-colors hover:text-white"
         >
-          Inicia sesión
+          {t.iniciaSesion}
         </Link>
       </AuthFooter>
     </AuthShell>

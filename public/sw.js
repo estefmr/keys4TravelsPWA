@@ -1,9 +1,10 @@
 // Minimal service worker for Keys4Travels — caches the app shell so the PWA
 // still opens (with a lightweight offline view) without a network connection.
 // Bump CACHE_VERSION whenever the shell files below change materially.
-const CACHE_VERSION = "k4t-shell-v5";
+const CACHE_VERSION = "k4t-shell-v6";
+// No HTML here: "/" answers in Spanish or redirects to /en depending on the
+// visitor, so pages are cached as they are visited instead (see below).
 const APP_SHELL = [
-  "/",
   "/manifest.json",
   "/logo-primary.png",
   "/icons/icon-192.png",
@@ -94,12 +95,28 @@ self.addEventListener("fetch", (event) => {
   // Straight to the network, never cached.
   if (isServerComponentRequest(request, url)) return;
 
-  // Network-first for navigations, falling back to the cached shell offline.
+  // Network-first for navigations. Each page that loads fine is kept, so
+  // offline the visitor still gets the pages they already saw; failing
+  // that, the home page in the language of the page they asked for.
   if (request.mode === "navigate") {
+    const english = url.pathname === "/en" || url.pathname.startsWith("/en/");
+    const [home, otherHome] = english ? ["/en", "/"] : ["/", "/en"];
     event.respondWith(
-      fetch(request).catch(() =>
-        caches.match(request).then((res) => res || caches.match("/"))
-      )
+      fetch(request)
+        .then((response) => {
+          // A redirected response can't answer a later navigation.
+          if (response.ok && !response.redirected) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() =>
+          caches
+            .match(request)
+            .then((res) => res || caches.match(home))
+            .then((res) => res || caches.match(otherHome))
+        )
     );
     return;
   }

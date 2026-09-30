@@ -489,11 +489,3 @@ export const routes: Route[] = [
     ],
   },
 ];
-
-export function getRouteBySlug(slug: string): Route | undefined {
-  return routes.find((r) => r.slug === slug);
-}
-
-export function getRoutesByCitySlug(citySlug: string): Route[] {
-  return routes.filter((r) => r.citySlug === citySlug);
-}

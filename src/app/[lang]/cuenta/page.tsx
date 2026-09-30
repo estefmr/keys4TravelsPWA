@@ -10,9 +10,12 @@ import AuthShell, {
 } from "@/components/AuthShell";
 import { useAuth } from "@/contexts/AuthContext";
 import InstallPrompt from "@/components/InstallPrompt";
+import { useDict, useLocalizePath } from "@/lib/i18n/LocaleProvider";
 
 export default function CuentaPage() {
   const { user, loading, signOut, configured } = useAuth();
+  const t = useDict().auth;
+  const loc = useLocalizePath();
 
   // Mientras se resuelve la sesión mantenemos el mismo panel: con un
   // "Cargando…" sobre fondo claro, la pantalla daba un fogonazo blanco
@@ -24,42 +27,40 @@ export default function CuentaPage() {
       // Pantalla raíz: se llega desde la barra de arriba, no cuelga de
       // ninguna otra, así que va sin flecha de volver.
       back={false}
-      backTitle="Mi cuenta"
+      backTitle={t.miCuenta}
       photo="/images/home/machu-picchu.jpg"
       // Mientras carga no afirmamos nada: decir "aún no has iniciado sesión"
       // a quien sí la tiene sería un parpadeo desconcertante.
-      kicker={loading || !entrado ? "Tu cuenta" : "Sesión iniciada"}
-      title={loading || entrado ? "Mi cuenta" : "Aún no has iniciado sesión"}
+      kicker={loading || !entrado ? t.cuentaKickerFuera : t.cuentaKickerDentro}
+      title={loading || entrado ? t.miCuenta : t.cuentaTituloFuera}
       subtitle={
         loading
           ? ""
           : entrado
             ? (user?.email ?? "")
-            : "Crea una cuenta para guardar tus hoteles y destinos favoritos."
+            : t.cuentaSubtituloFuera
       }
     >
       {loading ? (
-        <p className="mt-8 text-center text-sm text-white/50">Cargando…</p>
+        <p className="mt-8 text-center text-sm text-white/50">{t.cargando}</p>
       ) : entrado ? (
         <AuthActions>
           <button onClick={() => signOut()} className={authSecundario}>
-            <LogOut className="h-4 w-4" /> Cerrar sesión
+            <LogOut className="h-4 w-4" /> {t.cerrarSesion}
           </button>
         </AuthActions>
       ) : (
         <>
           {!configured && (
-            <AuthNotice tone="warn">
-              Configura Supabase para activar el acceso.
-            </AuthNotice>
+            <AuthNotice tone="warn">{t.configurarSupabase}</AuthNotice>
           )}
 
           <AuthActions>
-            <Link href="/login" className={authPrimario}>
-              Iniciar sesión
+            <Link href={loc("/login")} className={authPrimario}>
+              {t.iniciarSesion}
             </Link>
-            <Link href="/registro" className={authSecundario}>
-              Crear cuenta
+            <Link href={loc("/registro")} className={authSecundario}>
+              {t.crearCuenta}
             </Link>
           </AuthActions>
         </>

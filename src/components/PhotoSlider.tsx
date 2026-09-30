@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import SmartImage from "@/components/SmartImage";
 import Lightbox from "@/components/Lightbox";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 import type { GalleryPhoto } from "@/lib/types";
 
 /**
@@ -44,6 +45,7 @@ export default function PhotoSlider({
   const [visible, setVisible] = useState(false);
   /** Foto abierta en el visor a pantalla completa, o null. */
   const [abierta, setAbierta] = useState<number | null>(null);
+  const t = useDict().fotos;
 
   /** Deduce la foto visible a partir del scroll, que es la fuente de verdad. */
   const alDesplazar = useCallback(() => {
@@ -155,7 +157,7 @@ export default function PhotoSlider({
               key={foto.src}
               type="button"
               onClick={() => setAbierta(i)}
-              aria-label={`Ver en grande: ${foto.label}`}
+              aria-label={t.verEnGrande(foto.label)}
               className="relative aspect-[4/3] w-full shrink-0 cursor-zoom-in snap-center bg-sand"
             >
               <SmartImage
@@ -177,6 +179,7 @@ export default function PhotoSlider({
           <>
             <Flecha
               lado="izquierda"
+              label={t.anterior}
               oculta={actual === 0}
               onClick={() => {
                 pausarUnRato();
@@ -185,6 +188,7 @@ export default function PhotoSlider({
             />
             <Flecha
               lado="derecha"
+              label={t.siguiente}
               oculta={actual === photos.length - 1}
               onClick={() => {
                 pausarUnRato();
@@ -199,7 +203,7 @@ export default function PhotoSlider({
         <div
           ref={filtrosRef}
           role="tablist"
-          aria-label={`Fotos de ${altPrefix}`}
+          aria-label={t.fotosDe(altPrefix)}
           className="no-scrollbar -mx-5 mt-3 flex gap-2 overflow-x-auto px-5 pb-1"
         >
           {photos.map((foto, i) => (
@@ -240,10 +244,12 @@ export default function PhotoSlider({
 
 function Flecha({
   lado,
+  label,
   oculta,
   onClick,
 }: {
   lado: "izquierda" | "derecha";
+  label: string;
   oculta: boolean;
   onClick: () => void;
 }) {
@@ -252,7 +258,7 @@ function Flecha({
     <button
       type="button"
       onClick={onClick}
-      aria-label={lado === "izquierda" ? "Foto anterior" : "Foto siguiente"}
+      aria-label={label}
       // Ocultas en móvil (ahí manda el gesto) y en los extremos. El atributo
       // `hidden` de HTML no serviría: cualquier `display` de Tailwind lo
       // pisa, así que se controla con las propias clases.

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Clock3, ArrowRight } from "lucide-react";
 import type { Country, City } from "@/lib/types";
+import { useDict, useLocalizePath } from "@/lib/i18n/LocaleProvider";
 
 /**
  * Country cards for the Destinos screen. A country with linked cities
@@ -78,6 +79,7 @@ function CountryCard({
 }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  const t = useDict().destinos;
 
   return (
     <button
@@ -117,16 +119,14 @@ function CountryCard({
       {!ready && (
         <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-brand-dark shadow-sm backdrop-blur">
           <Clock3 className="h-3 w-3" strokeWidth={2} />
-          Próximamente
+          {t.proximamente}
         </span>
       )}
 
       <div className="relative z-10 flex w-full items-end justify-between px-5 pb-4">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
-            {ready
-              ? `${cityCount} ${cityCount === 1 ? "destino" : "destinos"}`
-              : "¡Muy pronto disponible!"}
+            {ready ? t.numDestinos(cityCount) : t.muyPronto}
           </p>
           <h2 className="font-display mt-0.5 text-2xl text-white">{name}</h2>
         </div>
@@ -153,10 +153,12 @@ function CityRow({ city }: { city: City }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
   const cover = city.images[0];
+  const t = useDict().destinos;
+  const loc = useLocalizePath();
 
   return (
     <Link
-      href={`/destinos/${city.slug}`}
+      href={loc(`/destinos/${city.slug}`)}
       className="group flex items-center gap-3 overflow-hidden rounded-2xl border border-black/5 bg-white p-2.5 pr-4 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-brand-light to-brand">
@@ -179,8 +181,8 @@ function CityRow({ city }: { city: City }) {
         <p className="truncate text-sm font-semibold text-foreground">{city.name}</p>
         <p className="truncate text-xs text-zinc-500">
           {city.hotelIds.length > 0
-            ? `${city.hotelIds.length} ${city.hotelIds.length === 1 ? "hotel" : "hoteles"} boutique`
-            : "Hoteles próximamente"}
+            ? t.numHotelesBoutique(city.hotelIds.length)
+            : t.hotelesProximamente}
         </p>
       </div>
 

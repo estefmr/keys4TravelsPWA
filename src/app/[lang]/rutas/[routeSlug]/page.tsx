@@ -1,11 +1,15 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import ZoomableImage from "@/components/ZoomableImage";
 import BackBar from "@/components/BackBar";
 import PhotoSlider from "@/components/PhotoSlider";
-import { routes, getRouteBySlug } from "@/lib/data/routes";
-import { getCityBySlug } from "@/lib/data/destinations";
+import { routes } from "@/lib/data/routes";
+import { getCity, getRoute } from "@/lib/data/localized";
+import { hasLocale, localizePath } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { alternates } from "@/lib/i18n/metadata";
 
 export function generateStaticParams() {
   return routes.map((route) => ({ routeSlug: route.slug }));
@@ -13,14 +17,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ routeSlug: string }>;
-}) {
-  const { routeSlug } = await params;
-  const route = getRouteBySlug(routeSlug);
+}: PageProps<"/[lang]/rutas/[routeSlug]">): Promise<Metadata> {
+  const { lang, routeSlug } = await params;
+  if (!hasLocale(lang)) return {};
+  const route = getRoute(routeSlug, lang);
   return {
-    title: route ? `${route.title} — Keys4Travels` : "Ruta — Keys4Travels",
+    title: route
+      ? `${route.title} — Keys4Travels`
+      : getDictionary(lang).meta.rutaFallback,
     description: route?.teaser,
+    alternates: alternates(lang, `/rutas/${routeSlug}`),
   };
 }
 
@@ -32,20 +38,20 @@ export async function generateMetadata({
  */
 export default async function RouteDetailPage({
   params,
-}: {
-  params: Promise<{ routeSlug: string }>;
-}) {
-  const { routeSlug } = await params;
-  const route = getRouteBySlug(routeSlug);
+}: PageProps<"/[lang]/rutas/[routeSlug]">) {
+  const { lang, routeSlug } = await params;
+  if (!hasLocale(lang)) notFound();
+  const route = getRoute(routeSlug, lang);
   if (!route) notFound();
 
-  const city = getCityBySlug(route.citySlug);
-  const destino = city?.name ?? "el destino";
-  const volver = `/destinos/${route.citySlug}`;
+  const t = getDictionary(lang).ruta;
+  const city = getCity(route.citySlug, lang);
+  const destino = city?.name ?? t.elDestino;
+  const volver = localizePath(lang, `/destinos/${route.citySlug}`);
 
   return (
     <div>
-      <BackBar href={volver} backLabel={destino} title={route.title} />
+      <BackBar href={volver} backLabel={destino} title={route.title} lang={lang} />
 
       <article className="px-5 pb-12 pt-6">
         <header>
@@ -133,7 +139,7 @@ export default async function RouteDetailPage({
           className="mt-10 flex items-center justify-center gap-2 rounded-full border border-brand/20 px-5 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand/5"
         >
           <ChevronLeft className="h-4 w-4" />
-          Volver a {destino}
+          {t.volverA(destino)}
         </Link>
       </article>
     </div>

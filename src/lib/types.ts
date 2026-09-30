@@ -93,3 +93,40 @@ export type Route = {
   photos?: GalleryPhoto[];
   stops: RouteStop[];
 };
+
+/**
+ * Traducción de un destino. Solo lleva los textos: fotos, hoteles y slugs
+ * salen siempre del original en español (src/lib/data/destinations.ts).
+ */
+export type CityTranslation = {
+  heroText: string;
+  body: string[];
+  sections?: CitySection[];
+  attractions: string[];
+};
+
+/** Traducción de un hotel. `galleryLabels` sigue el orden de `gallery`. */
+export type HotelTranslation = {
+  address?: string;
+  summary: string;
+  description: string[];
+  galleryLabels?: string[];
+};
+
+/**
+ * Traducción de una ruta o lugar. Los nombres de las fotos y las paradas
+ * siguen el mismo orden que en el original.
+ */
+export type RouteTranslation = {
+  kicker?: string;
+  title: string;
+  teaser: string;
+  intro: string[];
+  photoLabels?: string[];
+  stops?: {
+    title: string;
+    paragraphs: string[];
+    bullets?: string[];
+    photoLabels?: string[];
+  }[];
+};

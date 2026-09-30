@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import type { ReactNode } from "react";
 import BackBar from "@/components/BackBar";
+import { useDict, useLocale, useLocalizePath } from "@/lib/i18n/LocaleProvider";
 
 /**
  * Carcasa compartida de las pantallas de cuenta: acceso, registro y Mi cuenta.
@@ -37,13 +40,21 @@ export default function AuthShell({
   subtitle: string;
   children: ReactNode;
 }) {
+  const lang = useLocale();
+  const loc = useLocalizePath();
+  const t = useDict().auth;
   return (
     // `-mb-28` cancela el hueco que `main` reserva para la barra inferior:
     // aquí el panel oscuro llega hasta abajo del todo y ese hueco dejaría
     // una franja crema asomando bajo el azul.
     <div className="-mb-28">
       {back && (
-        <BackBar href="/cuenta" backLabel="Mi cuenta" title={backTitle} />
+        <BackBar
+          href={loc("/cuenta")}
+          backLabel={t.miCuenta}
+          title={backTitle}
+          lang={lang}
+        />
       )}
 
       {/* La altura descuenta lo que ocupan las barras de arriba, para llenar

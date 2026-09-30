@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
+import { useDict } from "@/lib/i18n/LocaleProvider";
 
 /**
  * Portada del Home: las mismas palabras de siempre, pero sobre fotos que se
@@ -36,6 +37,7 @@ export default function HeroSlider({
   const contenedorRef = useRef<HTMLDivElement>(null);
   const [actual, setActual] = useState(0);
   const [visible, setVisible] = useState(true);
+  const t = useDict().home;
 
   // Fuera de pantalla no tiene sentido gastar batería cambiando fotos que
   // nadie mira; la portada se va arriba en cuanto se baja un poco.
@@ -98,7 +100,7 @@ export default function HeroSlider({
         {photos.length > 1 && (
           <div
             role="tablist"
-            aria-label="Fotos de la portada"
+            aria-label={t.fotosPortada}
             className="mt-5 flex items-center gap-2"
           >
             {photos.map((foto, i) => (

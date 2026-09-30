@@ -205,11 +205,3 @@ export const hotels: Hotel[] = [
     ],
   },
 ];
-
-export function getHotelBySlug(slug: string): Hotel | undefined {
-  return hotels.find((h) => h.slug === slug);
-}
-
-export function getHotelsByCitySlug(citySlug: string): Hotel[] {
-  return hotels.filter((h) => h.citySlug === citySlug);
-}
