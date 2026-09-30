@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
 import Image from "next/image";
-import { Download, X, Plus } from "lucide-react";
+import { Download, X, Plus, ExternalLink, EllipsisVertical } from "lucide-react";
 
 /**
  * Chrome ya no muestra un banner de instalación por su cuenta: desde
@@ -10,6 +10,13 @@ import { Download, X, Plus } from "lucide-react";
  * `beforeinstallprompt` y ofrecer su propio botón. Safari en iOS nunca ha
  * emitido ese evento, así que ahí lo único posible es explicar el gesto
  * manual (Compartir → Añadir a pantalla de inicio).
+ *
+ * Samsung Internet sí emite el evento, pero la app que genera al instalar
+ * la construye Samsung para una versión vieja de Android y Google Play
+ * Protect la bloquea («Se bloqueó la app no segura»). Chrome la construye
+ * con Google y no salta nada, así que en Samsung no se ofrece instalar:
+ * se ofrece abrir la página en Chrome. En el resto de navegadores de
+ * Android sin evento se explica el gesto a mano desde el menú.
  *
  * La detección vive en un store externo en vez de en estado de React
  * porque nace fuera del árbol: el evento lo dispara el navegador, a veces
@@ -33,6 +40,8 @@ type Snapshot = {
   prompt: BeforeInstallPromptEvent | null;
   installed: boolean;
   ios: boolean;
+  android: boolean;
+  samsung: boolean;
   standalone: boolean;
   dismissed: boolean;
 };
@@ -41,6 +50,8 @@ const SERVER_SNAPSHOT: Snapshot = {
   prompt: null,
   installed: false,
   ios: false,
+  android: false,
+  samsung: false,
   standalone: false,
   dismissed: false,
 };
@@ -61,6 +72,18 @@ function detectIOS() {
     /iPad|iPhone|iPod/.test(ua) ||
     (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)
   );
+}
+
+/**
+ * Enlace que abre la página actual en Chrome desde otro navegador de
+ * Android. Si Chrome no está instalado, lleva a su ficha en Play Store.
+ */
+function chromeIntentUrl() {
+  const { host, pathname, search } = window.location;
+  const sinChrome = encodeURIComponent(
+    "https://play.google.com/store/apps/details?id=com.android.chrome"
+  );
+  return `intent://${host}${pathname}${search}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${sinChrome};end`;
 }
 
 function detectStandalone() {
@@ -87,6 +110,8 @@ function init() {
     prompt: window.__k4tInstallEvent ?? null,
     installed: false,
     ios: detectIOS(),
+    android: /Android/.test(navigator.userAgent),
+    samsung: /SamsungBrowser/.test(navigator.userAgent),
     standalone: detectStandalone(),
     dismissed,
   };
@@ -127,7 +152,11 @@ export default function InstallPrompt({
   const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [dismissedNow, setDismissedNow] = useState(false);
 
-  const { prompt, installed, ios, standalone } = state;
+  const { installed, ios, android, samsung, standalone } = state;
+  // En Samsung Internet el botón de instalar lleva al bloqueo de Play
+  // Protect: se hace como si no hubiera evento y se manda a Chrome.
+  const samsungAndroid = samsung && android;
+  const prompt = samsungAndroid ? null : state.prompt;
   // La tarjeta de "Mi cuenta" es el acceso permanente: ignora que el
   // banner se haya descartado antes.
   const dismissed =
@@ -152,8 +181,74 @@ export default function InstallPrompt({
   }
 
   if (standalone || installed || dismissed) return null;
-  // Nada que ofrecer: ni instalable por Chrome ni iOS con instrucciones.
-  if (!prompt && !ios) return null;
+  // Nada que ofrecer: ni botón, ni iPhone ni Android con instrucciones
+  // (en la práctica, un navegador de escritorio sin evento).
+  if (!prompt && !ios && !android) return null;
+
+  const suave = oscuro ? "text-white/60" : "text-zinc-500";
+  const resalte = oscuro ? "text-sand" : "text-brand";
+  const botonClase = `mt-2.5 flex w-fit items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+    oscuro
+      ? "bg-sand text-brand-dark hover:bg-white"
+      : "bg-brand text-white hover:bg-brand-dark"
+  }`;
+
+  let cuerpo: ReactNode;
+  if (prompt) {
+    cuerpo = (
+      <>
+        <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
+          Ábrela desde tu pantalla de inicio, a pantalla completa y sin
+          barra del navegador.
+        </p>
+        <button type="button" onClick={handleInstall} className={botonClase}>
+          <Download className="h-3.5 w-3.5" strokeWidth={2.25} />
+          Instalar app
+        </button>
+      </>
+    );
+  } else if (samsungAndroid) {
+    cuerpo = (
+      <>
+        <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
+          Para instalarla, ábrela en{" "}
+          <span className={`font-semibold ${resalte}`}>Chrome</span>: desde
+          este navegador el teléfono la bloquea por seguridad.
+        </p>
+        <a href={chromeIntentUrl()} className={botonClase}>
+          <ExternalLink className="h-3.5 w-3.5" strokeWidth={2.25} />
+          Abrir en Chrome
+        </a>
+      </>
+    );
+  } else if (ios) {
+    cuerpo = (
+      <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
+        Pulsa <span className={`font-semibold ${resalte}`}>Compartir</span> en
+        la barra de Safari y elige{" "}
+        <span className={`inline-flex items-center gap-0.5 font-semibold ${resalte}`}>
+          Añadir a pantalla de inicio <Plus className="h-3 w-3" />
+        </span>
+        .
+      </p>
+    );
+  } else {
+    // Android sin evento: otro navegador, o Chrome antes de avisar.
+    cuerpo = (
+      <p className={`mt-1 text-xs leading-relaxed ${suave}`}>
+        Abre el menú{" "}
+        <span className={`inline-flex items-center font-semibold ${resalte}`}>
+          <EllipsisVertical className="h-3.5 w-3.5" />
+        </span>{" "}
+        del navegador y toca{" "}
+        <span className={`font-semibold ${resalte}`}>Instalar app</span> o{" "}
+        <span className={`font-semibold ${resalte}`}>
+          Añadir a pantalla de inicio
+        </span>
+        .
+      </p>
+    );
+  }
 
   const content = (
     <div className="flex items-start gap-3">
@@ -172,42 +267,7 @@ export default function InstallPrompt({
         >
           Instala Keys4Travels
         </p>
-        {ios && !prompt ? (
-          <p className={`mt-1 text-xs leading-relaxed ${oscuro ? "text-white/60" : "text-zinc-500"}`}>
-            Pulsa{" "}
-            <span className={`font-semibold ${oscuro ? "text-sand" : "text-brand"}`}>
-              Compartir
-            </span>{" "}
-            en la barra de Safari y elige{" "}
-            <span
-              className={`inline-flex items-center gap-0.5 font-semibold ${
-                oscuro ? "text-sand" : "text-brand"
-              }`}
-            >
-              Añadir a pantalla de inicio <Plus className="h-3 w-3" />
-            </span>
-            .
-          </p>
-        ) : (
-          <>
-            <p className={`mt-1 text-xs leading-relaxed ${oscuro ? "text-white/60" : "text-zinc-500"}`}>
-              Ábrela desde tu pantalla de inicio, a pantalla completa y sin
-              barra del navegador.
-            </p>
-            <button
-              type="button"
-              onClick={handleInstall}
-              className={`mt-2.5 flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
-                oscuro
-                  ? "bg-sand text-brand-dark hover:bg-white"
-                  : "bg-brand text-white hover:bg-brand-dark"
-              }`}
-            >
-              <Download className="h-3.5 w-3.5" strokeWidth={2.25} />
-              Instalar app
-            </button>
-          </>
-        )}
+        {cuerpo}
       </div>
       {variant === "banner" && (
         <button
