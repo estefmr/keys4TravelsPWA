@@ -51,7 +51,9 @@ export default function RoutesSection({ routes }: { routes: Route[] }) {
               {/* `mt-auto` pega el botón abajo: con tarjetas de alto distinto
                   en la rejilla, así quedan todos los botones alineados. */}
               <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold text-brand">
-                Ver la ruta
+                {/* Solo las rutas numeradas llevan rótulo; el resto son
+                    fichas de un lugar, donde "ver la ruta" no encaja. */}
+                {route.kicker ? "Ver la ruta" : "Descubrir"}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </div>

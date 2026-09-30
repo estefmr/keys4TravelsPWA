@@ -12,468 +12,360 @@ import type { Route } from "@/lib/types";
  */
 export const routes: Route[] = [
   // ─────────────────────────── Santiago de Chile ───────────────────────────
+  // Lugares & Atractivos del documento "Santiago. K4T App" de la clienta, en
+  // su mismo orden. La portada de cada ficha no se repite en su carrusel.
   {
-    id: "santiago-historico",
-    slug: "santiago-historico",
+    id: "barrio-paris-londres",
+    slug: "barrio-paris-londres",
     citySlug: "santiago",
-    kicker: "Ruta 1",
-    title: "Santiago Histórico",
-    teaser: "Nueve paradas a pie por los 500 años de historia del centro.",
-    cover: "/images/rutas/santiago-historico/portada.jpg",
+    title: "Barrio París-Londres",
+    teaser: "Belleza, historia y memoria en el corazón de Santiago.",
+    cover: "/images/rutas/barrio-paris-londres/hotel-paris-londres.webp",
     intro: [
-      "En Keys4Travels fomentamos el turismo Lento (SLOW), o esa modalidad donde solo un viajero de verdad se permite hacer. Acá te dejo una ruta que no les tomará más de una hora hacerla caminando si lo que quieres es pasar y ver algunos sitios de interés de Santiago, pero si lo que están buscando es conectarse con esta ciudad, entonces deberás conocer un poco de sus 500 años de historia.",
+      "En pleno centro histórico de Santiago, el barrio París-Londres es un pequeño rincón que parece transportado directamente desde el Barrio Latino de París. Construido en la década de 1920, este conjunto de dos cuadras adoquinadas combina fachadas europeas, balcones de hierro forjado y casonas de tres y cuatro pisos que contrastan con los rascacielos modernos a solo una cuadra de distancia.",
+      "Pero este barrio no es solo una postal bonita: sus calles guardan también una parte oscura y valiente de la historia reciente de Chile. Durante la dictadura militar (1973-1990), el edificio de Londres 38 funcionó como centro clandestino de detención, un episodio doloroso que hoy se recuerda y honra como espacio de memoria. Desde 2010, este sitio está abierto al público para conectar a visitantes chilenos y extranjeros con la historia real del país.",
+      "Visitar el barrio París-Londres es una experiencia que va más allá de la fotografía: es caminar por la belleza arquitectónica europea y, al mismo tiempo, comprender la memoria histórica de Chile. Se recomienda especialmente recorrerlo con un guía local para vivir una experiencia más profunda y enriquecedora.",
+      "Un barrio que combina historia y resiliencia en pleno centro de Santiago. ¿Te animas a descubrirlo?",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/barrio-paris-londres/antiguo-cuartel-yucatan.webp",
+        label: "Antiguo Cuartel Yucatán",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "iglesia-de-san-francisco",
+    slug: "iglesia-de-san-francisco",
+    citySlug: "santiago",
+    title: "Iglesia de San Francisco",
+    teaser: "La más antigua de Santiago y testigo de 5 siglos de historia chilena.",
+    cover: "/images/rutas/iglesia-de-san-francisco/nave-del-templo.webp",
+    intro: [
+      "En plena Alameda Bernardo O'Higgins, la Iglesia de San Francisco es el edificio más antiguo de Santiago de Chile. Su construcción comenzó en 1572 y, desde entonces, ha sobrevivido a terremotos, revoluciones y a la transformación total de la ciudad que la rodea, manteniéndose en pie con sus muros de adobe de más de 450 años.",
+      "Su torre actual, de estilo neoclásico, fue reconstruida en 1857 por Fermín Vivaceta tras sucesivos sismos, y contrasta con el cuerpo colonial del templo. En su interior destaca un techo de madera de roble pellín traído desde el sur de Chile, además de la venerada Virgen del Socorro, una pequeña imagen que llegó junto a Pedro de Valdivia en 1540 y que acompañó la fundación de Santiago en 1541.",
+      "El conjunto se completa con el Museo Colonial de San Francisco, uno de los más importantes de Sudamérica, que resguarda 53 lienzos sobre la vida de San Francisco de Asís pintados en el Virreinato del Perú.",
+      "Ubicada cerca del metro Santa Lucía y del barrio París-Londres, esta iglesia es una parada obligada para quienes buscan conectar con la historia real de Santiago. La entrada al templo es gratuita. ¿Te animas a descubrirla?",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/iglesia-de-san-francisco/lienzos-siglo-xvii.webp",
+        label: "Lienzos del siglo XVII",
+      },
+      {
+        src: "/images/rutas/iglesia-de-san-francisco/pasillos-y-jardines.webp",
+        label: "Pasillos y jardines",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "museo-de-la-educacion-gabriela-mistral",
+    slug: "museo-de-la-educacion-gabriela-mistral",
+    citySlug: "santiago",
+    title: "Museo de la Educación Gabriela Mistral",
+    teaser: "Memoria pedagógica en el corazón del Barrio Yungay.",
+    cover: "/images/rutas/museo-de-la-educacion-gabriela-mistral/patio-de-los-tilos.webp",
+    intro: [
+      "En la intersección de Chacabuco y Compañía de Jesús, en el histórico Barrio Yungay de Santiago de Chile, se encuentra el Museo de la Educación Gabriela Mistral (MEGM), ubicado en el ala oeste de la antigua Escuela Normal de Preceptoras.",
+      "Su nombre rinde un doble homenaje a Gabriela Mistral: como la primera mujer latinoamericana en ganar el Premio Nobel de Literatura (1945), pero también como maestra, ya que fue en este mismo edificio donde obtuvo, en 1910, su licencia para ejercer como profesora primaria. Antes de ser poeta, Mistral fue educadora, y ese legado pedagógico es una parte esencial de su historia.",
+      "Más que un museo tradicional, el MEGM es un espacio vivo que reflexiona sobre los procesos educativos en Chile a través de su patrimonio pedagógico. Recibe mensualmente a ex alumnas de la Escuela Normal N°1, que regresan a las mismas salas donde se formaron como maestras, y trabaja activamente temas de primera infancia, género y comunidad local.",
+      "De acceso gratuito, este museo se ha consolidado como un punto de encuentro abierto y democrático en el Barrio Yungay, ideal para quienes buscan una mirada distinta y profunda de la cultura chilena.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/museo-de-la-educacion-gabriela-mistral/antiguo-despacho.webp",
+        label: "Antiguo despacho",
+      },
+      {
+        src: "/images/rutas/museo-de-la-educacion-gabriela-mistral/cronologia-de-la-educacion.webp",
+        label: "Cronología de la educación chilena",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "centro-cultural-la-moneda",
+    slug: "centro-cultural-la-moneda",
+    citySlug: "santiago",
+    title: "Centro Cultural La Moneda",
+    teaser: "El palacio subterráneo de cultura en el centro de Santiago.",
+    cover: "/images/rutas/centro-cultural-la-moneda/interior-del-centro.webp",
+    intro: [
+      "Bajo la Plaza de la Ciudadanía, frente al Palacio de La Moneda, se esconde uno de los espacios culturales más sorprendentes de Santiago de Chile: el Centro Cultural La Moneda. Ubicado en pleno corazón cívico de la capital, este centro subterráneo nació con un objetivo claro: democratizar el acceso al arte y posicionar a Chile en el circuito cultural internacional.",
+      "Construido entre 2004 y 2006 por la oficina Undurraga Devés e inaugurado por el expresidente Ricardo Lagos como parte del Proyecto Bicentenario, sorprende por su arquitectura vanguardista: hormigón a la vista, barandas de vidrio y un espectacular techo de cristal que inunda de luz natural todo el espacio, como una catedral moderna dedicada al arte.",
+      "Es un lugar vivo y en constante movimiento: exposiciones rotativas, seminarios de arte contemporáneo, festivales de lectura, actividades infantiles y eventos como el Día de los Patrimonios o el Santiago Wild Festival, dedicado a la naturaleza y conservación.",
+      "Abierto de martes a domingo, de 10:00 a 18:30 horas, con entrada gratuita a sus exposiciones. Se llega fácilmente en metro, bajando en la estación La Moneda (Línea 1).",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/centro-cultural-la-moneda/entrada.webp",
+        label: "Entrada al centro cultural",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "museo-ferroviario",
+    slug: "museo-ferroviario",
+    citySlug: "santiago",
+    title: "Museo Ferroviario de Santiago",
+    teaser: "Gigantes de acero en el Parque Quinta Normal.",
+    cover: "/images/rutas/museo-ferroviario/locomotora-alco-1940.webp",
+    intro: [
+      "En pleno Parque Quinta Normal de Santiago de Chile, rodeado de árboles centenarios, se encuentra el Museo Ferroviario de Santiago, hogar de una de las colecciones de locomotoras a vapor más importantes de Sudamérica: 16 máquinas monumentales que narran la historia del desarrollo y la unificación del país.",
+      "Fundado el 19 de diciembre de 1984, este museo nació gracias al esfuerzo de los propios trabajadores de la desaparecida Maestranza Central de San Bernardo, quienes conservaron estas piezas patrimoniales tras su retiro de servicio, salvándolas del olvido.",
+      "Es un plan perfecto para toda la familia: los niños pueden recorrer libremente entre locomotoras gigantes y descubrir la historia de Chile de forma entretenida, mientras los visitantes pueden subir a vagones históricos, como un coche de madera de 1923 fabricado en Alemania. En julio de 2025, el museo sumó cuatro vagones del Ferrocarril de Antofagasta a Bolivia, construidos en Inglaterra a inicios del siglo XX.",
+      "Más que un museo, es una verdadera máquina del tiempo que transporta a la época dorada del ferrocarril chileno. Una visita imperdible para descubrir estos gigantes de acero que escribieron la historia sobre rieles.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/museo-ferroviario/locomotora-kitson-meyer.webp",
+        label: "Locomotora Kitson Meyer",
+      },
+      {
+        src: "/images/rutas/museo-ferroviario/locomotora-tipo-20-1911.webp",
+        label: "Locomotora Tipo 20 (1911)",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "cerro-santa-lucia",
+    slug: "cerro-santa-lucia",
+    citySlug: "santiago",
+    title: "Cerro Santa Lucía",
+    teaser: "El corazón donde nació Santiago de Chile.",
+    cover: "/images/rutas/cerro-santa-lucia/fuente-de-neptuno.webp",
+    intro: [
+      "En pleno centro de Santiago, el Cerro Santa Lucía —o Huelén, como lo llamaban los mapuches— es mucho más que un mirador natural: es el lugar exacto donde comenzó la historia de la capital chilena. Con apenas 69 metros de altura, este cerro fue considerado sagrado por los pueblos originarios, quienes lo usaban como sitio de observación y conexión espiritual.",
+      "Fue aquí donde Pedro de Valdivia decidió fundar Santiago de Nueva Extremadura el 12 de febrero de 1541, tras llegar al Valle del Mapocho el día de Santa Lucía en 1540. Siglos después, el cerro también fue escenario científico: Charles Darwin lo utilizó como observatorio en 1834 para estudiar la Cordillera de los Andes, y en 1908 se instaló allí la primera estación sismológica de Chile.",
+      "Un dato sorprendente: el Cerro Santa Lucía es en realidad el remanente de un volcán de 15 millones de años de antigüedad. Hoy, sus senderos invitan a recorrer el Castillo Hidalgo, la Fuente de Neptuno, la Capilla Neogótica, el sepulcro de Benjamín Vicuña Mackenna y hermosos jardines con faroles y estatuas antiguas.",
+      "Visitar este cerro es pararse literalmente donde nació Santiago hace casi 500 años.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/cerro-santa-lucia/jardin-circular-castillo-hidalgo.webp",
+        label: "Jardín circular (Castillo Hidalgo)",
+      },
+      { src: "/images/rutas/cerro-santa-lucia/mirador.webp", label: "El mirador" },
+      {
+        src: "/images/rutas/cerro-santa-lucia/sepulcro-vicuna-mackenna.webp",
+        label: "Sepulcro de Vicuña Mackenna",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "museo-nacional-de-bellas-artes",
+    slug: "museo-nacional-de-bellas-artes",
+    citySlug: "santiago",
+    title: "Museo Nacional de Bellas Artes",
+    teaser: "El palacio que respira arte en el Parque Forestal.",
+    cover: "/images/rutas/museo-nacional-de-bellas-artes/fachada.webp",
+    intro: [
+      "En pleno Parque Forestal de Santiago de Chile se levanta el Museo Nacional de Bellas Artes (MNBA), el museo de arte más antiguo de Sudamérica y el primero de Latinoamérica, fundado el 18 de septiembre de 1880. Su elegante cúpula de vidrio y fachada neoclásica evocan los bulevares parisinos, y no es casualidad: el arquitecto chileno Emilio Jéquier se inspiró en el Petit Palais de París para diseñar este palacio, inaugurado en 1910 como parte de las celebraciones del Centenario.",
+      "Su cúpula de vidrio, fabricada en Bélgica con 2.400 piezas y 115 toneladas de estructura, ilumina un hall central de gran belleza. En su interior, el museo resguarda miles de obras —pinturas, esculturas, dibujos y grabados— que recorren desde el arte colonial religioso hasta las expresiones contemporáneas, incluyendo a grandes nombres del arte chileno como Pedro Lira.",
+      "Más que un edificio con cuadros, el MNBA es un espejo de la identidad chilena, donde el arte refleja la historia, las luchas y los sueños del país. Tras sufrir graves daños en el terremoto de 1985, el museo se reconstruyó y hoy sigue siendo el corazón artístico de Chile.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/museo-nacional-de-bellas-artes/gran-salon.webp",
+        label: "El gran salón",
+      },
+      {
+        src: "/images/rutas/museo-nacional-de-bellas-artes/esculturas-la-quimera.webp",
+        label: "Esculturas (La Quimera)",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "pueblito-los-dominicos",
+    slug: "pueblito-los-dominicos",
+    citySlug: "santiago",
+    title: "Pueblito de Los Dominicos",
+    teaser: "De los establos a la cuna de la artesanía chilena.",
+    cover: "/images/rutas/pueblito-los-dominicos/pueblito.webp",
+    intro: [
+      "En pleno Santiago de Chile, el Pueblito de Los Dominicos es hoy uno de los destinos más buscados por turistas extranjeros, pero su historia comienza mucho antes de convertirse en centro artesanal. Estas tierras fueron entregadas en 1544 a Inés de Suárez, la única mujer conquistadora reconocida oficialmente en el país, y en 1767 pasaron a manos de la Orden de los Dominicos gracias a la donación de María Antonia de Portusagasti y su esposo.",
+      "El lugar también guarda un capítulo patriótico: durante la Guerra de Independencia de Chile, fue escondite del guerrillero Manuel Rodríguez y refugio de otras figuras históricas como José Manuel Balmaceda.",
+      "Por casi dos siglos, sus antiguos establos y bodegas permanecieron vacíos, hasta que en 1978 un grupo de artesanos comenzó a vender sus obras junto a la iglesia. Así nació, en 1979, el actual Pueblito Los Dominicos, que hoy reúne más de 160 talleres con artesanos trabajando en vivo, creando piezas en plata, madera, lapislázuli, greda y cerámica de todo Chile.",
+      "Aquí no hay souvenirs en serie: cada pieza es hecha a mano y cuenta una historia real de tradición chilena.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/pueblito-los-dominicos/entrada.webp",
+        label: "Entrada al pueblito",
+      },
+      {
+        src: "/images/rutas/pueblito-los-dominicos/fuente-jardin-de-los-bonsai.webp",
+        label: "Fuente del Jardín de los Bonsái",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "basilica-de-los-sacramentinos",
+    slug: "basilica-de-los-sacramentinos",
+    citySlug: "santiago",
+    title: "Basílica de los Sacramentinos",
+    teaser: "El Sacré-Cœur escondido de Santiago de Chile.",
+    cover: "/images/rutas/basilica-de-los-sacramentinos/fachada.webp",
+    intro: [
+      "En el barrio San Diego, en pleno centro de Santiago, se levanta la Basílica de los Sacramentinos, un templo con 72 metros de cúpula y un secreto único en Chile: son dos iglesias, una encima de la otra.",
+      "Todo comenzó en 1908, cuando María Lecaros de Marchant trajo a los sacramentinos a Chile y pidió un templo inspirado en la Basílica del Sagrado Corazón de París. El arquitecto Ricardo Larraín Bravo hizo realidad ese sueño afrancesado en pleno Santiago.",
+      "Su diseño de doble iglesia es lo que la hace irrepetible: arriba, el templo principal; abajo, una cripta a 4 metros de profundidad con mármoles, piedras preciosas y mosaicos bizantinos dorados que recuerdan a las catacumbas romanas. Muchos visitantes aseguran que la cripta impresiona incluso más que el templo superior.",
+      "Declarada votivo nacional por el centenario de la independencia y bendecida por el Papa Pío X en 1910, hoy funciona como parroquia activa del barrio.",
+      "Un pedazo de París construido con devoción chilena: una joya arquitectónica que pocos turistas conocen y que vale la pena descubrir.",
+    ],
+    photos: [
+      { src: "/images/rutas/basilica-de-los-sacramentinos/la-nave.webp", label: "La nave" },
+      {
+        src: "/images/rutas/basilica-de-los-sacramentinos/desde-lo-alto.webp",
+        label: "El templo desde lo alto",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "museo-de-la-memoria",
+    slug: "museo-de-la-memoria",
+    citySlug: "santiago",
+    title: "Museo de la Memoria y los Derechos Humanos",
+    teaser: "La historia de Chile que no debe olvidarse.",
+    cover: "/images/rutas/museo-de-la-memoria/exterior.webp",
+    intro: [
+      "En Santiago de Chile, el Museo de la Memoria y los Derechos Humanos es un espacio dedicado a preservar uno de los capítulos más difíciles de la historia reciente del país: los 17 años de dictadura militar que comenzaron tras el golpe de Estado del 11 de septiembre de 1973, cuando fue derrocado el gobierno democrático de Salvador Allende.",
+      "El museo, un edificio moderno de tres pisos con hormigón expuesto y luz natural controlada, fue diseñado para invitar a la reflexión más que al espectáculo. Sus exposiciones permanentes recorren cronológicamente el periodo 1973-1990: el golpe de Estado, los centros de detención, la resistencia, el exilio de miles de chilenos y el retorno a la democracia. A través de testimonios, documentos, cartas y objetos originales, el visitante puede comprender de manera directa el impacto humano de este periodo histórico.",
+      "Es un ejemplo destacado de turismo de memoria y turismo negro: no busca el morbo, sino la educación y la reflexión sobre la importancia de los derechos humanos y la democracia. Muchos visitantes salen conmovidos tras el recorrido.",
+      "Una visita profundamente necesaria para entender el Chile contemporáneo.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/museo-de-la-memoria/historias-en-fotos.webp",
+        label: "Historias en fotos",
+      },
+      {
+        src: "/images/rutas/museo-de-la-memoria/las-victimas-conocidas.webp",
+        label: "Las víctimas conocidas",
+      },
+      {
+        src: "/images/rutas/museo-de-la-memoria/periodicos-de-la-epoca.webp",
+        label: "Periódicos de la época",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "templo-bahai",
+    slug: "templo-bahai",
+    citySlug: "santiago",
+    title: "Templo Bahá'í de Sudamérica",
+    teaser: "La flor de luz que corona la precordillera de Santiago.",
+    cover: "/images/rutas/templo-bahai/el-templo.webp",
+    intro: [
+      "En plena precordillera de Santiago de Chile, a 1.000 metros de altura, se alza el Templo Bahá'í de Sudamérica, una construcción con forma de flor de nueve pétalos que parece levitar sobre la cordillera de los Andes. El bahaísmo llegó al país en 1919 gracias a la periodista Martha Root, pero este templo comenzó a gestarse recién en 2002, tras un concurso internacional de arquitectura, y fue inaugurado en octubre de 2016.",
+      "Su diseño, con nueve entradas, caminos, fuentes y \"velas\" arqueadas, responde al número sagrado del bahaísmo, símbolo de unidad entre todas las religiones. De día, la luz atraviesa sus paneles de vidrio creando patrones sobre el mármol blanco; de noche, el templo se ilumina como un faro visible desde varios kilómetros de distancia.",
+      "Es un espacio sin rituales ni sermones, abierto a personas de todas las creencias y orígenes, ideal para quienes buscan paz, contemplación y vistas panorámicas de Santiago rodeadas de flora nativa como quillayes y boldos.",
+      "Más que un templo, es un encuentro entre fe, arquitectura y naturaleza que invita a la reflexión personal.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/templo-bahai/estanque-y-mirador.webp",
+        label: "Estanque y mirador",
+      },
+    ],
+    stops: [],
+  },
+  {
+    id: "vina-concha-y-toro",
+    slug: "vina-concha-y-toro",
+    citySlug: "santiago",
+    title: "Viña Concha y Toro",
+    teaser: "La leyenda del diablo que custodia los mejores vinos de Chile.",
+    cover: "/images/rutas/vina-concha-y-toro/barricas-en-bodegas.webp",
+    intro: [
+      "A solo una hora de Santiago de Chile, en el Valle del Maipo, se encuentra Viña Concha y Toro, una de las bodegas más emblemáticas del país, fundada en 1883 por Don Melchor Concha y Toro. Su historia esconde una leyenda fascinante: cansado de que le robaran sus mejores vinos —creados con cepas traídas desde Burdeos, Francia—, Don Melchor difundió el rumor de que el Diablo habitaba en sus bodegas. La superstición funcionó, los robos cesaron, y años después nació una de las marcas de vino más reconocidas del mundo: Casillero del Diablo.",
+      "Ubicado en la zona de Pirque, este viñedo es una de las visitas obligadas cerca de Santiago, gracias a la belleza de sus bodegas subterráneas, la antigua casa de veraneo de Don Melchor y sus imponentes jardines. El recorrido permite sentir el frío característico de las bodegas, descubrir los aromas de las mejores cosechas y conocer de cerca la historia vitivinícola chilena.",
+      "Debido a su alta demanda turística, se recomienda reservar la visita con anticipación a través del sitio web oficial del viñedo. Al finalizar, es posible comprar vinos en su tienda especializada.",
+    ],
+    photos: [
+      {
+        src: "/images/rutas/vina-concha-y-toro/entrada.webp",
+        label: "Entrada a Concha y Toro",
+      },
+      { src: "/images/rutas/vina-concha-y-toro/mansion.webp", label: "La mansión de la viña" },
+    ],
+    stops: [],
+  },
+  {
+    id: "catedral-de-santiago",
+    slug: "catedral-de-santiago",
+    citySlug: "santiago",
+    title: "Catedral de Santiago",
+    teaser: "Donde la ciudad comenzó a escribir su historia.",
+    cover: "/images/rutas/catedral-de-santiago/fachada.webp",
+    intro: [
+      "¿Alguna vez has sentido que un lugar guarda más secretos de los que muestra? Párate frente a la Catedral de Santiago y mira bien su fachada. Detrás de esas paredes hay casi cinco siglos de fe, terremotos, reconstrucciones y momentos que marcaron a todo un país.",
+      "Su historia comienza en 1541, cuando Pedro de Valdivia fundó Santiago y reservó este terreno frente a la plaza para levantar la primera iglesia. Desde entonces, con cada tragedia que dañaba su estructura, la ciudad volvía a construirla. Esa terquedad hace que este sitio sea mucho más que un edificio: es un símbolo de que Santiago siempre se levanta.",
+      "La que ves hoy se construyó a fines del siglo XVIII, con diseño de Joaquín Toesca, el mismo arquitecto del Palacio de La Moneda. Por fuera es elegante y sobria. Por dentro te sorprenden sus columnas, sus altares dorados y una calma rara en pleno centro de la ciudad.",
+      "Es el corazón espiritual y ceremonial de Chile, Monumento Nacional y punto de encuentro de la vida religiosa, política y cultural del país. Por eso es una de las paradas más visitadas del centro histórico.",
+    ],
+    photos: [
+      { src: "/images/rutas/catedral-de-santiago/nave-central.webp", label: "La nave central" },
+      { src: "/images/rutas/catedral-de-santiago/altares.webp", label: "Columnas y altares" },
     ],
     stops: [
       {
-        title: "Iglesia de los Sacramentinos",
+        title: "Para tu visita",
         paragraphs: [
-          "La iglesia de los Sacramentinos nos da la bienvenida a esta ruta. La historia de esta basílica se remonta al año 1908, cuando la consagración de los Sacramentinos llega a Chile, quienes al poco tiempo encargan al arquitecto chileno Ricardo Larraín Bravo la creación de un templo similar al Sacre Couer de París. La basílica consta de dos iglesias, la cripta subterránea de unos 1500 metros cuadrados que se construye entre los años 1912 y 1920. Entre los años 1920 y 1934 se construye la iglesia superior al estilo romano bizantino.",
-          "Para el año 1985 sufre estragos producto de un gran sismo, debilitando su estructura y tumbando una gran cruz de 3 metros que había sido diseñada por el mismo arquitecto Larraín. En el centro se pueden observar finos parquets chilenos y vitrales franceses y argentinos, creando un interior perfectamente elegante, y su construcción se diferencia de la basílica del Sagrado Corazón de París en que en esta se usó hormigón, mientras que en Francia predominó el uso de la piedra. En 1991 esta basílica es declarada Monumento Histórico.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/sacramentinos-fachada.jpg",
-            label: "Fachada",
-          },
-          {
-            src: "/images/rutas/santiago-historico/sacramentinos-basilica.jpg",
-            label: "La basílica",
-          },
-          {
-            src: "/images/rutas/santiago-historico/sacramentinos-nave.jpg",
-            label: "La nave",
-          },
-        ],
-      },
-      {
-        title: "Parque Almagro",
-        paragraphs: [
-          "Se ubica en el centro de Santiago, a solo 3 minutos caminando de la Iglesia de los Sacramentinos, entre las calles San Ignacio y San Diego, a un costado el Museo Palacio Cousiño y sus jardines y al otro la Iglesia de los Sacramentinos. En sus inicios este lugar sirvió como punto de descanso para los viajeros provenientes del sur del país, durante la época colonial por allá en el siglo XVII. Más tarde, en el siglo XX, ya se utilizaba como una plaza de abasto llamada Mercado de San Diego, donde se vendían productos sureños.",
-          "En la actualidad, en la esquina de San Diego con Santa Isabel se pueden observar 2 puntos históricos de la zona. Primero encontramos una feria de libros usados que se instaló y permanece en el mismo sitio desde la década de 1970. El otro paraje son las instalaciones y el campus de la Universidad Central de Chile, con unos 80 mil metros cuadrados aproximadamente, siendo una de las universidades privadas más prestigiosas del país, fundada en el año 1982.",
-        ],
-      },
-      {
-        title: "Museo Palacio Cousiño",
-        paragraphs: [
-          "Este palacio de estilo neoclásico consta de 2 pisos y 27 habitaciones y se ubica en la esquina de las calles Dieciocho y Santa Isabel. Fue construido y terminado en el año 1878 por un arquitecto francés poco conocido en el mundo, pero de grandes e impecables obras, llamado Paul Lathoud, por órdenes de Luis Cousiño para la Sra. Isidora Goyenechea, quien sería viuda de Luis Cousiño antes de la terminación del palacio.",
-          "En 1940 el inmueble es traspasado a la municipalidad de Santiago, sirviendo de residencia a visitas internacionales como Charles de Gaulle, el presidente italiano Saragat y el Rey Balduino de Bélgica, entre otros. En 1968 sufre un serio incendio en la segunda planta, y no es hasta el año 1977 cuando reabre sus puertas como museo.",
-        ],
-        bullets: [
-          "Nacionales y residentes: 3.000 CLP (4 USD)",
-          "Estudiantes nacionales: 1.000 CLP (1.5 USD)",
-          "Adulto mayor de 60 años: 1.000 CLP (1 USD)",
-          "Turistas extranjeros: 4.000 CLP (5 USD)",
-          "Estudiantes extranjeros: 3.000 CLP (4 USD)",
-          "Gratis: niños menores de 10 años",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/palacio-cousino.jpg",
-            label: "El palacio",
-          },
-        ],
-      },
-      {
-        title: "Paseo Bulnes",
-        paragraphs: [
-          "Antiguamente era un camino de tierra que servía para que los viajeros continuaran su rumbo hacia el norte después de atravesar el Parque Almagro. Este corredor peatonal fue creado en 1940 y la intención era mantener una estrecha relación estética con los edificios gubernamentales de la época, en un emplazamiento que ya era referencia geocultural. También se buscaba unificar el sur con el centro de la ciudad y posteriormente el norte, no sin antes contemplar el Palacio de la Moneda.",
-          "Hoy en día, este corredor muestra las marcas dejadas por el golpe de Estado realizado en el año 1973, las cuales se mantienen como recordatorio de lo sucedido en esa época tan trágica para el país.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/paseo-bulnes.jpg",
-            label: "El paseo",
-          },
-          {
-            src: "/images/rutas/santiago-historico/paseo-bulnes-2.jpg",
-            label: "Hacia La Moneda",
-          },
-        ],
-      },
-      {
-        title: "Cripta de Bernardo O’Higgins",
-        paragraphs: [
-          "Es un mausoleo de mármol dedicado a este prócer de la historia chilena. Militar y político chileno, recibió el título de director supremo por su desempeño en el proceso de independencia de Chile y gracias a él el país tiene un himno nacional y una bandera, los cuales siguen hasta nuestros días. Este monumento fúnebre se inaugura en el año 1869 en el cementerio general. Hoy en día se puede visitar la cripta totalmente gratis, ubicada en el subterráneo de la Plaza de la Ciudadanía, donde además se muestra la historia militar de Chile en una pequeña exposición.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/cripta-ohiggins.jpg",
-            label: "La cripta",
-          },
-        ],
-      },
-      {
-        title: "Palacio de la Moneda",
-        paragraphs: [
-          "También conocida como La Moneda, es la sede de la presidencia de la República de Chile. En el año 1784 comenzó la construcción de este edificio. Se ubica entre las calles Morandé y Teatinos a sus costados, y al norte con la calle Agustinas y al sur con la calle Moneda. Fue Joaquín Toesca a quien se le encomienda realizar los planos y el diseño de lo que sería en definitiva este palacio presidencial, en el año 1786, pero en el año 1799 Toesca muere a los 54 años luego de una vida amorosa bien tormentosa, donde su esposa intentó terminar con su vida. Sus restos fueron enterrados en la Iglesia de San Francisco.",
-          "El palacio fue finalmente inaugurado en el año 1805, aún con algunas partes de su estructura inconclusas. 40 años más tarde, el presidente Bulnes ordena que el palacio sea utilizado como sede del Gobierno y lugar de residencia de los jefes de Estado. Entre los años 1822 y 1850 el palacio sufrió muchos estragos producto de los sismos registrados en esa época, y en 1855 el ala donde los presidentes tenían sus residencias sufre un incendio. Pero no es sino hasta 1973 cuando este coloso de la arquitectura sufre los peores daños registrados en su larga historia: durante el golpe de Estado de dicho año las pérdidas fueron incalculables, siendo el Acta de la Independencia el documento de mayor valor para este país que se destruiría en los hechos mencionados.",
-          "El Centro Cultural La Moneda se encuentra justo debajo de este palacio y es recomendable visitarlo.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/palacio-la-moneda.jpg",
-            label: "La Moneda",
-          },
-        ],
-      },
-      {
-        title: "Plaza de la Constitución",
-        paragraphs: [
-          "Es una explanada que está al norte del Palacio de la Moneda, entre las calles Moneda y Agustinas. Esta plaza cuenta con varios caminos, formando una X que se unen en una zona central. Debajo de esta se encuentran los estacionamientos. La plaza finalmente se termina de construir para el año 1935 y a lo largo de su historia ha recibido los nombres de Plaza de la Moneda, Portales y el nombre actual, que es Plaza de la Constitución, esto gracias a las 10 constituciones que ha tenido Chile.",
-          "En la actualidad sirve de punto de encuentro para muchos tours caminados, punto de referencia para quienes se encuentran en la zona o simplemente un área para descansar en las zonas verdes que tiene la plaza.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/plaza-de-la-constitucion.jpg",
-            label: "La plaza",
-          },
-        ],
-      },
-      {
-        title: "Museo Chileno de Arte Precolombino",
-        paragraphs: [
-          "Lo que comenzó con la idea de una colección privada para Sergio Larraín García Moreno terminó por transformarse en lo que conocemos hoy como el Museo Precolombino. Esta institución se funda en 1981, pero su historia se remonta al año 1555, cuando este edificio fue usado como solar; en el año 1635 se utiliza como Convictorio y para el año 1802 el gobernador Luis Muñoz de Guzmán ordena que se construya la sede de la Real Aduana. En 1845 se transforma en la Corte Suprema de Justicia hasta el año 1968, cuando es destruido por completo por un gran incendio.",
-          "En este museo se exponen piezas únicas basadas en la historia y cultura del continente americano, resaltando su colección textil andina que data de 3.000 años de antigüedad, piezas de las culturas mayas y aztecas, así como obras provenientes del Amazonas y el Caribe y una impresionante colección de arte de las distintas culturas y pueblos de Chile. Esta casa fue por décadas una de las más importantes del país, ya que se dice fue la única que tenía dos pisos.",
-        ],
-        bullets: [
-          "Nacionales y residentes: 2.000 CLP (3 USD)",
-          "Estudiantes nacionales: 1.000 CLP (1.5 USD)",
-          "Turistas extranjeros: 10.000 CLP (13 USD)",
-          "Estudiantes extranjeros: 5.000 CLP (6 USD)",
-          "Gratis: niños menores de 10 años y adultos mayores de 60 años",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/precolombino-fachada.jpg",
-            label: "El edificio",
-          },
-          {
-            src: "/images/rutas/santiago-historico/precolombino-sala.jpg",
-            label: "Una sala",
-          },
-          {
-            src: "/images/rutas/santiago-historico/precolombino-piezas.jpg",
-            label: "Las piezas",
-          },
-        ],
-      },
-      {
-        title: "Plaza de Armas",
-        paragraphs: [
-          "En 1541 un señor de nombre Pedro de Valdivia es quien se encarga de fundar la capital chilena en un lugar que hoy se conoce como kilómetro 0. Este punto era un campo de entrenamiento militar durante la época de la conquista española, pero con el pasar de los años se fueron construyendo edificaciones gubernamentales, convirtiéndose en el núcleo social y administrativo de la ciudad.",
-          "Por una parte tenemos la Catedral Metropolitana de Santiago, ocupando casi toda una manzana y construida en el año 1566. El edificio del Correo Central comienza a construirse en 1882 y actualmente son las oficinas de Correos de Chile, siendo hoy un monumento histórico desde el año 1976. Justo al lado de este encontramos el Museo Histórico Nacional, mismo sitio donde funcionó la Real Audiencia, máximo tribunal colonial del país para esos tiempos. Por último, en la esquina de la calle Monjitas y el paseo 21 de Mayo se encontraba la antigua cárcel colonial, lo que hoy es conocido como la Municipalidad de Santiago.",
-          "Plaza de Armas sigue siendo uno de los lugares más visitados de la capital chilena por la fuerte historia que encierran sus edificios y su atmósfera.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/santiago-historico/plaza-armas-catedral.jpg",
-            label: "Catedral de Santiago",
-          },
-          {
-            src: "/images/rutas/santiago-historico/plaza-armas-museo-historico.jpg",
-            label: "Museo Histórico Nacional",
-          },
+          "Se ubica frente a la Plaza de Armas. Baja en Metro Plaza de Armas (líneas 3 y 5) y estarás ahí, pero te recomiendo que revises los horarios antes de ir.",
+          "Te dejo este consejito para tu foto perfecta: entra y párate al fondo de la nave central para lograr una imagen simétrica hacia el altar, es decir, las líneas deben terminar donde tú te estás parando, manteniendo la misma distancia entre las líneas y el borde de la cámara. Ve por la mañana, cuando la luz suave entra por las ventanas.",
         ],
       },
     ],
   },
   {
-    id: "de-lo-antiguo-a-lo-moderno",
-    slug: "de-lo-antiguo-a-lo-moderno",
+    id: "museo-de-arte-precolombino",
+    slug: "museo-de-arte-precolombino",
     citySlug: "santiago",
-    kicker: "Ruta 2",
-    title: "De lo antiguo a lo moderno",
-    teaser:
-      "Un día entero, del lugar donde se fundó la ciudad al barrio más bohemio.",
-    cover: "/images/rutas/de-lo-antiguo-a-lo-moderno/portada.jpg",
+    title: "Museo Chileno de Arte Precolombino",
+    teaser: "Un viaje en el tiempo por miles de años de historia americana.",
+    cover: "/images/rutas/museo-de-arte-precolombino/salon-subterraneo.webp",
     intro: [
-      "Acá te dejo otra ruta con la cual puedes pasar todo un día conociendo algunos de los lugares más visitados e históricos de la ciudad de Santiago. En esta ruta podrás conocer desde el lugar donde se fundó la ciudad hasta llegar a uno de los barrios más bohemios y Open Mind de la capital.",
-      "¡Recuerda! Yo enfoco el Turismo Slow como pilar de un verdadero viajero, es por ello que te invito a que camines esta ruta con calma, admirando los alrededores y conociendo la vida y la historia de Santiago a través de los siguientes lugares que te estoy dejando a continuación.",
+      "¿Y si te dijera que en pleno centro de Santiago puedes conocer miles de años de historia americana antes de que llegaran los conquistadores? Cruzas una puerta antigua y, de pronto, el ruido de la ciudad desaparece. Adentro te esperan rostros de cerámica, textiles increíblemente finos, joyas, máscaras y objetos que tienen más de 3.000 años.",
+      "El museo abrió en 1981, gracias al arquitecto Sergio Larraín García-Moreno, quien reunió su colección personal y decidió compartirla con todo el mundo. Hoy es uno de los museos más importantes de América Latina en su tema. Funciona en la antigua Real Aduana, un edificio de comienzos del siglo XIX que ya tiene historia propia.",
+      "Lo mejor es cómo te cuenta la historia. No solo ves piezas: entiendes cómo vivían, qué creían y cómo se expresaban los pueblos de México, Centroamérica, los Andes y Chile. Su exposición permanente, Chile antes de Chile, te muestra la riqueza cultural de los pueblos que habitaron este territorio, con momias, tejidos y cerámica que te dejan pensando.",
+      "Para el turismo es un punto clave del centro histórico, muy valorado por viajeros, escuelas y amantes de la cultura. Es ideal si quieres entender Chile más allá de sus paisajes.",
     ],
-    stops: [
+    photos: [
       {
-        title: "Barrio París – Londres",
-        paragraphs: [
-          "Por una parte, para el año 1920 la ciudad de Santiago crecía paulatinamente cada vez más y más; por la otra, los religiosos de la Orden de San Francisco estaban teniendo ciertos problemas económicos, razón por la cual venden una buena porción de sus tierras, solucionando así muchos de estos problemas. Algunas de estas tierras fueron adquiridas por el Estado, delegando a los arquitectos Roberto Araya y Ernesto Holzman la responsabilidad de crear un espacio que evocara ese estilo medieval característico de las ciudades y pueblos de Europa.",
-          "El barrio cubre 4 manzanas que, desde su diseño con calles estrechas y curvas, buscaba romper con el damero característico de la ciudad de Santiago de ese entonces. Los edificios aledaños no comparten el mismo diseño plasmado por Araya y Holzman, pero sí mantienen una armonía visual producto de los trabajos realizados por grandes arquitectos chilenos como Ricardo Larraín Bravo (Iglesia de los Sacramentinos) y Alberto Cruz Montt (Banco Central de Chile, 1928).",
-          "Actualmente se considera un barrio bohemio donde se consiguen hostales, pequeños cafés y hasta lo que era la sede de la DINA (la Gestapo de Pinochet, Cuartel Yucatán), que fue un centro de detención y tortura durante el régimen dictatorial impuesto en 1973.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/paris-londres-esquina.jpg",
-            label: "Esquina París-Londres",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/paris-londres-calle.jpg",
-            label: "Calle Londres",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/paris-londres-dina.jpg",
-            label: "Cuartel Yucatán",
-          },
-        ],
-      },
-      {
-        title: "Iglesia de San Francisco",
-        paragraphs: [
-          "Hablar de esta iglesia nos llevará unos 5 siglos atrás en la historia, pues estamos hablando de la edificación que aún se mantiene en pie con la fecha registrada más antigua de Santiago y la segunda a nivel nacional. Todo comienza a mediados del año 1570, cuando en un lugar lejano y peligroso (a las afueras de las murallas de la ciudad) se construye un edificio con base de adobe y paja, trabajo realizado por los indígenas, la cual fue destruida en 1583 producto de un terremoto, siendo este el primer intento por construir la Iglesia de San Francisco.",
-          "Luego de esto, en el año 1595 se retoman los trabajos de construcción para dar por finalizada esta gran iglesia en el año 1618, ya con muros de piedra y techos que la hacían más resistente. A lo largo de los años este recinto sobrevivió con solidez a los terremotos de los años 1647 (Terremoto Magno) y 1730, este último hizo que se demoliera por completo el edificio producto del daño sufrido.",
-          "Este histórico de Santiago ha visto no solo desastres naturales y remodelaciones a su estructura, sino que también se ha adaptado al ensanchamiento de la avenida Alameda en los años 40. Para el año 1951 esta iglesia es declarada Monumento Histórico. En 1969 se inaugura el Museo Colonial en lo que antes era el edificio del convento, donde se conservan los lienzos que narran la vida de San Francisco, hechos en Perú en el año 1684. En los años 1985 y 2010 sufre daños debido a los terremotos ocurridos en dichos años, haciendo que su estructura sea reparada y restaurada una vez más.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/san-francisco-entrada.jpg",
-            label: "La entrada",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/san-francisco-nave.jpg",
-            label: "La nave",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/san-francisco-museo.jpg",
-            label: "Museo Colonial",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/san-francisco-jardines.jpg",
-            label: "Los jardines",
-          },
-        ],
-      },
-      {
-        title: "Biblioteca Nacional de Chile",
-        paragraphs: [
-          "Gustavo García del Postigo fue el arquitecto responsable de presentar lo que hoy conocemos como la Biblioteca Nacional de Chile. Este es el principal centro bibliográfico del país y se comienza a construir para el año 1813, y desde esa fecha tiene como tarea la recopilación de libros; durante el siglo XIX esta tarea fue consolidada.",
-          "Entre las bibliotecas que enriquecieron el gran catálogo se encuentran la biblioteca de Benjamín Vicuña Mackenna y la de Andrés Bello, entre otros, conformando un verdadero tesoro bibliográfico. En 1854 se crea el primer catálogo impreso de los libros de la Biblioteca Nacional, en 1861 se crea la Sección de Manuscritos a partir del material recibido de los juzgados y en 1871 realiza la primera Estadística Bibliográfica chilena.",
-          "En el año 1913 se inicia la construcción del actual edificio en los terrenos que antiguamente servían para el Convento de las Monjas Claras. Este edificio también pasó a la historia por ser uno de los primeros en los que se empleaba el hormigón armado desde sus cimientos, lo que le sirvió para soportar los terremotos, y en su interior se nota el nivel de exigencia en la selección de los materiales para su construcción, lo que permite que aún hoy se mantenga en perfectas condiciones si se le compara con otras edificaciones públicas de la ciudad. El edificio fue declarado Monumento Histórico en el año 1976.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/biblioteca-edificio.jpg",
-            label: "El edificio",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/biblioteca-sala.jpg",
-            label: "Sala de lectura",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/biblioteca-interior.jpg",
-            label: "El interior",
-          },
-        ],
-      },
-      {
-        title: "Cerro Santa Lucía",
-        paragraphs: [
-          "Es un parque urbano ubicado en pleno corazón de Santiago, limitando al sur por la principal arteria vial, Av. Libertador Bernardo O’Higgins (Alameda), y al norte con la calle Merced. Muy cerca de este cerro se encuentra la estación de metro Santa Lucía, perteneciente a la Línea 1 (roja), y también la Biblioteca Nacional de Chile.",
-          "El cerro Santa Lucía es uno de los paseos y atractivos más interesantes que visitar en la capital chilena. Con sus 69 metros de altura y una vista privilegiada del centro cívico, se entiende cómo Pedro de Valdivia funda la ciudad de Santiago en el año 1541 a los pies de este cerro, al que nombró Santa Lucía. En el año 1814, y bajo la orden del último gobernador de Chile, Casimiro Marcó del Pont, lo convierte en una especie de fortaleza realista, construyendo los fuertes Marcó y Santa Lucía (castillo González y castillo Hidalgo respectivamente).",
-          "En este cerro se encuentra la bella Fuente de Neptuno, una capilla de estilo neogótico, caminerías y un jardín japonés, el cual se construye con la colaboración del gobierno japonés. El cerro es declarado Monumento Nacional en la categoría de Monumentos Históricos en el año 1983.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/santa-lucia-neptuno.jpg",
-            label: "Fuente de Neptuno",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/santa-lucia-castillo.jpg",
-            label: "Castillo Hidalgo",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/santa-lucia-castillo-2.jpg",
-            label: "Desde el cerro",
-          },
-        ],
-      },
-      {
-        title: "Museo de Bellas Artes",
-        paragraphs: [
-          "Fue fundado en el año 1880 con el nombre de Museo Nacional de las Pinturas, gracias a la necesidad del escultor José Miguel Blanco de reunir bajo un mismo techo todas las piezas de arte que estaban dispersas en diferentes edificios institucionales. En 1901 el arquitecto chileno-francés Émile Jéquier resulta ganador para el proyecto de construcción de dicho museo, quien finalmente en el año 1910 inaugura el palacio de Bellas Artes, inspirándose en el Petit Palais de París.",
-          "El museo cuenta con una planta subterránea de 60 metros cuadrados, un hall central que da la bienvenida a sus visitantes y un segundo piso, todos destinados a exposiciones y actividades culturales. La inmensa cúpula de cristal sobre el museo brinda la suficiente luz natural para observar cada detalle en el hall central y fue diseñada y construida en Bélgica hace más de 100 años.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/bellas-artes-fachada.jpg",
-            label: "La fachada",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/bellas-artes-hall.jpg",
-            label: "El hall central",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/bellas-artes-subterranea.jpg",
-            label: "Sala subterránea",
-          },
-        ],
-      },
-      {
-        title: "Barrio Lastarria",
-        paragraphs: [
-          "Este barrio existe casi desde la fundación de la ciudad de Santiago en 1541 y, como la mayoría de muchas zonas, comenzó a moldearse gracias a la construcción de una iglesia, la Iglesia de la Veracruz, la cual se terminó de construir en el año 1857, y en este sector solo vivía la elite de la ciudad.",
-          "Esta zona, declarada como Típica en 1996 y catalogada como una de las más cool del mundo, es el primer barrio gay-friendly de Santiago, que combinado con los bares, cafés y hoteles boutique hacen de esta zona uno de los lugares que siempre recomendaría visitar en Santiago.",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/lastarria.jpg",
-            label: "El barrio",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/lastarria-calle.jpg",
-            label: "Calle Lastarria",
-          },
-          {
-            src: "/images/rutas/de-lo-antiguo-a-lo-moderno/lastarria-veracruz.jpg",
-            label: "Iglesia de la Veracruz",
-          },
-        ],
+        src: "/images/rutas/museo-de-arte-precolombino/pasillos-interiores.webp",
+        label: "Pasillos interiores",
       },
     ],
+    stops: [],
   },
   {
-    id: "de-museo-en-museo",
-    slug: "de-museo-en-museo",
+    id: "jardin-japones",
+    slug: "jardin-japones",
     citySlug: "santiago",
-    kicker: "Ruta 3",
-    title: "De museo en museo",
-    teaser: "Cinco museos de Quinta Normal, a unos pasos unos de otros.",
-    cover: "/images/rutas/de-museo-en-museo/portada.jpg",
+    title: "Jardín Japonés de Santiago",
+    teaser: "El rincón de calma que no esperabas.",
+    cover: "/images/rutas/jardin-japones/torre-costanera-desde-el-jardin.webp",
     intro: [
-      "Los museos siempre tendrán algo que nos sorprenderá de una u otra manera, es por ello que en esta ruta te propongo que salgas a recorrer parte de la zona de Quinta Normal y sus alrededores. En este barrio encontrarás varios museos que harán que quieras quedarte toda una tarde recorriéndolos, ya que están a unos cuantos pasos de distancia y ¡créeme!, son muy interesantes para conocer un poco del pasado de la bella capital chilena.",
+      "Aquí el agua, las piedras, los puentes y las flores te invitan a bajar el ritmo y a mirar con otros ojos.",
+      "Este jardín también se conoce como el Jardín de la Amistad, y su nombre cuenta lo que representa: un puente cultural entre Chile y Japón. Es el jardín japonés más grande del país y uno de los espacios más visitados del Parque Metropolitano. Por eso es un clásico del cerro San Cristóbal.",
+      "Su cultura se inspira en la filosofía japonesa del silencio, la contemplación y el respeto por la naturaleza. Por eso, al entrar, verás carteles que te piden disfrutar de la calma. Para el turismo, es una parada muy valorada si buscas naturaleza y tranquilidad sin salir de la ciudad. Es perfecto para combinar con una visita al cerro, sus miradores y el teleférico.",
+      "Excelente opción para una tarde de descanso después de un viaje tan ¡Bakan!",
     ],
-    stops: [
-      {
-        title: "Museo de la Memoria y los Derechos Humanos",
-        paragraphs: [
-          "El 21 de mayo de 2007 es anunciada la creación de este museo por quien fuera presidenta de la república para ese tiempo, Michelle Bachelet. Casi 3 años más tarde, el 11 de enero de 2010, el museo de tres pisos es inaugurado. Este recinto está dedicado a las víctimas de los Derechos Humanos durante la dictadura militar de Augusto Pinochet, siendo el lugar donde se conservan y exhiben los documentos que muestran un pasado oscuro en la historia de Chile.",
-          "En el museo, de varios pisos, se muestran periódicos y fotografías de la época. El MMDH es un proyecto de reparación moral a las miles de víctimas de ejecuciones, desapariciones y torturas ocasionadas por los cuerpos de seguridad, como la DINA. El museo tiene una entrada conectada con la estación de metro Quinta Normal, línea verde (5), y es totalmente gratis visitarlo.",
-        ],
-        bullets: ["Tiempo para recorrerlo: 2 a 3 horas", "Entrada gratuita"],
-        photos: [
-          {
-            src: "/images/rutas/de-museo-en-museo/memoria.jpg",
-            label: "El museo",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/memoria-edificio.jpg",
-            label: "El edificio",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/memoria-muro.jpg",
-            label: "Muro de las víctimas",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/memoria-piso-3.jpg",
-            label: "Tercer piso",
-          },
-        ],
-      },
-      {
-        title: "Museo Nacional de Historia Natural",
-        paragraphs: [
-          "Siendo uno de los museos más antiguos del continente, el Museo Nacional de Historia Natural (MNHN) es fundado por el francés Claudio Gay en el año 1830. Desde el año 1876 ocupa el edificio que vemos hoy y que fue una de las obras de Paul Lathoud (Museo Palacio Cousiño). El MNHN abre sus puertas de forma gratuita desde el año 2015 y en él verás salas dedicadas a la Paleontología, la Botánica y la Antropología, entre otras. También cuenta con exposiciones permanentes y temporales.",
-          "Este museo, al igual que otros, ha tenido una vida llena de altibajos, siendo la década de 1920 una de las más complejas por serios problemas económicos que llevaron a despidos masivos y recortes salariales de gran importancia. El recinto cuenta con dos pisos, pero solo el primer piso es accesible al público en general.",
-        ],
-        bullets: ["Tiempo para recorrerlo: 2 a 2:30 horas", "Entrada gratuita"],
-        photos: [
-          {
-            src: "/images/rutas/de-museo-en-museo/historia-natural-fachada.jpg",
-            label: "La fachada",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/historia-natural-galeria.jpg",
-            label: "La galería",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/historia-natural-ballena.jpg",
-            label: "Esqueleto de ballena",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/historia-natural-sala-marina.jpg",
-            label: "Sala marina",
-          },
-        ],
-      },
-      {
-        title: "Museo de la Educación Gabriela Mistral",
-        paragraphs: [
-          "El que inicialmente se llamase Museo Pedagógico de Chile fue creado en el año 1941 con la idea de poder recopilar el material necesario para exhibir gran parte de la historia educativa pública y privada en Chile a través de la Exposición Retrospectiva de la Enseñanza, organizada en ese mismo año y razón por la cual se crea dicho museo.",
-          "En este museo verás todo el proceso evolutivo de la educación chilena a través de murales, libros y un sinfín de piezas que se exponen de manera permanente. En 2006 este museo cambia su nombre a Museo de la Educación Gabriela Mistral (MEGM), tomando el nombre de quien fuera la primera Premio Nobel de Literatura de Chile y Latinoamérica. En el año 2016 se hacen renovaciones, mejorando así los espacios de circulación, la iluminación y hasta el área interna llamada el Patio de los Tilos. El edificio es declarado Monumento Nacional el 2 de junio de 1981.",
-        ],
-        bullets: ["Tiempo para recorrerlo: 2 horas"],
-        photos: [
-          {
-            src: "/images/rutas/de-museo-en-museo/gabriela-mistral-entrada.jpg",
-            label: "Entrada lateral",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/gabriela-mistral-sala.jpg",
-            label: "Una sala",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/gabriela-mistral-archivador.jpg",
-            label: "El archivador",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/gabriela-mistral-patio.jpg",
-            label: "Patio de los Tilos",
-          },
-        ],
-      },
-      {
-        title: "Museo Ferroviario de Santiago",
-        paragraphs: [
-          "Este museo no es lo que comúnmente uno se espera de un museo, con piezas en una vitrina mostrando algo importante que en un punto fue parte de la historia del país. El Museo Ferroviario es más un espacio al aire libre donde podrás ver las locomotoras o trenes que fueron piezas claves en el desarrollo de Chile desde finales de 1800 hasta finales de 1900.",
-          "En el museo se puede apreciar la tercera locomotora más antigua que existe en Chile, también una de las locomotoras de mayor complejidad mecánica en el mundo para comienzos del siglo XX, y podrás además entrar al interior de uno de los vagones de pasajeros de la época.",
-        ],
-        bullets: [
-          "Tiempo para recorrerlo: 2 horas",
-          "Nacionales, residentes y extranjeros: 1.500 CLP (1.70 USD)",
-          "Adulto mayor, estudiantes y niños: 1.000 CLP (1.20 USD)",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-museo-en-museo/ferroviario-locomotora-211.jpg",
-            label: "Locomotora 211",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/ferroviario-locomotora-306.jpg",
-            label: "Locomotora 306",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/ferroviario-alco-1940.jpg",
-            label: "Locomotora ALCO 1940",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/ferroviario-tanque-3349.jpg",
-            label: "Tipo tanque 3349",
-          },
-        ],
-      },
-      {
-        title: "Museo Artequin de Santiago",
-        paragraphs: [
-          "Antes de comenzar a comentarles del museo quiero mencionar un dato interesante, y me refiero al edificio donde está este museo, pues se trata del Pabellón París, un hermoso edificio que choca y resalta dentro del sector de Quinta Normal. Este edificio se construyó para la Exposición Universal de París en 1889 y sus materiales fueron el hierro y el zinc. Se trasladó a Chile después de dicha exposición, rearmándose en el mismo lugar donde se encuentra actualmente, como si de un Lego estuviésemos hablando.",
-          "Es Monumento Nacional desde el año 1986 y desde 1992 funciona como el Museo Artequin. En este museo se pueden observar exposiciones temporales y con una excelente audioguía para que no te pierdas de cada detalle.",
-        ],
-        bullets: [
-          "Tiempo para recorrerlo: 2:30 horas",
-          "Nacionales, residentes y extranjeros: 1.500 CLP (1.70 USD)",
-          "Adulto mayor, estudiantes y niños: 1.000 CLP (1.20 USD)",
-        ],
-        photos: [
-          {
-            src: "/images/rutas/de-museo-en-museo/artequin-fachada.jpg",
-            label: "La fachada",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/artequin-escaleras.jpg",
-            label: "Escaleras internas",
-          },
-          {
-            src: "/images/rutas/de-museo-en-museo/artequin-sala.jpg",
-            label: "La sala",
-          },
-        ],
-      },
+    photos: [
+      { src: "/images/rutas/jardin-japones/caminos.webp", label: "Los caminos" },
+      { src: "/images/rutas/jardin-japones/riachuelo.webp", label: "El riachuelo" },
     ],
+    stops: [],
   },
 
   // ───────────────────────── San Pedro de Atacama ─────────────────────────

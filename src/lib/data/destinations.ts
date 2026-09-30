@@ -100,10 +100,14 @@ export const cities: City[] = [
     countrySlug: "chile",
     countryName: "Chile",
     heroText:
-      "Santiago de Chile — una ciudad con mucho que mostrar y la puerta de entrada a uno de los países más maravillosos para el turismo que existe.",
+      "Santiago de Chile: la puerta perfecta a la aventura sudamericana.",
+    // Texto de entrada del documento "Santiago. K4T App" de la clienta.
     body: [
-      "Santiago es la capital de Chile, un país rico en bellezas naturales y ganador del premio a Mejor Destino de Turismo de Aventura de los World Travel Awards en varias oportunidades. Y es en Santiago donde está el mejor punto para entrar al país si vienes desde el extranjero.",
-      "Es una metrópolis con muchas cosas a su favor: transporte público de calidad, amplia oferta hotelera, parques al aire libre y buena vida nocturna.",
+      "Capital cosmopolita de un país multipremiado como Mejor Destino de Turismo de Aventura en los World Travel Awards, Santiago te recibe con transporte público eficiente, una oferta hotelera para todos los gustos, parques al aire libre y una vida nocturna que no se detiene. Aquí conviven la comodidad de una gran metrópolis con la calidez de sus barrios más buscados: Providencia, Las Condes, Ñuñoa y Vitacura, ideales para hospedarte por su conectividad y encanto.",
+      "Llegar es fácil: desde el aeropuerto Arturo Merino Benítez puedes tomar un taxi oficial, solicitar el pick-up de tu hotel o moverte de forma económica en bus hasta conectar con el metro, una de las redes más limpias y modernas de Sudamérica. Una sola tarjeta recargable te permite recorrer toda la ciudad sin complicaciones, combinando metro y buses según lo necesites.",
+      "La ciudad ofrece experiencias para cada tipo de viajero: el mirador y zoológico del Cerro San Cristóbal, las artesanías del Pueblito Los Dominicos, el ambiente fiestero de Ñuñoa y Barrio Lastarria, y un centro histórico donde el Palacio de La Moneda, el Museo de Bellas Artes y La Chascona narran la historia de Chile. Para quienes buscan aventura y desconexión, el Cajón del Maipo, la costa literaria de Isla Negra y el santuario de Yerba Loca son escapadas imperdibles a menos de 2 horas de la capital.",
+      "Y si de sabores se trata, las viñas cercanas como Concha y Toro, Cousiño Macul o Santa Rita revelan los secretos detrás de los mejores vinos del mundo. Santiago no es solo un punto de llegada: es el inicio perfecto de tu próxima gran aventura.",
+      "¡Vívelo con Keys4Travels!",
     ],
     sections: [
       {
@@ -149,6 +153,25 @@ export const cities: City[] = [
           "Visitar una viña: Chile es conocido en el mundo por sus vinos, y muy cerca de Santiago puedes visitar Errázuriz, Cousiño Macul, Matetic, Antiyal, Concha y Toro, Villard y Santa Rita. En cualquiera de ellas aprenderás cómo se obtienen los mejores vinos del país, sus cepas y la historia que hay detrás de cada una: temas políticos, religiosos y hasta de terror envuelven el nacimiento de algunas de las viñas más famosas.",
         ],
       },
+      {
+        title: "Experiencias y desconexión",
+        paragraphs: [
+          "Hay momentos que quizás no se repitan en la vida; por eso, si tienes la oportunidad de hacer algo significativo en un destino, no dudes en hacerlo, o quizás te arrepientas más adelante.",
+          "Santiago es una ciudad bastante segura para recorrerla por tu cuenta, pero las distancias pueden ser un tanto largas, así que alquilar un auto no es una idea descabellada, y recorrer algunos de los siguientes puntos por tu cuenta puede ser todo un planazo.",
+          "Estas opciones también están disponibles contratando uno de los tour operadores que gustosamente contactaré por ti, o incluso en transporte público.",
+          "Pomaire: imagínate comprar uno de los famosos «chanchitos» de greda como el regalo perfecto para alguien que quieres; entonces debes ir a Pomaire. A tan solo una hora en coche propio o alquilado se encuentra la zona de la greda y de la empanada al horno predilecta de chilenos y viajeros de todo el mundo. Este poblado se mantiene vivo gracias a una tradición alfarera de 300 años, en la que aún hoy se siguen creando vasijas, jarros y hasta alcancías en forma de cochinitos.",
+          "Pomaire no solo es conocido por sus típicos jarrones, sino también por sus talleres textiles, que acompañan a las muchas creaciones que salen de sus talleres. Visitarlo es perfecto por su cercanía con Santiago, sus obras en greda (arcilla roja) y su gastronomía típica, y en medio día puedes ir y regresar para seguir disfrutando de una tarde de más aventuras y experiencias.",
+          "Cajón del Maipo: ¿qué mejor manera de desconectarte y relajarte de la carga del día que pasar una noche rodeado de ríos, cumbres y cielos despejados a tan solo una hora de Santiago? El Cajón, como le dicen los santiaguinos, es el lugar por excelencia para un merecido descanso.",
+          "Para disfrutar al máximo de esta experiencia te recomiendo dormir una noche en la zona: así puedes tomarte un delicioso chocolate o un helado en Casa Chocolate, visitar el Embalse El Yeso y recorrer el depósito y reserva de agua potable que surte a toda la ciudad de Santiago, tomarte unas horas para hacer un retiro y recibir los mejores tratamientos wellness, o simplemente contemplar el impresionante cielo nocturno en una cabaña de ensueño o en un tour de astrofotografía.",
+          "El Cajón es sin duda la idea predilecta de muchos para conectarse con la naturaleza y desconectarse de la cotidianidad de la semana. Vale cada minuto.",
+          "Embalse El Yeso: si no te animas a quedarte a dormir una noche en el Cajón del Maipo, puedes planificar una escapada de algunas horas durante el día hacia la principal reserva de agua de toda la Región Metropolitana. La entrada es gratuita, pero es recomendable ir en un vehículo con buena tracción, mejor del tipo rústico; también puedes ver las opciones con un tour operador de la zona. El embalse es inmenso e ideal para sacar fotos de otro planeta y contemplar lo imponente que puede ser la naturaleza y lo diminutos que podemos ser ante ella.",
+          "Valle de Casablanca: nada como tomar uno de los mejores chardonnay en un ambiente fresco y cercano al mar. El Valle de Casablanca está en una zona muy estratégica si vas a Santiago o a Viña del Mar, ya que queda casi a mitad de la Ruta 68, que conecta ambas ciudades. Se caracteriza por sus exquisitos vinos blancos y pinot noir, gracias al clima frío y templado de la zona, y se puede visitar en una tarde sin problema, degustando una cata de vinos frescos y de aromas excepcionales.",
+          "Viña del Mar y Valparaíso: aquí sí te recomiendo que te quedes por lo menos una noche, no para vivir experiencias de locura, sino para descansar, porque Viña y Valparaíso son ciudades que tienen mucho para mostrar.",
+          "Valparaíso, por una parte, es un lienzo de colores: una ciudad que se mantiene viva, con sus característicos cerros, como el Alegre y el Concepción, atravesados por calles estrechas y empinadas que terminan en algunos de los miradores más hermosos de la Quinta Región. Caminar por Valparaíso es una aventura: cada esquina revela un mural y un callejón con historia, y los cafés bohemios, el arte y una suave brisa marina completan a la perfección la escapada a una de las zonas más visitadas por los viajeros.",
+          "Viña del Mar, la ciudad jardín de la Quinta Región, es la ciudad hermana de Valparaíso. Se puede visitar en un día y tiene un urbanismo más moderno, que apuesta por un viajero más joven. Aquí se celebra todos los años el famoso Festival de Viña del Mar, que marca el fin del verano chileno, y su propuesta gastronómica, basada en productos del mar, es muy potente.",
+          "También está el Muelle Vergara, con puestas de sol increíbles para fotos dignas de catálogo, y muy cerca de Viña se encuentran Reñaca y Concón, otra franja costera unida por el Pacífico con Viña y Valparaíso. Mucho más al norte está Zapallar, una zona un poco más exclusiva y con un estilo distinto al del resto. La importancia turística de estas localidades sigue creciendo con los años, y muchos viajeros vuelven a ellas temporada tras temporada: la zona es un pilar del turismo en Chile.",
+        ],
+      },
     ],
     attractions: [
       "Cerro San Cristóbal",
@@ -171,10 +194,6 @@ export const cities: City[] = [
       "/images/santiago/palacio-presidencial-casa-de-la-moneda.jpg",
     ],
     hotelIds: ["castillo-rojo"],
-    // Santiago no muestra la sección "Atractivos y lugares": sus tres rutas
-    // siguen en routes.ts (y sus páginas /rutas/… siguen existiendo), pero no
-    // se enlazan desde aquí. Quita esta línea para volver a mostrarlas.
-    hideRoutes: true,
   },
   {
     id: "san-pedro-de-atacama",
@@ -183,10 +202,13 @@ export const cities: City[] = [
     countrySlug: "chile",
     countryName: "Chile",
     heroText:
-      "Uno de los lugares más remotos del planeta, con una energía que parece estar más allá de nuestro entendimiento.",
+      "San Pedro de Atacama: el corazón del desierto más árido del planeta te espera.",
+    // Texto de entrada del documento "San Pedro de Atacama" de la clienta.
     body: [
-      "San Pedro de Atacama es una joya encantadora en el corazón del desierto chileno. Fundado en 1450, es uno de los pueblos más antiguos del país y destaca por su autenticidad: calles de tierra, casitas de adobe y hoteles acogedores perfectamente integrados con el entorno. No es casualidad que haya sido reconocido en repetidas ocasiones como el principal destino de aventura de Sudamérica.",
-      "Es también la puerta de entrada para los miles de viajeros que cada año se aventuran a explorar las tierras desérticas que lo rodean. Y ofrece un espectáculo celestial incomparable: sus atardeceres y sus noches, bajo cielos despejados y estrellados, son un deleite inolvidable en cualquier estación del año.",
+      "Fundado en 1450, este pueblo milenario de calles de tierra y casas de adobe ha sido reconocido repetidamente como el principal destino de aventura de Sudamérica. Sus atardeceres y cielos estrellados, entre los más limpios del mundo, ofrecen un espectáculo celestial inolvidable durante casi todo el año.",
+      "Llegar es sencillo: vuela hasta Calama (aeropuerto El Loa), a dos horas desde Santiago, y luego recorre unos 80 minutos por la Ruta 23 en auto de alquiler o transfer privado, muchos con descuento si reservas ida y vuelta. Una vez en el pueblo, la bicicleta es reina: rápida, económica y perfecta para explorar sus calles de tierra, aunque conviene tener experiencia, ya que la altura (2.400 m s. n. m.) y el terreno árido pueden sorprenderte. Y por supuesto, ¡caminar sigue siendo la mejor forma de descubrirlo todo!",
+      "Con 1.600 km de extensión, San Pedro guarda paisajes para varios días de exploración; lo ideal es quedarse al menos 4 o 5 días y vivir el Turismo Slow con calma. El propio pueblo es una joya histórica: declarado Zona Típica en 1980, sus raíces se remontan siglos a. C., pasando por civilizaciones nómadas, el auge textil y minero, la llegada del imperio inca en 1450 y la conquista española en 1540. Su iglesia, construida en 1557 y declarada Monumento Histórico en 1951, sigue de pie junto a la plaza principal, testigo silencioso de siglos de historia.",
+      "San Pedro de Atacama no es solo un destino: es un viaje en el tiempo bajo el cielo más despejado del mundo. ¡Vamos a descubrirlo juntos!",
     ],
     sections: [
       {
