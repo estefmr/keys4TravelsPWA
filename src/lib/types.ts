@@ -35,7 +35,7 @@ export type CitySection = {
   paragraphs: string[];
   /** Carrusel de fotos que va al final del bloque. Opcional. */
   photos?: GalleryPhoto[];
-  /** Texto de un botón al final del bloque que lleva al formulario de reserva. */
+  /** Texto de un botón al final del bloque que lleva al formulario de Contacto. */
   cta?: string;
 };
 

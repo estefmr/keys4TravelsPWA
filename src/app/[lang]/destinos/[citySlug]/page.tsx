@@ -101,7 +101,7 @@ export default async function CityDetailPage({
             )}
             {section.cta && (
               <Link
-                href={localizePath(lang, "/reserva")}
+                href={localizePath(lang, "/contacto")}
                 className="mt-5 flex items-center justify-center rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
               >
                 {section.cta}
