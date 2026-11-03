@@ -32,7 +32,12 @@ function localizeCity(city: City, locale: Locale): City {
     ...base,
     heroText: t.heroText,
     body: t.body,
-    sections: t.sections ?? base.sections,
+    // Las fotos de cada bloque son las mismas en los dos idiomas.
+    sections:
+      t.sections?.map((section, i) => ({
+        ...section,
+        photos: section.photos ?? base.sections?.[i]?.photos,
+      })) ?? base.sections,
     attractions: t.attractions,
   };
 }

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import HeroBanner from "@/components/HeroBanner";
 import Gallery from "@/components/Gallery";
 import StickyCityHotels from "@/components/StickyCityHotels";
 import RoutesSection from "@/components/RoutesSection";
 import BackBar from "@/components/BackBar";
+import RichText from "@/components/RichText";
+import PhotoSlider from "@/components/PhotoSlider";
 import { cities } from "@/lib/data/destinations";
 import { getCity, getCityHotels, getCityRoutes } from "@/lib/data/localized";
 import { hasLocale, localizePath } from "@/lib/i18n/config";
@@ -87,29 +90,25 @@ export default async function CityDetailPage({
             <div className="mt-2 flex flex-col gap-3">
               {section.paragraphs.map((paragraph, i) => (
                 <p key={i} className="text-sm leading-relaxed text-zinc-600">
-                  {paragraph}
+                  <RichText text={paragraph} />
                 </p>
               ))}
             </div>
+            {section.photos && section.photos.length > 0 && (
+              <div className="mt-4">
+                <PhotoSlider photos={section.photos} altPrefix={section.title} />
+              </div>
+            )}
+            {section.cta && (
+              <Link
+                href={localizePath(lang, "/reserva")}
+                className="mt-5 flex items-center justify-center rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+              >
+                {section.cta}
+              </Link>
+            )}
           </section>
         ))}
-
-        {city.attractions.length > 0 && (
-          <div className="mt-6">
-            <h2 className="font-display text-lg text-foreground">{t.destino.queVer}</h2>
-            <ul className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
-              {city.attractions.map((attraction) => (
-                <li
-                  key={attraction}
-                  className="flex items-start gap-2 text-sm text-zinc-600"
-                >
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light" />
-                  {attraction}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
 
         <RoutesSection routes={routes} lang={lang} />
       </div>

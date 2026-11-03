@@ -33,6 +33,10 @@ export type Hotel = {
 export type CitySection = {
   title: string;
   paragraphs: string[];
+  /** Carrusel de fotos que va al final del bloque. Opcional. */
+  photos?: GalleryPhoto[];
+  /** Texto de un botón al final del bloque que lleva al formulario de reserva. */
+  cta?: string;
 };
 
 export type City = {
