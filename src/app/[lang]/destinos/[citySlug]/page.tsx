@@ -96,7 +96,7 @@ export default async function CityDetailPage({
             </div>
             {section.photos && section.photos.length > 0 && (
               <div className="mt-4">
-                <PhotoSlider photos={section.photos} altPrefix={section.title} />
+                <PhotoSlider photos={section.photos} altPrefix={section.title} square />
               </div>
             )}
             {section.cta && (

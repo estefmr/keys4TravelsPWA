@@ -33,9 +33,12 @@ const REANUDAR_MS = 9000;
 export default function PhotoSlider({
   photos,
   altPrefix,
+  square = false,
 }: {
   photos: GalleryPhoto[];
   altPrefix: string;
+  /** Esquinas rectas en vez de redondeadas. */
+  square?: boolean;
 }) {
   const pistaRef = useRef<HTMLDivElement>(null);
   const filtrosRef = useRef<HTMLDivElement>(null);
@@ -150,7 +153,9 @@ export default function PhotoSlider({
         <div
           ref={pistaRef}
           onScroll={alDesplazar}
-          className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-2xl"
+          className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto ${
+            square ? "" : "rounded-2xl"
+          }`}
         >
           {photos.map((foto, i) => (
             <button
