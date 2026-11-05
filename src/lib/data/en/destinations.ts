@@ -38,6 +38,16 @@ export const citiesEn: Record<string, CityTranslation> = {
       "As for the weather: if you want a Buenos Aires summer, come between December and February, with high temperatures and humidity that can make the heat stifling. June, July and August are the coldest months, but exploring the city is still a good option. For the perfect balance, choose March and April (autumn) or October and November (spring): fewer tourists, more affordable hotels and far more pleasant walking.",
       "Walking through Buenos Aires is an experience in itself. It is clean and well organized, with historic buildings that now house banks or government offices, and an obelisk that is perhaps the city’s most iconic landmark. The nightlife is unique: parties only warm up after midnight, and in many venues 2 or 3 a.m. is considered early in the night.",
     ],
+    imageLabels: [
+      "Avenida de Mayo",
+      "Historic center",
+      "Teatro Colón",
+      "Ateneo Grand Splendid",
+      "Monumento de los Españoles",
+      "Palermo Lake",
+      "Mafalda and her friends",
+      "Aeroparque Jorge Newbery",
+    ],
     attractions: [
       "Plaza de Mayo, Casa Rosada and the Museo del Cabildo",
       "Avenida de Mayo",
@@ -99,6 +109,12 @@ export const citiesEn: Record<string, CityTranslation> = {
         ],
         cta: "I want my experiences",
       },
+    ],
+    imageLabels: [
+      "Sunset in Santiago",
+      "Pueblito Los Dominicos",
+      "Cerro San Cristóbal",
+      "Palacio de La Moneda",
     ],
     attractions: [
       "Cerro San Cristóbal",
@@ -171,6 +187,7 @@ export const citiesEn: Record<string, CityTranslation> = {
     body: [
       "Viña del Mar, one of the most famous coastal cities in the world, with narrow streets full of charm. Close to the Casino de Viña del Mar (a 10-minute walk), the Muelle Vergara (15 minutes) and the Quinta Vergara, home of the Festival de Viña del Mar since 1960 (20 minutes).",
     ],
+    imageLabels: ["Entrance", "Patio", "Dining room"],
     attractions: [],
   },
 };

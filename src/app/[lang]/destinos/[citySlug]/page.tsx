@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import HeroBanner from "@/components/HeroBanner";
-import Gallery from "@/components/Gallery";
 import StickyCityHotels from "@/components/StickyCityHotels";
 import RoutesSection from "@/components/RoutesSection";
 import BackBar from "@/components/BackBar";
@@ -78,7 +77,15 @@ export default async function CityDetailPage({
 
         {city.images.length > 0 && (
           <div className="mt-6">
-            <Gallery images={city.images} altPrefix={city.name} />
+            {/* Mismo carrusel que el de las secciones (Escapadas…). */}
+            <PhotoSlider
+              photos={city.images.map((src, i) => ({
+                src,
+                label: city.imageLabels?.[i] ?? `${city.name} ${i + 1}`,
+              }))}
+              altPrefix={city.name}
+              square
+            />
           </div>
         )}
 

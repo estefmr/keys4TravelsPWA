@@ -51,6 +51,8 @@ export type City = {
   sections?: CitySection[];
   attractions: string[];
   images: string[];
+  /** Nombre de cada foto de `images`, en el mismo orden (botones del carrusel). */
+  imageLabels?: string[];
   hotelIds: string[];
   comingSoon?: boolean;
   /**
@@ -107,6 +109,8 @@ export type CityTranslation = {
   body: string[];
   sections?: CitySection[];
   attractions: string[];
+  /** Sigue el orden de `imageLabels`. Si falta, se usan los del español. */
+  imageLabels?: string[];
 };
 
 /** Traducción de un hotel. `galleryLabels` sigue el orden de `gallery`. */

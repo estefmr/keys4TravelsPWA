@@ -39,6 +39,7 @@ function localizeCity(city: City, locale: Locale): City {
         photos: section.photos ?? base.sections?.[i]?.photos,
       })) ?? base.sections,
     attractions: t.attractions,
+    imageLabels: t.imageLabels ?? base.imageLabels,
   };
 }
 

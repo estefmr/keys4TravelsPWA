@@ -91,6 +91,16 @@ export const cities: City[] = [
       "/images/buenos-aires/mafalda-y-sus-amigos.jpg",
       "/images/buenos-aires/aeroparque-jorge-newbery.jpg",
     ],
+    imageLabels: [
+      "Avenida de Mayo",
+      "Casco histórico",
+      "Teatro Colón",
+      "Ateneo Grand Splendid",
+      "Monumento de los Españoles",
+      "Laguna de Palermo",
+      "Mafalda y sus amigos",
+      "Aeroparque Jorge Newbery",
+    ],
     hotelIds: ["cassa-lepage", "mine-hotel"],
   },
   {
@@ -169,6 +179,12 @@ export const cities: City[] = [
       "/images/santiago/cerro-san-cristobal-por-bellavista.jpg",
       "/images/santiago/palacio-presidencial-casa-de-la-moneda.jpg",
     ],
+    imageLabels: [
+      "Atardecer en Santiago",
+      "Pueblito Los Dominicos",
+      "Cerro San Cristóbal",
+      "Palacio de La Moneda",
+    ],
     hotelIds: ["castillo-rojo"],
   },
   {
@@ -234,6 +250,13 @@ export const cities: City[] = [
       "/images/san-pedro-de-atacama/laguna-cejar-y-laguna-piedra.jpg",
       "/images/san-pedro-de-atacama/piedras-rojas-y-lagunas-altiplanicas.jpg",
     ],
+    imageLabels: [
+      "Calle Caracoles",
+      "Iglesia de San Pedro",
+      "Valle de la Luna",
+      "Laguna Cejar y Laguna Piedra",
+      "Piedras Rojas",
+    ],
     hotelIds: ["casa-solcor"],
   },
   {
@@ -255,6 +278,7 @@ export const cities: City[] = [
       "/images/esencia/patio-trasero.jpg",
       "/images/esencia/comedor.jpg",
     ],
+    imageLabels: ["Entrada", "Patio", "Comedor"],
     hotelIds: ["esencia"],
   },
 ];
